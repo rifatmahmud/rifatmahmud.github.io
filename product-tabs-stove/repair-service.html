@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inside Maps</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script> -->
+    <!-- <script src="./../controller.js"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"> -->
+       <script>
+        var repairService = function($scope) {
+
+            $scope.demoDatas = [{
+                name: "AM&M",
+                rating: "★ ★ ★ ★ ✩",
+                category: "",
+                reviewedBy: "70",
+                link: "https://www.ammappliances.com/",
+                logoImgLink: "./../img/nalogo.png",
+                contactAddress: "13061 Running Deer Road, Moreno Valley, CA 92553",
+                contactPerson: "",
+                contactNo: "951-656-5624",
+                email: "ammappliance@gmail.com",
+                insidemapsRating: "4.5",
+                yelpRating: "5",
+                pinRating: "4.5",
+                text: ""
+            }, {
+                name: "Morante's",
+                rating: "★ ★ ★ ★ ✩",
+                category: "",
+                reviewedBy: "4",
+                link: "http://www.morantesappliances.com/",
+                logoImgLink: "./../img/nalogo.png",
+                contactAddress: "5970 Tyler Street, Riverside, CA 92503",
+                contactPerson: "",
+                contactNo: "951-354-6355",
+                email: "",
+                insidemapsRating: "4.5",
+                yelpRating: "4.5",
+                pinRating: "4.5",
+                text: ""
+            }, {
+                name: "J.I.M. Appliance Repair",
+                rating: "★ ★ ★ ★ ✩",
+                category: "",
+                reviewedBy: "39",
+                link: "http://jimappliances.com/",
+                logoImgLink: "./../img/nalogo.png",
+                contactAddress: "3681 Sunnyside Dr Ste 236, Riverside, CA 92506",
+                contactPerson: "",
+                contactNo: "951-279-8314",
+                email: "",
+                insidemapsRating: "4.5",
+                yelpRating: "3.5",
+                pinRating: "4.5",
+                text: ""
+            }, {
+                name: "A V Appliance Repair",
+                rating: "★ ★ ★ ★ ✩",
+                category: "",
+                reviewedBy: "97",
+                link: "http://www.avappliancerepair.com",
+                logoImgLink: "./../img/nalogo.png",
+                contactAddress: "Corona, CA",
+                contactPerson: "",
+                contactNo: "951-531-8500",
+                email: "",
+                insidemapsRating: "4.5",
+                yelpRating: "4.5",
+                pinRating: "4",
+                text: ""
+            }];
+            $scope.applianceType = $scope.demoDatas[0].category;
+        };
+
+        angular.module('myapp', []).controller('repairService', ['$scope', repairService]);
+    </script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        .third-party-rating-logo {
+            margin: 0 0 2% 2%;
+        }
+
+        .third-party-rating-logo i {
+            /*border-left: 1px solid #999;*/
+            padding: 3%;
+        }
+
+        .third-party-rating{
+          text-align: center;
+        }
+
+        .third-party-rating p {
+            /*padding: 0 5% 140% 5%;*/
+            padding: 3%;
+            display: inline;
+            font-weight: bold;
+            color: #004263;
+            border-left: 2px solid #999;
+        }
+
+        .third-party-rating p:last-child {
+            border-right: 2px solid #999;
+        }
+
+        .tab-href {
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            padding: 1% 0;
+            text-align: center;
+        }
+
+        .tab-href a {
+            text-align: center;
+            text-decoration: none;
+            color: #777;
+            font-size: larger;
+            font-weight: bold;
+            padding: 0 2.1%;
+        }
+
+        @media only screen and (max-width: 750px) {
+          .third-party-rating{
+            text-align: right;
+            padding-bottom: 5%;
+          }
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app='myapp' ng-controller="repairService">
+        <div class="tab-href">
+            <a href="./../product-details-stove.html"><span class="fa fa-chevron-left" aria-hidden="true"></span> Go Back</a>
+            <a href="./../index.html">| Home |</a>
+            <a href="./../files/stove_um.pdf" target="_blank">| User Manual |</a>
+            <a href="troubleshooting.html" target="_blank">| Troubleshooting |</a>
+            <a href="diy.html" target="_blank">| DIY |</a>
+            <a href="parts.html" target="_blank">| Parts |</a>
+            <a href="repair-service.html" target="_blank">| Repair Service |</a>
+            <a href="replacement-options.html" target="_blank">| Replacement Option |</a>
+        </div>
+        <div class="container">
+          <div class="text-center">
+              <h2>Repair Service <small><sub>({{applianceType}})</sub></small></h2>
+              <hr></hr>
+          </div>
+            <div class="row">
+                <div class="col-md-8 col-sm-8"></div>
+
+                <div class="col-md-3 col-sm-3 text-right third-party-rating-logo">
+                    <i style="color: #7cc04b" class="fa fa-houzz fa-2x"></i>
+                    <i style="color: #f47621" class="fa fa-thumb-tack fa-2x"></i>
+                    <i style="color: #bf2519" class="fa fa-yelp fa-2x"></i>
+                </div>
+            </div>
+            <div class="row" data-ng-repeat="data in demoDatas"><!-- Text Left for responsive -->
+                <div class="col-md-9 col-sm-9">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-9">
+                            <img ng-src="{{data.logoImgLink}}" alt="" class="img-rounded" width="150" height="auto">
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <p style="font-weight: bold;" data-ng-bind="data.name"></p>
+                            <p style="font-size: 20px">{{data.rating}} <span style="font-size: 14px; color: #999">{{data.reviewedBy}} reviews</span></p>
+                            <p data-ng-bind="data.category"></p>
+                            <a ng-show="data.link!=''" style="font-weight: bold; text-decoration: none; color: #337ab7; cursor: pointer" ng-href="{{data.link}}" target="_blank">Visit Our Official Website</a>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <p data-ng-bind="data.contactAddress"></p>
+                            <p>{{data.contactPerson}} {{data.contactNo}}</p>
+                            <p style="font-weight: bold" data-ng-bind="data.email"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3 col-sm-3"></div>
+                        <div class="col-md-8 col-sm-8" style="color: #999">
+                            <p ng-show="data.text!=''" style="margin: 1% 0 5% 0">{{data.text | limitTo: 80}} ... <span class="fa fa-chevron-right" aria-hidden="true"></p>
+                            <!-- <p class="text-right">(more)</p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 third-party-rating"> <!-- Text Right for responsive -->
+                    <p data-ng-bind="data.insidemapsRating"></p>
+                    <p data-ng-bind="data.pinRating"></p>
+                    <p data-ng-bind="data.yelpRating"></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

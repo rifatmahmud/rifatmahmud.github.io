@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inside Maps</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Dancing+Script">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script> -->
+
+    <script>
+        var troubleshootingTree = function($scope) {
+          $scope.trblshtngImg = {link:"./../img/water-heater/tst.png"};
+            $scope.link = {
+              problems: ['Hot water is not available','Banging, knocking and other bothersome noises','Water isn’t heating to desired temperatures']
+             }
+
+            $scope.vdolink = {
+                vdoLinks: [{
+                        link: "https://www.youtube.com/watch?v=Tcu3tuWZNl8",
+                        name: "Hot Water Heaters : How to Troubleshoot the Pilot in a Hot Water Heater"
+                    },
+                    {
+                            link: "https://www.youtube.com/watch?v=SlyStHM9Nr0",
+                            name: "Troubleshooting Electric Water Heaters in MINUTES ~ Step By Step"
+                        }]
+            }
+        };
+
+        angular.module('myapp', []).controller('troubleshootingTree', ['$scope', troubleshootingTree]);
+    </script>
+
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        .tab-href {
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            padding: 1% 0;
+            text-align: center;
+        }
+
+        .tab-href a {
+            text-align: center;
+            text-decoration: none;
+            color: #777;
+            font-size: larger;
+            font-weight: bold;
+            padding: 0 2.1%;
+        }
+        .link-block h4 {
+            text-align: center;
+            padding: 1% 0;
+        }
+
+        .link-block p {
+            text-decoration: none;
+            color: #666;
+            font-weight: bolder;
+            line-height: 2em;
+        }
+
+        .link-block a {
+            text-decoration: none;
+            color: #666;
+            font-weight: bolder;
+            line-height: 2em;
+            padding-bottom: 3%;
+        }
+
+        .troubleshooting-tree img {
+            width: 55%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app='myapp' ng-controller="troubleshootingTree">
+        <div class="tab-href">
+            <a href="./../product-details-water-heater.html"><span class="fa fa-chevron-left" aria-hidden="true"></span> Go Back</a>
+            <a href="./../index.html">| Home |</a>
+            <a href="./../files/waterheater_um.pdf" target="_blank">| User Manual |</a>
+            <a href="troubleshooting.html" target="_blank">| Troubleshooting |</a>
+            <a href="diy.html" target="_blank">| DIY |</a>
+            <a href="parts.html" target="_blank">| Parts |</a>
+            <a href="repair-service.html" target="_blank">| Repair Service |</a>
+            <a href="replacement-options.html" target="_blank">| Replacement Option |</a>
+        </div>
+        <div class="container">
+
+            <div class="link-block" >
+              <hr>
+                <h4>Most Common Water Heater Problems</h4>
+                <hr>
+                <p ng-repeat="link in link.problems"><span class="fa fa-dot-circle-o fa-lg" aria-hidden="true"></span> {{link}}</p>
+            </div>
+
+            <div class="link-block" >
+              <hr>
+                <h4>Videos for Water Heater Troubleshooting</h4>
+                <hr>
+                <div data-ng-repeat = "link in vdolink.vdoLinks">
+                <a href="{{link.link}}" target="_blank"><span class="fa fa-hand-o-right fa-lg" aria-hidden="true"></span>  {{link.name}}</a>
+              </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

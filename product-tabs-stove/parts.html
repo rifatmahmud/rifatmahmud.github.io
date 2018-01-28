@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inside Maps</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Dancing+Script">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script> -->
+
+    <script>
+        var parts = function($scope) {
+            console.log("Hello");
+            $scope.link = {
+                partSeller: [{
+                        link: "http://www.reliableparts.com",
+                        name: "Reliable Parts",
+                        tag: "The House Of A Million Parts"
+                    },
+                    {
+                        link: "http://www.appliancepartspros.com",
+                        name: "Appliance Part Pros",
+                        tag: "Helping do-it-yourselfers since 1999"
+                    }
+                ]
+            }
+
+        };
+
+        angular.module('myapp', []).controller('parts', ['$scope', parts]);
+    </script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        .tab-href {
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            padding: 1% 0;
+            text-align: center;
+        }
+
+        .tab-href a {
+          text-align: center;
+            text-decoration: none;
+            color: #777;
+            font-size: larger;
+            font-weight: bold;
+            padding: 0 2.1%;
+        }
+
+        .link-block a {
+            text-decoration: none;
+            color: #666;
+            font-weight: bolder;
+            line-height: 2em;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div ng-app='myapp' ng-controller="parts">
+        <div class="tab-href">
+            <a href="./../product-details-stove.html"><span class="fa fa-chevron-left" aria-hidden="true"></span> Go Back</a>
+            <a href="./../index.html">| Home |</a>
+            <a href="./../files/stove_um.pdf" target="_blank">| User Manual |</a>
+            <a href="troubleshooting.html" target="_blank">| Troubleshooting |</a>
+            <a href="diy.html" target="_blank">| DIY |</a>
+            <a href="parts.html" target="_blank">| Parts |</a>
+            <a href="repair-service.html" target="_blank">| Repair Service |</a>
+            <a href="replacement-options.html" target="_blank">| Replacement Option |</a>
+        </div>
+        <div class="container">
+            <div class="heading-block text-center">
+                <h2>Electric Parts Seller</h2>
+                <hr></hr>
+            </div>
+            <div class="link-block" ng-repeat="link in link.partSeller">
+                <a href="{{link.link}}" target="_blank"><span class="fa fa-hand-o-right fa-lg" aria-hidden="true"></span>  {{link.name}} <sub>{{link.tag}}</sub></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inside Maps</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Dancing+Script">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script> -->
+
+    <script>
+        var HomeApplianceProductDetails = function($scope) {
+            console.log("Hello");
+            $scope.demoDatas = [{
+                brand: "Maytag",
+                images: ["./img/dryer/d1.jpg", "./img/dryer/d2.jpg"],
+                model: "MED5740TQ0",
+                domnufctr: "July, 2008",
+                appliance: "Dryer",
+                sn: "MW2852526",
+                specification: "Dryer with sanitize cycle has Energy Preferred, Freshen Up, Less Dry, More Dry, Timed Dry 20, Timed Dry 30, Timed Dry 40, Timed Dry 50, Timed Dry 60, Timed Dry 70 dryer cycle selection feature and automatic dry control system."
+            }];
+
+            $scope.thumbnailSelected = $scope.demoDatas[0].images[0];
+            $scope.mainImgFirst = $scope.thumbnailSelected;
+            //$scope.mainImgFirst = "2px solid red";
+            $scope.thumbnail = function(index) {
+                $scope.thumbnailSelected = $scope.demoDatas[0].images[index];
+                $scope.mainImgFirst = $scope.thumbnailSelected;
+                //  $scope.mainImgFirst = "2px solid red";
+            }
+
+        };
+
+        angular.module('myapp', []).controller('HomeApplianceProductDetails', ['$scope', HomeApplianceProductDetails]);
+    </script>
+
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        .heading-block {
+            padding-top: 1%;
+        }
+
+        .navbar-color {
+            background-color: #31708F;
+            border-color: transparent;
+        }
+
+        .navbar-nav>li>a {
+            color: #ddd;
+        }
+
+        .navbar-nav>li>a:hover,
+        .navbar-nav>li>a:focus {
+            color: #fff;
+            background-color: transparent;
+        }
+
+        .icon-bar {
+            color: #ddd;
+            border-color: #ddd;
+            background-color: #ddd;
+        }
+
+        .product-main-img img {
+            margin: 0 1%;
+        }
+
+        .product-img-thumbnails div {
+            padding: 1% 0;
+            cursor: pointer;
+        }
+
+        .product-img-thumbnails div>img {
+            border: 2px solid #999;
+        }
+        /*.product-details p:nth-last-child(1) {
+            white-space: pre-wrap;
+            padding: 25px;
+            background-color: rgba(42, 42, 42, 0.07);
+            border-radius: 3px;
+            border: 1px solid #ABABAB;
+            margin-top: 12px;
+            line-height: 1.6em;
+            font-size: 1.05em;
+        }*/
+
+        .product-specification p {
+            white-space: pre-wrap;
+            padding: 25px;
+            background-color: rgba(42, 42, 42, 0.07);
+            border-radius: 3px;
+            border: 1px solid #ABABAB;
+            margin-top: 12px;
+            line-height: 1.6em;
+            font-size: 1.05em;
+        }
+
+        .product-details span {
+            font-weight: bold;
+        }
+
+        .tab-href {
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            padding: 1% 0;
+        }
+
+        .tab-href a {
+            text-decoration: none;
+            color: #777;
+            font-size: larger;
+            font-weight: bold;
+            padding: 0 2.1%;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app='myapp' ng-controller="HomeApplianceProductDetails">
+        <div class="tab-href text-center">
+            <a href="./index.html">| Home |</a>
+            <a href="./files/dryer_um.pdf" target="_blank">| User Manual |</a>
+            <a href="./product-tabs-dryer/troubleshooting-tree.html" target="_blank">| Troubleshooting Tree |</a>
+            <a href="./product-tabs-dryer/diy.html" target="_blank">| DIY |</a>
+            <a href="./product-tabs-dryer/parts.html" target="_blank">| Parts |</a>
+            <a href="./product-tabs-dryer/repair-service.html" target="_blank">| Repair Service |</a>
+            <a href="./product-tabs-dryer/replacement-options.html" target="_blank">| Replacement Option |</a>
+        </div>
+        <div class="container heading-block" data-ng-repeat="data in demoDatas">
+            <div class="text-center">
+                <!-- <h2>{{data.appliance}}</h2> -->
+                <h2>{{data.brand}} - {{data.model}}</h2>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-md-6 product-specification">
+                    <div class="row text-center">
+                        <div class="col-md-3 product-img-thumbnails">
+                            <div data-ng-repeat="image in data.images track by $index">
+                                <img ng-src="{{image}}" ng-click="thumbnail($index)" width="75" height="75" style="border: {{mainImgFirst}}">
+                            </div>
+                        </div>
+                        <div class="col-md-9 product-main-img">
+                            <img ng-src="{{mainImgFirst}}" width="325" height="275">
+                        </div>
+                    </div>
+                    <p data-ng-bind="data.specification"></p>
+                </div>
+                <div class="col-md-6 product-details">
+                    <p><span>Brand: </span>{{data.brand}}</p>
+                    <p><span>Model: </span>{{data.model}}</p>
+                    <p><span>Serial No.: </span>{{data.sn}}</p>
+                    <p><span>Date of Manufacture: </span>{{data.domnufctr}}</p>
+                    <!-- <p data-ng-bind="data.specification"></p> -->
+                    <p><span>Appliance: </span>{{data.appliance}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
