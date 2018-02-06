@@ -14,7 +14,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"> -->
      <script>
-        var repairService = function($scope) {
+                    var repairService = function($scope) {
 
             $scope.demoDatas = [{
                 name: "AM&M",
@@ -22,11 +22,11 @@
                 category: "",
                 reviewedBy: "70",
                 link: "https://www.ammappliances.com/",
-                logoImgLink: "./../img/nalogo.png",
+                logoImgLink: "./../img/Logo-01.png",
                 contactAddress: "13061 Running Deer Road, Moreno Valley, CA 92553",
                 contactPerson: "",
                 contactNo: "951-656-5624",
-                email: "ammappliance@gmail.com",
+                email: "",
                 insidemapsRating: "4.5",
                 yelpRating: "5",
                 pinRating: "4.5",
@@ -37,7 +37,7 @@
                 category: "",
                 reviewedBy: "4",
                 link: "http://www.morantesappliances.com/",
-                logoImgLink: "./../img/nalogo.png",
+                logoImgLink: "./../img/Logo-02.png",
                 contactAddress: "5970 Tyler Street, Riverside, CA 92503",
                 contactPerson: "",
                 contactNo: "951-354-6355",
@@ -52,7 +52,7 @@
                 category: "",
                 reviewedBy: "39",
                 link: "http://jimappliances.com/",
-                logoImgLink: "./../img/nalogo.png",
+                logoImgLink: "./../img/Logo-03.png",
                 contactAddress: "3681 Sunnyside Dr Ste 236, Riverside, CA 92506",
                 contactPerson: "",
                 contactNo: "951-279-8314",
@@ -67,7 +67,7 @@
                 category: "",
                 reviewedBy: "97",
                 link: "http://www.avappliancerepair.com",
-                logoImgLink: "./../img/nalogo.png",
+                logoImgLink: "./../img/Logo-04.jpg",
                 contactAddress: "Corona, CA",
                 contactPerson: "",
                 contactNo: "951-531-8500",
@@ -79,6 +79,7 @@
             }];
             $scope.applianceType = $scope.demoDatas[0].category;
         };
+        
 
         angular.module('myapp', []).controller('repairService', ['$scope', repairService]);
     </script>
@@ -146,12 +147,12 @@
         <div class="tab-href">
             <a href="./../product-details-dryer.html"><span class="fa fa-chevron-left" aria-hidden="true"></span> Go Back</a>
             <a href="./../index.html">| Home |</a>
-            <a href="./../files/dryer_um.pdf" target="_blank">| User Manual |</a>
-            <a href="troubleshooting.html" target="_blank">| Troubleshooting |</a>
-            <a href="diy.html" target="_blank">| DIY |</a>
-            <a href="parts.html" target="_blank">| Parts |</a>
-            <a href="repair-service.html" target="_blank">| Repair Service |</a>
-            <a href="replacement-options.html" target="_blank">| Replacement Option |</a>
+            <a href="./../files/dryer_um.pdf" >| User Manual |</a>
+            <a href="troubleshooting.html" >| Troubleshooting |</a>
+            <a href="diy.html" >| DIY |</a>
+            <a href="parts.html" >| Parts |</a>
+            <a href="repair-service.html" >| Repair Service |</a>
+            <a href="replacement-options.html" >| Replacement Option |</a>
         </div>
         <div class="container">
           <div class="text-center">
@@ -177,7 +178,7 @@
                             <p style="font-weight: bold;" data-ng-bind="data.name"></p>
                             <p style="font-size: 20px">{{data.rating}} <span style="font-size: 14px; color: #999">{{data.reviewedBy}} reviews</span></p>
                             <p data-ng-bind="data.category"></p>
-                            <a ng-show="data.link!=''" style="font-weight: bold; text-decoration: none; color: #337ab7; cursor: pointer" ng-href="{{data.link}}" target="_blank">Visit Our Official Website</a>
+                            <a ng-show="data.link!=''" style="font-weight: bold; text-decoration: none; color: #337ab7; cursor: pointer" ng-href="{{data.link}}" >Visit Our Official Website</a>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <p data-ng-bind="data.contactAddress"></p>
