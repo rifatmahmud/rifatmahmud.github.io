@@ -1,0 +1,4987 @@
+<!DOCTYPE html>
+<!-- saved from url=(0081)https://www.insidemaps.com/app/walkthrough/embedded?projectId=ETAYgE7Dyn&env=prod -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+	<title>InsideMaps 3D Viewer</title>
+	<!--<base href="/app/">--><base href=".">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+  	<meta name="apple-mobile-web-app-capable" content="yes">
+  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+  	<meta name="mobile-web-app-capable" content="yes">
+
+  	
+  	<meta content="utf-8" http-equiv="encoding">
+
+	<!-- BEGIN HEADER.PARTIAL.HTML -->
+	<meta name="description" content="Insidemaps Creates 3D models of homes.">
+	<!-- Tell Internet Explorer to render in highest compatibility mode -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+
+	<!-- DETECT ERRORS DURING SCRIPT LOADING AND DISPLAY "OLD BROWSER" SCREEN INSTEAD OF MAIN PAGE -->
+	<script>
+		var global = {};
+		global.window_ = window;
+		global.isNode = false;
+		global.isBrowser = true;
+		global.insidemaps_ = {};
+
+		// Script timer
+		global.insidemaps_.scriptTimer = new Date();
+		console.log('0.00s: ----------------------- Insidemaps Reloading  ---------------------');
+
+		// Insidemaps error state
+		global.insidemaps_.errorState = {
+
+			onerror : window.onerror,
+			loadingScripts : false,
+			loadingScriptsFailed : false,  // Checked in insidemaps.ui error handler
+			virtualTourLoading: false,
+
+			startScriptLoading : function() {
+				global.insidemaps_.errorState.loadingScripts = true;
+				global.insidemaps_.errorState.loadingScriptsFailed = false;
+			},
+
+			endScriptLoading : function() {
+				global.insidemaps_.errorState.loadingScripts = false;
+				if ( ! global.insidemaps_.errorState.loadingScriptsFailed) {
+					var body = document.getElementById("mainBody");
+					if (body) body.style.display = "block";
+				}
+			},
+
+			onScriptLoadingError : function() {
+				if (window.location.search.indexOf("debug") > -1) return;
+				if (global.insidemaps_.errorState.loadingScripts) {
+					global.insidemaps_.errorState.loadingScriptsFailed = true;
+					var wrongBrowser = document.getElementById('wrongBrowser');
+					if (wrongBrowser) wrongBrowser.style.display = "block";
+					return true;
+				}
+				return false;
+			},
+
+			continueAfterScriptLoadingError : function() {
+				var body = document.getElementById("mainBody");
+				if (body) body.style.display = "block";
+				var wrongBrowser = document.getElementById('wrongBrowser');
+				if (wrongBrowser) wrongBrowser.style.display = "none";
+			},
+
+		};
+
+		window.onerror = function() {
+			// Only call orignal onerror function if there were no
+			// script loading errors
+			if (! global.insidemaps_.errorState.onScriptLoadingError() &&
+				 global.insidemaps_.errorState.onerror )
+			{
+					global.insidemaps_.errorState.onerror.call(arguments);
+			}
+		};
+
+		global.insidemaps_.errorState.startScriptLoading();
+	</script>
+
+	<!-- WHICHBROWSER LIBRARY -->
+	<script>
+		(function(){var p=[],w=window,d=document,e=f=0;p.push('ua='+encodeURIComponent(navigator.userAgent));e|=w.ActiveXObject?1:0;e|=w.opera?2:0;e|=w.chrome?4:0;
+		e|='getBoxObjectFor' in d || 'mozInnerScreenX' in w?8:0;e|=('WebKitCSSMatrix' in w||'WebKitPoint' in w||'webkitStorageInfo' in w||'webkitURL' in w)?16:0;
+		e|=(e&16&&({}.toString).toString().indexOf("\n")===-1)?32:0;p.push('e='+e);f|='sandbox' in d.createElement('iframe')?1:0;f|='WebSocket' in w?2:0;
+		f|=w.Worker?4:0;f|=w.applicationCache?8:0;f|=w.history && history.pushState?16:0;f|=d.documentElement.webkitRequestFullScreen?32:0;f|='FileReader' in w?64:0;
+		p.push('f='+f);p.push('r='+Math.random().toString(36).substring(7));p.push('w='+screen.width);p.push('h='+screen.height);var s=d.createElement('script');
+		s.id='whichBrowserScript'; s.src='/whichbrowser/detect.php?' + p.join('&');d.getElementsByTagName('head')[0].appendChild(s);})();
+	</script><script id="whichBrowserScript" src="./detect(1).php"></script>
+
+	<script>
+		function waitForWhichBrowser(cb) {
+			var callback = cb;
+			function wait() {
+				if (typeof WhichBrowser == 'undefined') 
+					window.setTimeout(wait, 100)
+				else 
+					callback();
+			}
+			wait();
+		}
+	</script>
+
+	<!-- BABEL POLYFILLS
+	<script type='application/javascript' src='/lib/babel/browser-polyfill.js'></script>
+	-->
+
+<!-- END HEADER.PARTIAL.HTML -->
+
+	<script>
+		global.insidemaps_.env = 'production'; 
+		global.insidemaps_.php = { env: 'production', data: {}, log: [] }; 
+	</script>
+
+
+	<script type="application/javascript" src="./browser-modules.js"></script>
+
+	<meta property="og:title" content="Front Page Walkthrough">
+	<meta property="og:image" content="https://s3.amazonaws.com/im-production/users/s8v8Kz3SKs/projects/ETAYgE7Dyn/splashPhoto/SplashImage.jpg">
+	<meta property="og:description" content="InsideMaps - Listing">
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@insidemaps">
+	<meta property="twitter:title" content="Front Page Walkthrough">
+	<meta property="twitter:image" content="https://s3.amazonaws.com/im-production/users/s8v8Kz3SKs/projects/ETAYgE7Dyn/splashPhoto/SplashImage.jpg">
+	<meta property="twitter:description" content="InsideMaps - Listing"><script type="text/javascript" async="" src="./mixpanel-2-latest.min.js"></script></head>
+
+<body>
+	<!-- HTML -->
+	<!-- <div data-im-ui-navbar></div> -->
+
+	<!-- HTML FOR THE MATERIAL PICKER SCREEN -->
+<script type="text/ng-template" id="new-material-picker-template">
+  <div id="newMaterialPicker" ng-class="{'furnitureAndMaterialPickerOpen': interaction.showMaterialPicker, 'furnitureAndMaterialPickerClosed': !interaction.showMaterialPicker}" ng-controller="MaterialPickerController as materialPicker" ng-mousemove="$event.stopPropagation()" ng-if="interaction.showMaterialPicker">
+    <div class="row" style="margin: 0; margin-top: 5px; margin-bottom:5px; padding: 5px; height:100%; overflow-y: scroll;" >
+      <div class="col-xs-4">
+        <select class="btn btn-default btn-xs dropdown-toggle" data-ng-model="materialPicker.category" ng-change="materialPicker.categoryChanged()">
+          <option value="paint">Solids</option>
+          <option value="brick">Brick</option>
+          <option value="carpet">Carpet</option>
+          <option value="concrete">Concrete</option>
+          <option value="fabric">Fabric</option>
+          <option value="granite">Granite</option>
+          <option value="largestone">Large Stone</option>
+          <option value="leather">Leather</option>
+          <option value="metal">Metal</option>
+          <option value="rugs">Rugs</option>
+          <option value="tile">Tile</option>
+          <option value="wallpaper">Wall Paper</option>
+          <option value="wood">Wood</option>
+          <option value="woodfloor">Wood Floor</option>
+        </select>
+      </div>
+      <div class="col-xs-3 col-xs-offset-4">
+        <a class="btn outline pull-right btn-sm" style="margin-bottom: 5px;" ng-click="interaction.hideMaterialPickerElement(); $event.stopPropagation();">Close</a>
+      </div>
+      <div class="col-xs-12">
+        <div class="row">
+          <div ng-repeat="texture in materialPicker.textures track by $index">
+            <div class="col-xs-6 col-sm-3">
+              <div class="icon-background rounded-modal-borders" ng-click="interaction.hideMaterialPickerElement(); materialPicker.onPickedMaterial(texture.attributes.name); $event.stopPropagation();">
+                <div class="text-center">
+                  <a href="" style="text-decoration: none;">
+                    <img ng-src="{{materialPicker.urls.getUrlFor(materialPicker.urls.MATERIAL, texture.attributes.map, {}, true)}}" class="material-icon" crossorigin=""/>
+                    <p class="text-center" style="color: white; text-decoration: none;">{{texture.attributes.name}}</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+<!-- HTML FOR THE FURNITURE PICKER SCREEN -->
+<script type="text/ng-template" id="new-furniture-picker-template">
+
+  <style>
+  .fp-font{
+    font-size: 2em;
+  }
+
+  .fp-image{
+    border: 2px solid white;
+  }
+  </style>
+
+  <div id="newFurniturePicker" ng-class="{'furnitureAndMaterialPickerOpen': interaction.showFurniturePicker, 'furnitureAndMaterialPickerClosed': !interaction.showFurniturePicker}" ng-controller="FurniturePickerController as furniturePicker"
+  ng-mousemove="$event.stopPropagation()" ng-keydown="$event.stopPropagation()" ng-click="$event.stopPropagation()" style="overflow: hidden">
+
+    <div ng-if="!furniturePicker.showTagSearch && interaction.showFurniturePicker">
+       <div style="color: white; font-size: 20pt; text-align: center; margin-top: 10px; margin-bottom: 5px;">
+          Select Furniture Category:
+      </div>
+
+      <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
+        <div class="col-xs-4 col-xs-offset-2 text-center" ng-click="furniturePicker.setForCategory('bed-primary');" style="margin-bottom: 5px;">
+          <img class="img-rounded fp-image" ng-if="interaction.showFurniturePicker" ng-src="{{furniturePicker.categoryImages[0]}}" ng-cloak width="90%"><br>
+          <font class="white-font gotham-font fp-font">Bedroom</font>
+        </div>
+
+        <div class="col-xs-4 text-center" ng-click="furniturePicker.setForCategory('living-primary');" style="margin-bottom: 5px;">
+          <img class="img-rounded fp-image" ng-if="interaction.showFurniturePicker" ng-src="{{furniturePicker.categoryImages[2]}}" width="90%"><br>
+          <font class="white-font gotham-font fp-font">Living Room</font>
+        </div>
+
+        <div class="col-xs-4 col-xs-offset-2 text-center" ng-click="furniturePicker.setForCategory('dining-primary');">
+          <img class="img-rounded fp-image" ng-if="interaction.showFurniturePicker" ng-src="{{furniturePicker.categoryImages[1]}}" width="90%"><br>
+          <font class="white-font gotham-font fp-font">Dining Room</font>
+        </div>
+
+        <div class="col-xs-4 text-center" ng-click="furniturePicker.setForCategory('painting');">
+          <img class="img-rounded fp-image" ng-if="interaction.showFurniturePicker" ng-src="{{furniturePicker.categoryImages[3]}}" width="90%"><br>
+          <font class="white-font gotham-font fp-font">Paintings</font>
+        </div>
+      </div>
+
+     <!-- <div class="row" style="margin-bottom: 5px; margin-top: 5px;" >
+        
+
+        <div class="col-xs-4 text-center" ng-click="furniturePicker.setForCategory('toolbox');">
+          <img class="img-rounded" ng-if="interaction.showFurniturePicker" ng-src="{{furniturePicker.categoryImages[4]}}" width="90%"><br>
+          <font class="white-font gotham-font">Toolbox</font>
+        </div>
+
+        <div class="col-xs-4 text-center" ng-click="furniturePicker.setForSearch();">
+          <img class="img-rounded" ng-src="{{furniturePicker.categoryImages[5]}}" style="width: 143px; height: 143px;" ng-if="interaction.showFurniturePicker" width="90%"><br>
+          <font class="white-font">Search All</font>
+        </div>
+      </div>-->
+    </div>
+
+    <div ng-if="furniturePicker.showTagSearch" style="height: 100%; oveflow: hidden">
+
+      <tags-input disable-blur ng-model="furniturePicker.tags" on-tag-added="furniturePicker.onTagAdded($tag)" on-tag-removed="furniturePicker.onTagRemoved($tag)"
+        add-on-enter="true" add-on-space="true" add-on-comma="true" add-on-paste="true">
+        <auto-complete source="furniturePicker.autoComplete($query)"></auto-complete>
+      </tags-input>
+
+      <div class="furniture-library" ng-if="interaction.showFurniturePicker">
+        <div class="furniture-library-item" ng-repeat="model in furniturePicker.searchResults">
+          <img title="{{model.getName()}}" ng-src="{{model.getArt()}}" ng-click="furniturePicker.onModelChoosen(model); interaction.hideFurniturePickerElement();">
+        </div>
+      </div>
+
+    </div>
+
+    <div style="position: absolute; bottom: 10px; width: 100%; text-align: center;">
+      <a class="btn outline close-button" ng-show="furniturePicker.showTagSearch" ng-click="furniturePicker.reset(); furniturePicker.showTagSearch=false;">
+        Back
+      </a>
+      <a class="btn outline close-button" ng-click="furniturePicker.showTagSearch=false; furniturePicker.reset(); interaction.hideFurniturePickerElement(); $event.stopPropagation()">
+        Close
+      </a>
+    </div>
+
+  </div>
+
+</script>
+<!-- HTML FOR THE FURNITURE PICKER SCREEN -->
+
+<style>
+    .activeSelection{
+        border: 5px solid green;
+    }
+
+    .wallElementPicker {
+        width:600px !important;
+    }
+
+    .wallElementPicker .modal-dialog{
+        margin: 0 !important;
+        height: 100% !important;
+    }
+
+    .wallElementPicker .modal-content{
+        height: 100% !important;
+        background: rgba(0,0,0,0.8);
+    }
+
+    .spinGallery {
+        width: 100%  !important;
+        height:100% !important;
+    }
+
+    .spinGallery .modal-dialog{
+        margin-top: 0px;
+        margin-bottom: 0px;
+        height: 100% !important;
+    }
+
+    .spinGallery .modal-content{
+        background: rgba(0,0,0,0.8);
+    }
+
+    .spinGallery .modal-body{
+        padding: 5px;
+    }
+
+    .no-lr-padding{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .we-picker-form{
+        padding: 2px !important;
+    }
+
+    .full-height{
+        top:90px;
+    }
+
+    .partial-height{
+        top:296px;
+    }
+
+    .partial-height-categories{
+        top:325px !important;
+    }
+
+    .elementConnection {
+        cursor: pointer;
+        width: 100%;
+        height: 74px;
+        padding: 2px;
+    }
+
+    .elementConnection:hover {
+        outline: 2px solid #70ff00;
+        outline-offset: -2px;
+    }
+
+    .elementConnection .roomName {
+        font-weight: bold;
+        width: 50%;
+        font-size: 16px;
+        padding: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        margin-top: 19px;
+    }
+
+    .elementConnection .pano {
+        text-align:center;
+        float:right;
+        width:50%;
+        display:inline;
+        position: relative;
+    }
+
+    .elementConnection .pano img {
+        flow: left;
+        width:25%;
+        height:70px;
+    }
+
+    .elementConnection .pano .view {
+        background-image: url('../../../images/WS.png');
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        right: 6px;
+        top: 19px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: none;
+    }
+
+    .elementConnection:hover .pano .view {
+        display: block;
+    }
+
+    .emptyList {
+        font-weight: bold;
+        width: 100%;
+        font-size: 14px;
+        padding: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .clearSearch {
+        position: absolute !important;
+        right: 4px;
+        top: 9px !important;
+        font-size: 18px;
+        color: gray;
+        cursor: pointer;
+    }
+
+    .clearSearch:hover {
+        color: black;
+    }
+
+    .shadowfilter {
+        -webkit-filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.8));
+        -moz-filter:  drop-shadow(0px 0px 4px rgba(0,0,0,0.8));
+        -o-filter:  drop-shadow(0px 0px 4px rgba(0,0,0,0.8));
+        -ms-filter:  drop-shadow(0px 0px 4px rgba(0,0,0,0.8));
+    }
+
+    .elementConnection:hover .pano .view.shadowfilter:hover {
+        -webkit-filter: drop-shadow(0px 0px 4px #00ff00);
+    }
+
+    .elementConnection .roomConnectedTag {
+        color: black;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        height: 15px;
+        text-align: right;
+        background: #67f931;
+        padding-right: 2px;
+        padding-left: 2px;
+        font-size: 10px;
+    }
+
+    .elementConnection.selected {
+        background-color: white;
+    }
+
+    .elementConnection.selected .roomName{
+        color: black;
+    }
+
+    .elementConnection.selected .roomConnectedTag {
+        background-color: white;
+    }
+
+    .findRoomPanel {
+        height: 50px;
+        width: 100%;
+        overflow: hidden;
+        border-bottom: 1px solid white;
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+
+    .spinMenu {
+        text-align: center;
+        width: 210px;
+        position: fixed;
+        top: 0px;
+        right: -205px;
+        background: rgba(0,0,0,0.8);
+    }
+
+    .spinMenu .spin {
+        width: 200px;
+        height: 50px;
+        margin: 5px;
+        cursor: pointer;
+    }
+
+    .spinMenu .spin img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .spinMenu .spin:hover {
+        outline: 2px solid lime;
+    }
+
+    .spinMenu .spin.selected {
+        outline: 2px solid white;
+    }
+
+    .titleRecent {
+        font-size: 15px;
+        font-weight: bold;
+        margin-top: 5px;
+        color: #fff;
+        text-indent: 5px;
+    }
+
+    .tab {
+        display:none;
+    }
+    .tab:checked + label,
+    .tab:checked + label:hover {
+        background-color:white !important;
+        color:black;
+    }
+
+    .tab + label {
+        padding: 4px;
+        font-size: 11px;
+        cursor:pointer;
+    }
+
+    .tab + label:hover {
+        background-color:#a73c39;
+    }
+    .elementOption{
+        background-color: rgba(0,0,0,0);
+        color:white;
+        text-align: center;
+        padding-top:6px;
+        cursor: pointer;
+    }
+    .elementOption:hover{
+        background-color: white;
+        color:black;
+    }
+    .elementConnection{
+        color:lime;
+    }
+    .elementConnection:hover{
+        color:green;
+    }
+
+</style>
+
+<script type="text/ng-template" id="wall-element-picker-template">
+  <div class="modal-body no-lr-padding" style="height: 100%; padding-top: 0; padding-bottom: 0; overflow:auto">
+    <!--<div id="wallElementPicker"
+      ng-class="{'furnitureAndMaterialPickerOpen': interaction.showWallElementPicker, 'furnitureAndMaterialPickerClosed': !interaction.showWallElementPicker}"
+      ng-controller="WallElementPickerController as wallElementPicker"
+      ng-mousemove="$event.stopPropagation()" ng-keydown="$event.stopPropagation()" ng-click="$event.stopPropagation()" style="overflow: hidden">-->
+
+      <tags-input disable-blur ng-model="wallElementPicker.tags"
+        on-tag-added="wallElementPicker.onTagAdded($tag)"
+        on-tag-removed="wallElementPicker.onTagRemoved($tag)"
+        add-on-enter="true" add-on-space="true" add-on-comma="true" add-on-paste="true" style="display: none">
+        <auto-complete source="wallElementPicker.autoComplete($query)"></auto-complete>
+      </tags-input>
+
+      <!-- TOOLBAR -->
+      <div class="row no-margin" style="height: 90px; border-bottom: 1px solid white; overflow: hidden;">
+          <div class="row no-margin">
+            <div class="col-xs-2 we-picker-form" style="margin-left:5px;">
+              <div ng-if="wallElementPicker.showPositionCorrection" class="form-group" style="margin-bottom: 2px;">
+                <label for="wallElelementHeight" class="white-font">Top</label>
+                <input type="number" class="form-control" id="wallElementHeight" ng-change="wallElementPicker.dimensionsChanged()" ng-model="wallElementPicker.topOffset" ng-disabled="wallElementPicker.topOffset !== 0 && !wallElementPicker.topOffset">
+              </div>
+            </div>
+            <div class="col-xs-2 we-picker-form">
+              <div ng-if="wallElementPicker.showPositionCorrection" class="form-group" style="margin-bottom: 2px;">
+                <label for="wallElelementHeight" class="white-font">Width</label>
+                <input type="number" class="form-control" ng-change="wallElementPicker.dimensionsChanged()" ng-model="wallElementPicker.width" ng-disabled="wallElementPicker.width !== 0 && !wallElementPicker.width">
+              </div>
+            </div>
+            <div class="col-xs-2 we-picker-form" ng-if="wallElementPicker.category!='door'">
+              <div ng-if="wallElementPicker.showPositionCorrection" class="form-group" style="margin-bottom: 2px;">
+                <label for="wallElelementHeight" class="white-font">Bottom</label>
+                <input type="number" class="form-control" ng-change="wallElementPicker.dimensionsChanged()" ng-model="wallElementPicker.bottomOffset"ng-disabled="wallElementPicker.bottomOffset !== 0 && !wallElementPicker.bottomOffset">
+              </div>
+            </div>
+
+
+            <div class="pull-right we-picker-form col-xs-5">
+              <a class="btn btn-default red-nav-btn we-button" ng-click="wallElementPicker.cancelWallElement()">
+                Cancel
+              </a>
+              <a ng-if="wallElementPicker._steps.length - 1 == wallElementPicker._currentStep" class="btn btn-default red-nav-btn we-button" ng-click="wallElementPicker.finalizeWallElement()">
+                Finish
+              </a>
+            </div>
+          </div>
+          <div ng-if="wallElementPicker.showPositionCorrection && app.vtour.plugin.currStep.tag != 'wall-elements'" style="padding-left: 7px;position:relative;">
+              <input id="applyDimensions" type="checkbox" ng-model="wallElementPicker.includePreviousDimensions"><label for="applyDimensions" class="white-font" style="font-size: 12px;position: absolute;top: 2px;margin-left: 5px;">Apply Dimensions</label>
+          </div>
+    </div>
+
+    <!-- CONNECTIONS -->
+    <div class="row no-margin" style="border-bottom: 1px solid white;" ng-if="wallElementPicker._connectionElementsDimensions.length > 0">
+        <div class="col-xs-12 no-lr-padding">
+            <div class="col-xs-10 we-picker-form">
+                <div ng-if="wallElementPicker.category=='door'" class="titleRecent">Connection Room doors:</div>
+                <div ng-if="wallElementPicker.category=='enterance'" class="titleRecent">Connection Room enterances:</div>
+            </div>
+        </div>
+        <div class="col-xs-12 no-lr-padding" style="height: 100%; overflow-y: auto; ">
+          <div class="row no-margin" style="margin-bottom: 20px;">
+            <div ng-repeat="element in wallElementPicker._connectionElementsDimensions" class="col-xs-12 no-lr-padding elementOption" ng-class="(element['connection'])?'elementConnection':''"
+                ng-if="(element['type'] == 'D' && wallElementPicker.category=='door') || (element['type'] == 'e' && wallElementPicker.category=='enterance')"
+                ng-click="wallElementPicker.applySelectedDimensions(element)">
+                <p ng-if="element['connection']" class="col-xs-12">Connected to this room:</p>
+                <div>
+                    <p class="col-xs-4"><b>Top:</b> {{element['top']}} </p>
+                    <p class="col-xs-4"><b>Width:</b> {{element['width']}} </p>
+                    <p ng-if="wallElementPicker.category!='door'" class="col-xs-4"><b>Bottom:</b> {{element['bottom']}} </p>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- RECENTS -->
+    <div class="row no-margin" style="border-bottom: 1px solid white;" ng-if="wallElementPicker.recentlySelectedModels && wallElementPicker.recentlySelectedModels.length > 0 && wallElementPicker.currentTag != 'roomConnection'">
+        <div class="col-xs-12 no-lr-padding">
+            <div class="col-xs-10 we-picker-form">
+                <div ng-if="wallElementPicker.category=='wallTrim' && wallElementPicker.subtype=='fl'" class="titleRecent">Recent floor trims:</div>
+                <div ng-if="wallElementPicker.category=='wallTrim' && wallElementPicker.subtype!='fl'" class="titleRecent">Recent ceiling trims:</div>
+                <div ng-if="wallElementPicker.category=='door'" class="titleRecent">Recent doors:</div>
+                <div ng-if="wallElementPicker.category=='window'" class="titleRecent">Recent windows:</div>
+                <div ng-if="wallElementPicker.category=='enterance'" class="titleRecent">Recent enterances:</div>
+                <div ng-if="wallElementPicker.category!='window' && wallElementPicker.category!='door' && wallElementPicker.category!='wallTrim'" class="titleRecent">Recent:</div>
+            </div>
+            <div class="col-xs-2 we-picker-form" ng-if="wallElementPicker.category==='cupboardDoor' || wallElementPicker.category === 'sink'">
+                <a class="btn btn-default red-nav-btn tiny-button pull-right" ng-click="wallElementPicker.clearRecentPicks()">
+                    Clear Recent
+                </a>
+            </div>
+        </div>
+        <div ng-if="app.vtour.plugin.currStep.tag == 'wall-elements'" class="col-xs-12 no-lr-padding" style="height: 100%; overflow-y: auto; ">
+          <div class="row no-margin" style="margin-bottom: 20px;">
+            <div ng-repeat="group in wallElementPicker.recentlySelectedModels" class="col-xs-12 no-lr-padding elementOption" 
+            ng-click="wallElementPicker.applySelectedDimensions({top:group['topOffset'], width:group['initialAbsoluteWidth'], bottom:group['bottomOffset']})">
+                <div>
+                    <p ng-if="group['roomName']" class="col-xs-2"><b>Used in:</b></p><p ng-if="group['roomName']" class="col-xs-3"> {{group['roomName']}} </p>
+                    <p class="col-xs-2"><b>Top:</b> {{group['topOffset']}} </p>
+                    <p class="col-xs-2"><b>Width:</b> {{group['initialAbsoluteWidth']}} </p>
+                    <p ng-if="wallElementPicker.category!='door'" class="col-xs-3"><b>Bottom:</b> {{group['bottomOffset']}} </p>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div ng-if="app.vtour.plugin.currStep.tag == 'cupboard-creation'" class="col-xs-12 no-lr-padding" style="height: 180px; overflow-y: auto; ">
+          <div class="row no-margin" style="margin-bottom: 20px;">
+            <div ng-repeat="group in wallElementPicker.recentlySelectedModels" class="col-xs-3 no-lr-padding" style="overflow:hidden; position:relative; height:140px;">
+                <div title="{{group['baseModel'].getName()}}" ng-click="wallElementPicker.applyPreviouslySelectedGroup(group, wallElementPicker.includePreviousDimensions, $index)"
+                    style="background-image: url({{group['baseModel'].getArt()}});background-repeat: no-repeat;background-size: contain;position: absolute; width: 100%; left: 0; top:0; bottom:0;" ng-class="{'activeSelection': $index === wallElementPicker.recentlySelectedGroupIndex}">
+                    <!--
+                    <span ng-if="group.type=='T' && group.position!='fl'" style="background-color: #b0423a;color: #fff;font-size: 12px;padding-left: 2px;padding-right: 2px; position:absolute;top:0px;">CEILING</span>
+                    <span ng-if="group.type=='T' && group.position=='fl'" style="background-color: #b0423a;color: #fff;font-size: 12px;padding-left: 2px;padding-right: 2px; position:absolute;bottom:0px;">FLOOR</span>
+                    -->
+                </div>
+
+                <div style="position: absolute; right: 0px; top: 0; bottom:0; width: 30%;">
+                    <div ng-repeat="subModel in group.subModels" style="background-image: url({{subModel.getArt()}}); width: 100%;height: 45px;background-repeat: no-repeat;background-size: cover; background-color: rgba(0,0,0,0.5);" ng-click=""></div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- DOOR CATEGORIES -->
+    <div ng-if="wallElementPicker.category === 'door' && wallElementPicker.currentTag === 'door' && app.vtour.plugin.currStep.tag == 'cupboard-creation'" class="row no-margin" style="margin-top:5px;">
+        <input class="tab" type="radio" name="editList" id="standardDoors" ng-model="wallElementPicker.subType" value="standard"/>
+        <label class="white-font" for="standardDoors">Standard</label>
+
+        <input class="tab" type="radio" name="editList" id="glassDoors" ng-model="wallElementPicker.subType" value="glass"/>
+        <label class="white-font" for="glassDoors">Glass</label>
+
+        <input class="tab" type="radio" name="editList" id="lueverDoors" ng-model="wallElementPicker.subType" value="louver"/>
+        <label class="white-font" for="lueverDoors">Louver</label>
+
+        <input class="tab" type="radio" name="editList" id="irregularDoors" ng-model="wallElementPicker.subType" value="irregular"/>
+        <label class="white-font" for="irregularDoors">Irregular</label>
+    </div>
+
+
+
+    <div ng-if="app.vtour.plugin.currStep.tag == 'cupboard-creation' || wallElementPicker.currentTag == 'roomConnection'" class="row no-margin" style="overflow-y: auto; position:absolute; bottom:0px; width: 100%;border-top: 1px solid #fff;" ng-class="{'partial-height': wallElementPicker.recentlySelectedModels && wallElementPicker.currentTag != 'roomConnection' && wallElementPicker.recentlySelectedModels.length > 0 , 'full-height': !wallElementPicker.recentlySelectedModels || wallElementPicker.currentStep != 2 || wallElementPicker.recentlySelectedModels.length == 0, 'partial-height-categories':(wallElementPicker.category === 'window' && wallElementPicker.currentTag === 'window') || (wallElementPicker.category === 'door' && wallElementPicker.currentTag === 'door')}">
+        <div class="col-xs-12 no-lr-padding">
+          <div class="row no-margin">
+            <div ng-if="!wallElementPicker.finalStepComplete">
+
+                <!-- All other wall elements -->
+                <div ng-cloak ng-if="wallElementPicker.currentTag != 'roomConnection'" ng-repeat="model in wallElementPicker.searchResults | filter: wallElementPicker.filterFunction" class="col-xs-3 no-lr-padding">
+                  <img title="{{model.getName()}}" ng-src="{{model.getArt()}}" ng-click="wallElementPicker.onModelChoosen(model, $index);" width="100%">
+                </div>
+
+                <!-- Room connections -->
+                <div ng-cloak ng-if="wallElementPicker.currentTag == 'roomConnection'">
+                    <h3 class="white-font">Select where this element connects to:</h3>
+
+                    <div class="progress progress-striped active"  ng-if="wallElementPicker.dataFetchingInProgress" style="width:95%; margin: 0 auto;">
+                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:100%;">
+                          Loading rooms...
+                        </div>
+                    </div>
+
+                    <!-- Search rooms -->
+                    <div ng-cloak ng-if="!wallElementPicker.dataFetchingInProgress" class="findRoomPanel">
+                        <div class="form-group" style="margin-bottom: 2px; position:relative;">
+                          <input type="text" class="form-control" placeholder="Search rooms..." maxlength="40" ng-model="wallElementPicker.filterSearchResultsText" ng-change="wallElementPicker.filterSearchResults('name', $event);" />
+                          <span ng-if="!!wallElementPicker.filterSearchResultsText" class="clearSearch glyphicon glyphicon-remove-circle form-control-feedback" ng-click="wallElementPicker.filterSearchResultsText = ''; wallElementPicker.filterSearchResults('');"></span>
+                        </div>
+                    </div>
+
+                    <!-- Empty list indicator -->
+                    <div ng-cloak ng-if="!wallElementPicker.dataFetchingInProgress && wallElementPicker.searchResults.length == 0" class="white-font emptyList">
+                        No rooms named "{{wallElementPicker.filterSearchResultsText}}"
+                    </div>
+
+                    <!-- Room list items -->
+                    <div ng-cloak ng-repeat="room in wallElementPicker.searchResults" ng-if="!wallElementPicker.dataFetchingInProgress" class="elementConnection" ng-class="{selected : wallElementPicker.getSelectedRoom() == room.roomId}"  ng-click="wallElementPicker.onModelChoosen(room, $index);">
+                        <div class="white-font roomName">
+                            {{room.name}}
+                        </div>
+                        <div class="col-xs-12 no-lr-padding ng-scope pano">
+                            <img ng-src="{{spin.url}}" ng-repeat="spin in room.spins[0]"  class="no-lr-padding"/>
+                            <div ng-if="room.spins[0].length == 4" class="view shadowfilter" title="View in gallery" ng-click="wallElementPicker.onViewSpin(room.spins[0], room); $event.stopPropagation();">
+                            </div>
+
+                            <div ng-if="wallElementPicker.isRoomConnectedParseData(room) || wallElementPicker.isRoomConnectedJSONData(room)" class="roomConnectedTag">
+                                Connected to current room
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="spin-slideshow">
+	<div class="modal-body">
+		<carousel interval="5000" disable-ng-animate>
+	      <slide ng-repeat="slide in photoArray">
+	      	<img ng-src="{{slide.url}}" style="margin: auto;" width="100%"/>
+	      </slide>
+	    </carousel>
+        <div class="spinMenu" ng-if="room.spins.length > 1">
+            <div style="color: white;text-align: left;padding: 5px; font-weight: bold;">
+                Available spins:
+            </div>
+            <div class="spin" ng-class="{'selected': wallElementPicker._selectedSpin == $index}" ng-repeat="spins in room.spins track by $index" style="color: white; display:inline-block;" ng-init="spinIndex = $index">
+                <img ng-repeat="spin in spins" ng-src="{{spin.url}}" class="no-lr-padding" ng-click="wallElementPicker.switchSpin(room, spinIndex)"/>
+            <div>
+        </div>
+	</div>
+</script><!-- HTML FOR THE FURNITURE CONFIGURATION SCREEN -->
+<script type="text/ng-template" id="furniture-configurator-template">
+  <div id="furnitureConfiurationContainer" class="furnitureConfigSlideIn im-no-scroll" style="background: rgba(0, 0, 0, 0.5); border-left: 1px solid white; " ng-if="app.vtour.parentFurnitureModel && app.vtour.parentFurnitureModel.getOptions() && interaction.configurationTool">
+    <div id="innerFurnitureConfigurationContainer">
+      <div ng-controller="FurnitureConfigurationController as config">
+        <div ng-repeat="opt in config.opts">
+          <div class="row" style="margin-left: 5px; margin-right: 5px; padding-bottom: 3px; padding-top: 3px; border-bottom: 1px solid white;">
+            <div ng-repeat="mat in config.listHolder[opt.optionKey] | startFrom: config.paginations[$index].page * config.paginations[$index].perPage | limitTo: config.paginations[$index].perPage">
+              <div class="col-xs-3" style="padding: 2px">
+                <div class="text-center">
+                  <a href="" ng-click="config.setMaterial(opt.optionName, mat);" style="text-decoration: none;">
+                    <img ng-src="{{config.urls.getUrlFor(config.urls.MATERIAL, mat.getMap(), {}, true)}}" width="100%" height="70px" crossorigin=""/>
+                    <div style="position: absolute; bottom: 5px; left: 0; right: 0; margin: 0 auto;" class="white-font">{{opt.optionName}}</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="furnitureInfoRow2">
+          <div class="col-xs-12 text-center white-font">
+
+            <p>Name: {{config.metaData.name}}</p>
+            <p>Price: {{config.metaData.price}}</p>
+            <p>Dimensions: {{config.metaData.dimensions.depth}} x {{config.metaData.dimensions.height}} x {{config.metaData.dimensions.width}}</p>
+            <p>Description: {{config.metaData.description}}</p>
+            <p>SKU: {{config.metaData.sku}}</p>
+          </div>
+        </div>
+
+        <div class="row text-center">
+          <a ng-if="!interaction.alreadyInScene && interaction.configurationDoneAllowed" class="btn outline" ng-click="interaction.hideConfigurationTool(false); config.endConfigurationOfNewFurniture(interaction.clickedCoord)" href="">Done</a>
+          <a ng-if="interaction.alreadyInScene && interaction.configurationDoneAllowed" class="btn outline" ng-click="interaction.hideConfigurationTool(true)" href="">Done</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="im-no-scroll text-center" ng-if="!app.vtour.parentFurnitureModel.getOptions() && interaction.configurationTool && interaction.configurationDoneAllowed">
+    <div style="position: absolute; left: 0; right: 0; margin: auto; bottom: 25px; width: 75px;">
+      <a class="btn outline" href="" ng-click="interaction.hideConfigurationTool(true)">Done</a>
+    </div>
+  </div>
+
+</script>
+
+  <style>
+    .green-background {
+      background-color: #00FF00 !important;
+    }
+  </style>
+
+  <script type="text/ng-template" id="floorjs-map-template">    
+      <div class="modal-header">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a href="#floorInfo" data-toggle="tab">Floor Info</a></li>
+          <li><a href="#projectTools" data-toggle="tab">Project Tools</a><li/>
+          <li><a href="#projectFancyModels" data-toggle="tab">Fancy Model</a></li>
+        </ul>
+      </div>
+      <div class="modal-body" ng-keydown="$event.stopPropagation();">
+        <div class="tab-content">
+          <div class="tab-pane active" id="floorInfo">
+            <h4>Floor Info</h4>
+            <hr/>
+            <div ng-repeat="floor in modelerConsole.floors">
+              <div class="input-group">
+                <div class="input-group-addon">{{floor.getName()}}</div>
+                <input type="text" class="form-control" ng-model="modelerConsole.floorValues[floor.getName()].name">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" ng-click="modelerConsole.saveFloorJSFile(floor, modelerConsole.floorValues[floor.getName()].name, $event)">Save</button>
+                </div>
+              </div>
+              <div class="input-group" style="margin-top: 5px;">
+                <div class="input-group-addon">Order</div>
+                <input type="number" class="form-control" ng-model="modelerConsole.floorValues[floor.getName()].orderNumber">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" ng-click="modelerConsole.saveFloorOrder(floor, modelerConsole.floorValues[floor.getName()].orderNumber, $event)">Save</button>
+                </div>
+              </div>
+              <div class="input-group" style="margin-top: 5px;">
+                <div class="input-group-addon">Scale</div>
+                <input type="number" class="form-control" ng-model="modelerConsole.floorValues[floor.getName()].scale">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" ng-click="modelerConsole.saveFloorScale(floor, modelerConsole.floorValues[floor.getName()].scale, $event)">Save</button>
+                </div>
+              </div>
+
+              <div class="input-group" style="margin-top: 5px;">
+                <div class="input-group-addon">Upload</div>
+                <input type="text" class="form-control" ng-model="modelerConsole.floorValues[floor.getName()].uploadFilename" disabled>
+
+                <div class="input-group-btn" dropdown is-open="status.isopen">
+                  <button class="btn btn-default dropdown-toggle" dropdown-toggle type="button" id="typeDropdown" aria-expanded="true">
+                    {{modelerConsole.floorValues[floor.getName()].uploadType}}
+                  <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="typeDropdown">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="modelerConsole.changeUploadType(floor, 'Bake')">Bake VRScene</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="modelerConsole.changeUploadType(floor, 'Render')">Render VRScene</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="modelerConsole.changeUploadType(floor, 'MayaOutput')">Maya Output</a></li>
+                  </ul>
+                </div>
+
+                <div class="input-group-btn">
+                  <button class="btn btn-default" ng-click="modelerConsole.chooseUploadFile(floor)">Choose</button>
+                </div>
+                <div class="input-group-btn">
+                  <button class="btn btn-default" ng-click="modelerConsole.uploadFile(floor, modelerConsole.floorValues[floor.getName()].uploadFile, $event)"
+                      ng-disabled="modelerConsole.floorValues[floor.getName()].uploadFile === undefined || modelerConsole.floorValues[floor.getName()].uploadTitle !== 'Upload'">{{modelerConsole.floorValues[floor.getName()].uploadTitle}}</button>
+                </div>
+              </div>
+
+              <div ng-if="floor.getSpawn()" style="margin-bottom: 5px;">
+                Spawn point: {{modelerConsole.floorValues[floor.getName()].spawn}}
+              </div>
+              <br/>
+            </div>
+          </div>
+          <div class="tab-pane" id="projectTools">
+            <h4>Custom fbx file upload</h4>
+            <hr/>
+            <div>
+              <div class="input-group-btn">
+                <button class="btn btn-default" ng-click="modelerConsole.chooseFbx()">Choose .fbx File to Upload</button>
+              </div>
+              <div style="margin-left: 3px;">
+                <div ng-show="!modelerConsole.fbx">No File Chosen</div>
+                <div ng-show="modelerConsole.fbx">{{ modelerConsole.fbx.name }}</div>
+              </div>
+              <div>
+                <button class="btn btn-default" ng-click="modelerConsole.uploadFbx()">Upload .fbx File</button>
+              </div>
+              <br>
+              <a class="btn btn-default" ng-show="modelerConsole.fbxLink" ng-href="{{ modelerConsole.getFbxLink() }}">Download .fbx</a>
+            </div>
+            <hr/>
+            <h4>Project Related Tools</h4>
+            <hr/>
+            <div class="row" ng-controller="VirtualTourMenuController as vtMenu">
+              <button class="btn btn-default" ng-click="vtMenu.customize('export-geometry-objmtl')">Export OBJ/MTL</button>
+              <button class="btn btn-default" ng-click="modelerConsole.exportFBX()">Export FBX</button>
+              <button class="btn btn-default" ng-click="vtMenu.customize('compress-project-data')">Compress Data</button>
+              <button class="btn btn-default" ng-click="modelerConsole.invalidateCloudfrontAsync($event)">Invalidate Cloudfront</button>
+              <button
+                class="btn btn-default"
+                ng-disabled="!vtMenu.isCustomModelDesiredProduct() || !vtMenu.app.vtour.project.getPro()"
+                ng-click="modelerConsole.renderHybridPanos()">
+                  Render Hybrid Panos
+              </button>
+            </div>
+           
+            <div class="row" style="margin-top: 7px;">
+              <button class="btn btn-default" ng-click="modelerConsole.toggleModel()" ng-disabled="!app.vtour.project.getFancy()">
+                {{modelerConsole.toggleText}}</button>
+              <button class="btn btn-default" ng-click="modelerConsole.finalizeModel($event)">Finalize Model</button>
+              <button class="btn btn-default" ng-click="modelerConsole.changeToHouseUploader()">Custom Geometry Uploader</button>
+              <button class="btn btn-default" ng-click="modelerConsole.checkInvalidations()">Check Invalidations</button>
+            </div>
+
+            <hr/>
+            <h4>Autobake Tools</h4>
+            <hr/>
+            <div class="row" ng-controller="VirtualTourMenuController as vtMenu">
+              <button class="btn btn-default" ng-disabled="!vtMenu.isCustomModelDesiredProduct()" ng-click="modelerConsole.autobakePartOne(vtMenu)">Autobake Part One</button>
+              <button class="btn btn-default" ng-disabled="!vtMenu.isCustomModelDesiredProduct()" ng-click="modelerConsole.autobakePartTwo()">Autobake Part Two</button>
+              <button class="btn btn-default" ng-disabled="!vtMenu.isCustomModelDesiredProduct()" ng-click="modelerConsole.fullAutobake(vtMenu)">Full Autobake</button>
+            </div>
+
+            <div class="row" style="margin-top: 7px;">
+              <p class="{{modelerConsole.fontColor}}">{{modelerConsole.textResult}}</p>
+            </div>
+            <div class="row" ng-if="modelerConsole.invalidationList.length > 0">
+              <table class="table table-striped">
+                <tr>
+                  <th>Id</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                </tr>
+                <tr ng-repeat="invalidation in modelerConsole.invalidationList">
+                  <td>{{invalidation.Id}}</td>
+                  <td>{{invalidation.CreateTime}}</td>
+                  <td>{{invalidation.Status}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane" id="projectFancyModels">
+            <h4>Fancy and Pro Model Names</h4>
+            <p style="color: red">Please fill out both the fancy name and the pro model name before uploading. If you do not fill out the fancy name, you will be redirected to the parse model after upload.</p>
+
+            <p>Note: <text style="color: red">Fancy Name must be unique</text></p>
+            <hr/>
+            <form name="fancyProForm">
+            <div class="input-group">
+              <div class="input-group-addon">Pro</div>
+              <input type="text" name="proName" class="form-control" ng-model="modelerConsole.proModelName" ng-pattern="/^[a-zA-Z0-9\_\-]*$/">
+
+              <div class="input-group-btn">
+                <button class="btn btn-default" ng-click="modelerConsole.saveProjectProModel(modelerConsole.proModelName, $event)" ng-disabled="fancyProForm.proName.$error.pattern">Save</button>
+              </div>
+            </div>
+            <p ng-show="fancyProForm.proName.$error.pattern" style="color: red;">Aplhanumeric characters, underscores and dashes only.</p>
+            <div class="input-group" style="margin-top: 5px">
+              <div class="input-group-addon">Fancy</div>
+              <input type="text" class="form-control" name="fancyName" ng-model="modelerConsole.fancyName" ng-pattern="/^[a-zA-Z0-9\_\-]*$/">
+              <div class="input-group-btn">
+                <button class="btn btn-default" ng-click="modelerConsole.saveProjectFancyName(modelerConsole.fancyName, $event)" ng-disabled="fancyProForm.fancyName.$error.pattern">Save</button>
+              </div>
+            </div>
+            <p ng-show="fancyProForm.fancyName.$error.pattern" style="color: red;">Aplhanumeric characters, underscores and dashes only.</p>
+            </form>
+            <p>WARNING: Changing the fancy name will affect the url. If this model has already been sent to a client, it is best not to change this name.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="https://github.com/insidemaps-org/website-v1/wiki/Model-Upload-Process-(In-Development)#modeler-tools" target="_blank">Modeler Tools Documentation</a>
+        <a class="btn btn-primary" ng-click="modelerConsole.closeModal()">Close</a>
+      </div>
+  </script>
+
+<!-- // Oculus Rift Bridge MODAL -->
+
+<div class="modal fade" id="testModal" style="display: none" tabindex="-1" role="dialog" aria-labelledby="testModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		   	<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">Oculus Bridge Needed</h4>
+		   	</div>
+		   	<div class="modal-body">
+				<p>In order for head tracking to work, you will need the following:<br></p>
+			  	<ul>
+				 <li>Mac OSX or Windows</li>
+				 <li>An Oculus Rift</li>
+				 <li><a href="https://github.com/Instrument/oculus-bridge" target="_blank">GitHub Oculus Bridge</a></li>
+			  </ul>
+		   	</div>
+		   	<div class="modal-footer">
+			  	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		   	</div>
+		</div>
+	</div>
+</div>
+
+
+
+<style>
+ #video-wrap {
+     position: relative;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     overflow: hidden;
+ }
+ #animatedLogoVideo {
+     position: absolute;
+     top: -9999px;
+     bottom: -9999px;
+     left: -9999px;
+     right: -9999px;
+     margin: auto;
+     min-width: 100%;
+     min-height: 100%;
+     width: auto;
+     height: auto;
+ }
+
+ #staticImage{
+ 	max-width: 100% !important;
+ 	max-height: 100% !important;
+ 	overflow: hidden !important;
+ }
+
+ .shadowedText{
+ 	color: rgb(250,250,250);
+	text-shadow:
+	0 1px 0 rgb(140, 140, 140),
+	0 2px 0 rgb(100, 100, 100),
+	0 3px 0	rgb(80, 80, 80),
+	0 4px 0 rgb(70, 70, 70),
+	0 5px 1px rgba(0,0,0,.1),
+	0 0 5px rgba(0,0,0,.1),
+	0 1px 2px rgba(0,0,0,.3),
+	0 3px 4px rgba(0,0,0,.2),
+	0 4px 6px rgba(0,0,0,.25),
+	0 6px 6px rgba(0,0,0,.2),
+	0 12px 12px rgba(0,0,0,.15);
+ }
+
+ #stats{
+ 	bottom: 0 !important;
+ 	right: auto !important;
+ 	top: auto !important;
+ 	left: 40% !important;
+ }
+
+ .backgroundGradient {
+ 	background-image:
+ 	    radial-gradient(
+ 	      circle at bottom center,
+ 	      rgb(139,139,139),
+ 	      rgb(53, 53, 53)
+ 	    );
+ }
+/*
+ #loadingCircleContainer{
+ 	text-rendering: optimizeLegibility!important;
+    -webkit-font-smoothing: antialiased!important;
+ }
+*/
+ #redCircle{
+ 	stroke: red;
+ 	stroke-dasharray: 299px;
+ 	stroke-width: 5px ;
+ 	stroke-dashoffset: 299px;
+ 	fill: transparent;
+ 	transition: stroke-dashoffset 0.8s linear;
+ }
+
+ #testLoadIcon{
+ 	opacity: 0;
+ 	transition: opacity 3s linear;
+ }
+
+ .rotate-1{
+ 	-webkit-animation:spin 2.1s linear infinite;
+    -moz-animation:spin 2.1s linear infinite;
+    animation:spin 2.1s linear infinite;
+ }
+
+ .rotate-2{
+ 	-webkit-animation:spin2 1.1s linear infinite;
+    -moz-animation:spin2 1.1s linear infinite;
+    animation:spin2 1.1s linear infinite;
+ }
+
+ .rotate-3{
+ 	-webkit-animation:spin 2s linear infinite;
+    -moz-animation:spin 2s linear infinite;
+    animation:spin 2s linear infinite;
+ }
+
+ .rotate-4{
+ 	-webkit-animation:spin2 1s linear infinite;
+    -moz-animation:spin2 1s linear infinite;
+    animation:spin2 1s linear infinite;
+ }
+
+ .vtour-box-shadow{
+	-webkit-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
+	border: 0px !important;
+}
+
+.bookmark-delete {
+	width: 16px;
+	float: right;
+	margin-top: -20px;
+	cursor: pointer;
+	font-size: 13px;
+	padding-left: 3px;
+	display:none;
+}
+
+.bookmark-delete:hover{
+	color:white;
+	background: red;
+}
+
+.drop-li:hover .bookmark-delete {
+	display: block;
+}
+
+ @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+ @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+ @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+ @-moz-keyframes spin2 { 100% { -moz-transform: rotate(-360deg); } }
+ @-webkit-keyframes spin2 { 100% { -webkit-transform: rotate(-360deg); } }
+ @keyframes spin2 { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
+
+</style>
+<!-- // Loading MODAL -->
+
+
+
+
+<div id="loadingModal" style="display: none; position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 1000;" class="backgroundGradient">
+
+	<div style="height: 100%;">
+		<div style="position: absolute; width: 100%; height: 175px; top: 0; bottom: 0; left:0; right:0; margin: auto;">
+			<div id="loadingCircleContainer" style="width: 100px; height: 100px; position: absolute; top: 0; bottom: 0; left:0; right:0; margin: auto;">
+				<svg height="100" width="100">
+					<circle cx="50" cy="50" r="47" stroke="white" stroke-width="5" fill="transparent" stroke-dasharray="570" stroke-dashoffset="0"></circle>
+					<circle cx="50" cy="50" r="42" id="redCircle" transform="rotate(-90 50 50)"></circle>
+				</svg>
+				<img id="testLoadIcon" src="./Overview.png" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; width: 50%;">
+			</div>
+			<div style="width: 100%; position: absolute; bottom: 0; left: 0; right: 0; margin: auto;">
+				<div class="text-center">
+					<p class="white-font gotham-font">Loading 3D Experience</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- ngIf: app.vtour -->
+	</div>
+</div>
+
+
+<!-- // Help MODAL -->
+<script type="text/ng-template" id="helpModal">
+
+
+	<div class="modal-header modal-header-border">
+		<button type="button" class="close" ng-click="modelHelp.closeModal()" >
+			<span style="color: white;" aria-hidden="true" class="glyphicon glyphicon-remove"></span>
+		</button>
+
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="active"> <a href="#customize" class="modal-tab-font" data-toggle="tab">Editing</a> </li>
+			<li>                <a href="#modes" class="modal-tab-font" data-toggle="tab">Navigation</a> </li>
+			<li>                <a href="#disclaimer" class="modal-tab-font" data-toggle="tab">Disclaimer</a> </li>
+		</ul>
+	</div>
+
+	<div class="modal-body" style="padding-top: 0px;">
+		<div class="row">
+			<div class="tab-content">
+
+				<div class="tab-pane active" id="customize">
+					<div ng-include="'help-page-model-editing-template'"></div>
+				</div>
+
+				<div class="tab-pane" id="modes">
+					<div ng-include="'help-page-model-navigation-template'"></div>
+				</div>
+
+				<div class="tab-pane" id="disclaimer">
+					<div ng-include="'help-page-model-disclaimer-template'"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer modal-footer-border clear-hover">
+
+	</div>
+</script>
+
+
+	<script type="text/ng-template" id="help-page-model-editing-template">
+
+		<div class="col-xs-6 col-sm-4 col-sm-offset-2">
+			<div class="text-center">
+				<h3 class="white-font">Furniture</h3>
+				<img src="/images/couch-v2.png"/><br/>
+				<font class="white-font" style="margin-top: 5px;">Add furniture pieces to scene. Click or tap furniture already in scene for more options.</font>
+			</div>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<div class="text-center">
+				<h3 class="white-font">Paint</h3>
+				<img src="/images/paint-v2.png"/><br/>
+				<font class="white-font" style="margin-top: 5px;">Paint walls and change floors. Click or tap to see what your walls would look like in a different color.</font>
+			</div>
+		</div>
+
+ 	</script>
+
+ 	<script type="text/ng-template" id="help-page-model-navigation-template">
+
+		<div class="col-sm-4 col-sm-offset-2">
+			<div class="text-center">
+				<h3 class="white-font">First Person</h3>
+				<img src="../../images/3dvt/First-Person.png"/><br/>
+				<font class="white-font">As if you were standing in the model.</li>
+				<font class="white-font">Walk through the house using first person controls.</font>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="text-center">
+				<h3 class="white-font">Overview</h3>
+				<img src="../../images/3dvt/Overview.png"/><br/>
+				<font class="white-font">Get a birds eye view of the model.</font>
+				<font class="white-font">Manipulate the model using overview controls.</font>
+			</div>
+		</div>
+		<!--<div class="col-sm-4">
+			<div class="text-center">
+				<h3 class="white-font">HD Panorama</h3>
+				<img src="../../images/3dvt/HD.png"/><br/>
+				<font class="white-font">360 degree views in HD.</font>
+				<font class="white-font">Marked by reflective spheres throughout the model.</font>
+			</div>
+		</div>-->
+
+ 	</script>
+
+ 	<script type="text/ng-template" id="help-page-model-disclaimer-template">
+
+		<div class="col-sm-10 col-sm-offset-1">
+			<div class="text-center">
+				<h3 class="white-font">Disclaimer</h3>
+				<font class="white-font" style="margin-top: 5px;">The floor plans depicted and the stated dimensions in this illustration are indicative only and serve as an approximation of
+				existing structures and features. This illustration is not guaranteed to be accurate or complete.
+				The accuracy of all information should be verified through personal inspection and/or with appropriate professionals.</font>
+			</div>
+		</div>
+
+ 	</script>
+
+
+ 	<script type="text/ng-template" id="furniture-model-template">
+ 		<div class="container-fluid" style="height: 100%" id="virtual-tour" ng-controller="VirtualTourMainController as virtualTour">
+ 			<div class="row" style="background: gray;" style="height: 100%;">
+ 				<canvas id="webGLFurnitureCanvas" style="height: 500px; !important; width: 100% !important; display: block; background: red;" ng-keydown="alert('$event')"></canvas>
+ 				<canvas id="furnitureCan" style="height: 500px; !important; width: 100% !important; display: none; border:1px solid #000000; background: blue;" ng-keydown="alert('$event')"></canvas>
+ 			</div>
+ 		</div>
+ 	</script>
+
+ 	<script type="text/ng-template" id="furniture-configuration-template">
+
+	 	<style>
+	 		.zoomButton:hover {
+	 			cursor: pointer;
+	 		}
+	 	</style>
+
+ 		<div class="container-fluid" id="virtual-tour" ng-controller="VirtualTourMainController as virtualTour" style="background: darkgray">
+ 			<div ng-controller="FurnitureConfigurationController as config">
+ 				<!-- Canvas of furniture model -->
+ 				<div class="col-xs-8" style="margin-top: 10px; margin-bottom: 10px">
+ 					<div class="row">
+ 						<div  class="zoomButton" style="position: absolute; top: 10px; left: 10px;" ng-click="virtualTour.zoomInOnFurnitureModel()" ng-if="!config.app.vtour.overviewUI.controls.imageSpaceZoomActive">
+ 							<span class="glyphicon glyphicon-zoom-in" style="font-size: 25px;"></span>
+ 						</div>
+ 						<div class="zoomButton" style="position: absolute; top: 10px; left: 10px;" ng-click="virtualTour.zoomOutFromFurnitureModel()" ng-if="config.app.vtour.overviewUI.controls.imageSpaceZoomActive">
+ 							<span class="glyphicon glyphicon-zoom-out" style="font-size: 25px;"></span>
+ 						</div>
+ 						<canvas id="webGLFurnitureCanvas" style="height: 475px !important; width: 100% !important; display: block;" ng-keydown="alert('$event')"></canvas>
+ 						<canvas id="furnitureCan" style="height: 475px !important; width: 100% !important; display: none; border:1px solid #000000;" ng-keydown="alert('$event')"></canvas>
+ 					</div>
+ 				</div>
+ 				<div class="col-xs-4 text-center" style="margin-top: 10px;">
+ 					<div class="row">
+ 						<div class="col-xs-12">
+ 							<div ng-repeat="opt in config.opts">
+ 								<div class="row" style="margin-left: 5px; padding-bottom: 3px; padding-top: 3px; border-bottom: 1px solid white;">
+ 									<div id="test2" class="col-xs-12">
+ 										<!--<h3>{{opt.optionName}}</h3>-->
+ 									</div>
+ 									<!--
+ 									<div class="col-xs-2">
+ 										<a href="" ng-click="config.paginations[$index].prevPage()"><img src="/images/previousWaypoint.png" height="50px"></img></a>
+ 									</div>
+ 									-->
+ 									<div ng-repeat="mat in config.listHolder[opt.optionKey] | startFrom: config.paginations[$index].page * config.paginations[$index].perPage | limitTo: config.paginations[$index].perPage">
+ 										<div class="col-xs-3" style="padding: 2px">
+ 											<div class="text-center">
+ 												<a href="" ng-click="config.setMaterial(opt.optionName, mat);" style="text-decoration: none;">
+ 													<img ng-src="{{config.urls.getUrlFor(config.urls.MATERIAL, mat.getMap(), {}, true)}}" width="100%" height="70px" crossorigin=""/>
+ 													<div style="position: absolute; bottom: 5px; left: 0; right: 0; margin: 0 auto;" class="white-font">{{opt.optionName}}</div>
+ 												</a>
+ 											</div>
+ 										</div>
+ 									</div>
+ 								</div>
+ 							</div>
+ 						</div>
+ 					</div>
+ 					<div class="row">
+ 						<div class="col-xs-12 text-center">
+ 							<!-- Metadata of furniture model-->
+ 							<!--<h3>FURNITURE INFO</h3>-->
+ 							<p>Name: {{config.metaData.name}}</p>
+ 							<p>Price: {{config.metaData.price}}</p>
+ 							<p>Dimensions: {{config.metaData.dimensions.depth}} x {{config.metaData.dimensions.height}} x {{config.metaData.dimensions.width}}</p>
+ 							<p>Description: {{config.metaData.description}}</p>
+ 							<p>SKU: {{config.metaData.sku}}</p>
+
+ 						</div>
+ 					</div>
+ 					<div class="row text-center">
+ 						<a href="http://test.spidie.com/tetra/ylKH29ZoC4?env=prod&loadFrom=s3" class="btn btn-default" target="_blank">Scanned Showroom Model</a>
+ 					</div>
+
+ 				</div>
+ 			</div>
+
+ 		</div>
+
+ 	</script>
+
+
+<style>
+	.furnitureConfigSlideIn{
+		position: absolute;
+		right: 0;
+		width: 30%;
+		height: 100%;
+	}
+	/*
+	.furnitureConfigSlideIn:hover {
+		transition: 1s;
+		right: 0;
+	}*/
+
+	.furnitureAndMaterialPickerOpen {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		background: rgba(0, 0, 0, 0.5);
+		transition: 1s;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+	}
+
+	.furnitureAndMaterialPickerClosed {
+		width: 80%;
+		height: 100%;
+		position: absolute;
+		left: -100%;
+		background: rgba(0, 0, 0, 0.5);
+		transition: 1s;
+	}
+
+	.btn.outline {
+		background: none;
+		border: 2px solid white;
+		color: white;
+	}
+
+	.newScreenshotIcon{
+		opacity: 0.7;
+	}
+
+	.newScreenshotIcon:hover{
+		opacity: 1.0;
+	}
+
+	.inactiveShowcase{
+		opacity: 0.7
+	}
+
+	.activeShowcase{
+		border: 3px solid #cf5641 !important;
+	}
+
+	#minimap-toggle{
+		position: absolute;
+		top: 10px;
+		right: 0;
+		width:21px;
+		height:52px;
+		background: rgba(0, 0, 0, 0.5);
+	}
+
+	#info-toggle{
+		width:21px;
+		height:100%;
+		background: rgba(0, 0, 0, 0.3);
+		padding-top: 11px;
+		transition: 1s linear;
+		display: inline-block;
+	}
+
+	#info-toggle:hover{
+		background: rgba(0, 0, 0, 0.6);
+	}
+
+	#info-container.info-open{
+		width: 221px;
+	}
+
+	#info-container{
+		position: absolute;
+		top: 80px;
+		left: 5px;
+		width:21px;
+		height:52px;
+		transition: 0.5s linear;
+		white-space: nowrap;
+	}
+
+	.info-container-pano{
+		top: 20px !important;
+	}
+
+	.info-container-cupboards{
+		top: 70px !important;
+	}
+
+	.mCSB_container{
+		margin-bottom: 15px !important;
+	}
+
+	.secondary-open{
+		height: 200px !important;
+
+	}
+
+	.info-opened{
+		display: inline-block;
+		white-space: nowrap;
+		width: 200px;
+		height: 52px;
+		overflow: hidden;
+		margin-left: 23px;
+	}
+
+	.info-closed{
+		display: inline-block;
+		width: 0px;
+		height: 52px;
+		overflow: hidden;
+		margin-left: 23px;
+	}
+
+	#actual-info{
+		transition: 500ms linear;
+		color: white;
+		padding-top: 8px;
+		height: auto;
+	}
+
+	.thumbnailsDown{
+		bottom: -115px;
+	}
+
+	.thumbnailsUp{
+		bottom: 0;
+	}
+
+	.toggleAddressBackOpen{
+		background-image: url("/images/previousWaypoint.png") !important;
+		background-position: center !important;
+		background-size: contain !important;
+		background-repeat: no-repeat !important;
+	}
+
+	.toggleAddressBackClosed{
+		background-image: url("/images/nextWaypoint.png") !important;
+		background-position: center !important;
+		background-size: contain !important;
+		background-repeat: no-repeat !important;
+	}
+
+
+
+	.dd-up{
+		bottom: 150px;
+	}
+
+	.dd-down{
+		bottom: 15px;
+	}
+
+	#main-thumb-container{
+		transition: 1s;
+	}
+
+	#floor-dropdown-div{
+		transition: 1s;
+	}
+
+	.visible-thumbs{
+		bottom: 0;
+	}
+
+	.invisible-thumbs{
+		bottom: -130px;
+	}
+
+	.visible-equirects{
+		top: 0;
+	}
+
+	.invisible-equirects{
+		top: -130px;
+	}
+
+	#pano-grab-capture{
+		cursor: pointer;
+	}
+
+	#pano-waypoint-capture{
+		cursor: pointer;
+	}
+</style>
+<script type="text/ng-template" id="bottom-row-panos">
+	<div  id="main-thumb-container" class="container-fluid" style="width: 100%; overflow: hidden; position: absolute;" ng-class="{'visible-thumbs': interaction.showThumbnails && !interaction.uiElementsHidden, 'invisible-thumbs': !interaction.showThumbnails || interaction.uiElementsHidden}">
+		<div ng-if="!app.vtour.walkthroughCreatorPreview" class="row virtual-tour-ui-element" style="height: 15px; width: 100%;">
+			<div style="width: 10%; border-top: 1px solid white; border-right: 1px solid white; border-left: 1px solid white; height: 100%; left: 0; right: 0; margin: auto; background: rgba(0,0,0,0.7); cursor: pointer;" ng-click="interaction.toggleThumbnailView()" class="text-center">
+				<span ng-if="!interaction.showThumbnails" class="glyphicon glyphicon-chevron-up white-font"></span>
+				<span ng-if="interaction.showThumbnails" class="glyphicon glyphicon-chevron-down white-font"></span>
+			</div>
+		</div>
+		<div  class="row" style="height: 130px; background: rgba(0,0,0,0.7);">
+				<div class="col-xs-1" style="height: 100%; padding: 0;"  ng-click="interaction.scrollThumbnails('left')">
+					<img ng-if="virtualTour.scrollBarInitiated" class="pull-right" src="/images/previousWaypoint.png" height="50px" style="margin-top: 25px; cursor: pointer;">
+				</div>
+				<div id="content-5" class="col-xs-10 mCustomScrollbar" data-mcs-theme="light-thin" data-mcs-axis="x" style="margin: 0; white-space: nowrap; overflow: hidden; padding: 0;">
+					<img ng-repeat="pano in virtualTour.firstPanos track by $index" ng-src="{{pano.imagesPreviewData[4]['path']}}{{pano.imagesPreviewData[4]['path'].indexOf('?')>=0 ? '&' : '?'}}thumbSelector" height="100px" style="margin: 5px; border: 2px solid white; cursor: pointer;" ng-click="interaction.jumpToWaypoint(pano, true)">
+				</div>
+				<div class="col-xs-1" style="height: 100%; padding: 0;"  ng-click="interaction.scrollThumbnails('right')">
+					<img ng-if="virtualTour.scrollBarInitiated" src="/images/nextWaypoint.png" height="50px" style="margin-top: 25px; cursor: pointer;">
+				</div>
+		</div>
+	</div>
+</script>
+
+<style>
+.as-sortable-item,
+.as-sortable-placeholder {
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    float: left;
+}
+
+#sortable-container {
+	width: 150px;
+    height: 100px;
+    display: inline-block;
+}
+
+.walkthrough-creator-buttons-up{
+
+	bottom: 145px !important;
+}
+
+.walkthrough-creator-buttons{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	bottom: 30px;
+	transition: 1s;
+}
+</style>
+
+<!-- ngIf: !hideWalkthroughUI --><script ng-if="!hideWalkthroughUI" type="text/ng-template" id="bottom-row-walkthrough-positions" class="ng-scope">
+	<div  id="main-thumb-container" class="container-fluid" style="width: 100%; overflow: hidden; position: absolute;" ng-class="{'visible-thumbs': interaction.showThumbnails && !interaction.uiElementsHidden, 'invisible-thumbs': !interaction.showThumbnails || interaction.uiElementsHidden}">
+
+		<!-- UP / DOWN GLYPHICON (Toggles Thumbnail Div) -->
+		<div class="row virtual-tour-ui-element" style="height: 15px; width: 100%;">
+			<div style="width: 10%; border-top: 1px solid white; border-right: 1px solid white; border-left: 1px solid white; height: 100%; left: 0; right: 0; margin: auto; background: rgba(0,0,0,0.7); cursor: pointer;" ng-click="interaction.toggleThumbnailView()" class="text-center">
+				<span ng-if="!interaction.showThumbnails" class="glyphicon glyphicon-chevron-up white-font"></span>
+				<span ng-if="interaction.showThumbnails" class="glyphicon glyphicon-chevron-down white-font"></span>
+			</div>
+		</div>
+
+		<!-- EQUIRECTANGULAR PANO ROW -->
+		<div  class="row" style="height: 130px; background: rgba(0,0,0,0.7);">
+
+			<div class="col-xs-12"  style="margin: 0; white-space: nowrap; overflow-x: scroll; padding: 0; height:100%;">
+
+				<div class="sortable-row" style="height:100%;" as-sortable ng-model="interaction.walkthroughPanos">
+					<div ng-repeat="pano in interaction.walkthroughPanos track by pano.keyID" class="as-sortable-item" as-sortable-item>
+						<div class="as-sortable-item-handle" as-sortable-item-handle style="width: 200px; height: 100px; display: inline-block; color: white-font;">
+								<img ng-src="{{interaction.urlForEquirectangular(pano.filepath)}}" style="border-radius: 10px;" width="100%">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</script><!-- end ngIf: !hideWalkthroughUI -->
+
+<style>
+.cupboard-nav{
+	z-index: 101;
+	height: 50px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	background: rgba(0,0,0,0.6);
+	margin: 0 !important;
+}
+
+.active-action{
+	color: black !important;
+	background: white !important;
+}
+
+.active-action-blue{
+	color: black !important;
+	background: #9999ff !important;
+}
+</style>
+
+<script type="text/ng-template" id="waypoint-qa-step">
+	<div id="new-tri-navbar" ng-controller="WaypointQAController as qa" class="row cupboard-nav" ng-if="interaction.waypointQA">
+		<div class="col-xs-1" style="margin-top: 7px;" ng-if="qa.active">
+			<a class="btn btn-xs red-gradient white-font" ng-click="qa.waypointAction('forward')">Forward</a>
+		</div>
+		<div class="col-xs-1" style="margin-top: 7px;" ng-if="qa.active">
+			<a class="btn btn-xs red-gradient white-font" ng-click="qa.waypointAction('back')">Back</a>
+		</div>
+		<div class="col-xs-1" style="margin-top: 7px;" ng-if="qa.active">
+			<a class="btn btn-xs red-gradient white-font" ng-click="qa.waypointAction('left')">Left</a>
+		</div>
+		<div class="col-xs-1" style="margin-top: 7px;" ng-if="qa.active">
+			<a class="btn btn-xs red-gradient white-font" ng-click="qa.waypointAction('right')">Right</a>
+		</div>
+		<div class="col-xs-1" style="margin-top: 7px;" ng-if="qa.active">
+			<a class="btn btn-xs red-gradient white-font" ng-click="qa.waypointAction('up')">Up</a>
+		</div>
+		<div class="col-xs-1" style="margin-top: 7px;" ng-if="qa.active">
+			<a class="btn btn-xs red-gradient white-font" ng-click="qa.waypointAction('down')">Down</a>
+		</div>
+		<div class="col-xs-1" style="margin-top: 7px;" ng-if="qa.active">
+			<a class="btn btn-xs red-gradient white-font" ng-click="qa.waypointAction('rotate left')">Rotate L</a>
+		</div>
+		<div class="col-xs-1" style="margin-top: 7px;" ng-if="qa.active">
+			<a class="btn btn-xs red-gradient white-font" ng-click="qa.waypointAction('rotate right')">Rotate R</a>
+		</div>
+		<div class="col-xs-1" style="margin-top: 7px; padding: 0;" ng-if="qa.active">
+			<input type="range" min="1" max="100" step="1" style="width: 100%" ng-model="qa.sensitivity" ng-change="qa.sensitivityChange()"><font class="white-font">{{qa.sensitivity}}</font></input>
+		</div>
+
+		<div class="col-xs-1" style="margin-top: 7px;" ng-if="qa.active">
+			<a class="btn btn-xs red-gradient white-font" ng-click="qa.confirmWaypoint()">Confirm</a>
+		</div>
+
+		<div class="col-xs-1" style="margin-top: 7px; padding-left: 0;" ng-if="qa.active">
+			<a class="btn btn-xs orange-gradient white-font" ng-click="qa.hideWaypoint()">Hide Waypoint</a>
+		</div>
+
+		<div class="col-xs-1" style="margin-top: 7px; padding-left: 0;" ng-if="qa.active && !qa.savingNavGraph">
+			<a class="btn btn-xs orange-gradient white-font" ng-click="qa.saveNavGraph()">Save Nav Graph</a>
+		</div>
+
+		<div class="col-xs-1" style="margin-top: 7px;" ng-if="!qa.active">
+			<a class="btn btn-xs red-gradient white-font" ng-click="qa.startWaypointQA()">Start</a>
+		</div>
+
+	</div>
+</script>
+
+<script type="text/ng-template" id="cupboard-editor-template">
+	<div id="new-tri-navbar" ng-controller="CupboardEditorController as editor" class="row cupboard-nav" ng-if="interaction.showCupboardEditor">
+
+		<!-- button to activate cupboard editor -->
+		<div class="col-xs-2" ng-if="!editor.enabled" style="margin-top: 8px; margin-left: 10px" >
+			<a class="btn red-gradient white-font vtour-box-shadow" ng-click="editor.enable()">Cupboard Editor</a>
+		</div>
+
+		<!-- ///////////////////////////////////////////// -->
+
+		<!-- Pano opacity, cogwheel, group dropdown selector -->
+		<div class="col-xs-3" ng-if="editor.enabled" style="margin-top: 4px;">
+			<div class="pull-left">
+				<div class='btn-group'>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" ng-cloak style="padding:0px;">
+						<span style='color:white;' class="glyphicon glyphicon-cog navbar-cog"></span>
+					</a>
+					<ul class="dropdown-menu" style="left: 0; left: auto">
+						<li><a ng-href="#" ng-click="editor._createGroup();">Create Group</a></li>
+						<li><a ng-href="#" ng-click="editor._saveGroup();">Save (Only group)</a></li>
+						<li><a ng-href="#" ng-click="editor._saveAll();">Save (Everything)</a></li>
+						<li><a ng-href="#" ng-click="editor._exportOBJAll();">Export OBJ</a></li>
+						<li><a ng-if="editor._isAnyGroupActive();" ng-href="#" ng-click="editor._renameActiveGroup();">Rename Active Group</a></li>
+					</ul>
+				</div>
+
+				<div class='btn-toolbar pull-right'>
+				</div>
+			</div>
+
+			<div class="pull-left">
+				<div class="row" style="margin-left:1px;margin-right:1px;">
+					<input type="range" min="0" max="100" step="1" style="width: 100%;" ng-model="editor.transparency" ng-change="editor.transparencyChanged()">
+				</div>
+
+				<div class="row white-font" style="margin-left:0px;margin-right:0px;">
+					Pano Opacity: {{editor.transparency}}&#37;
+				</div>
+			</div>
+
+			<div class="pull-left">
+				<select class="btn dropdown-toggle red-gradient white-font vtour-box-shadow" ng-model="editor.currentGroupName" ng-change="editor.changeMorphGroup(true)" ng-if="editor.showMorphGroupsDropDown" ng-options="action.name for action in editor.morphGroupsNames" style="background-color: #ce5541 !important; margin-top:4px; margin-right:4px; margin-left:15px;"></select>
+
+				<button class="btn red-gradient white-font vtour-box-shadow" ng-if="editor.enabled && editor.tool.morphGroups.length === 0" ng-click="editor._createGroup()" style="background-color: #ce5541 !important; margin-top:4px; margin-right:4px; margin-left:15px;">
+					Create Group
+				</button>
+			</div>
+		</div>
+
+		<!--
+		<div class="col-xs-1" style="margin-top: 4px;" ng-if="editor.enabled">
+			<div class="row">
+				<a style="margin-right: 3px;" class="btn btn-xs red-gradient white-font" ng-click="editor.toggleAbstractVisibility()" data-placement="bottom">AV</a>
+				<a style="margin-right: 3px;" class="btn btn-xs red-gradient white-font" ng-click="editor.toggleMeshesVisibility()" data-placement="bottom">MV</a>
+			</div>
+
+			<div class="row">
+				<select class="btn btn-xs dropdown-toggle red-gradient white-font" ng-model="editor.currentActionGroup" ng-change="editor.changeActionGroup(true)" ng-options="action.name for action in editor.actionGroups" style="background-color: #ce5541 !important;"></select>
+			</div>
+
+			<div class="row">
+				<a style="margin-right: 3px;" ng-repeat="subAction in editor.undoRedoActions" class="btn btn-xs red-gradient white-font" ng-click="editor.clickOnUndoRedo(subAction.id)" ng-disabled="!subAction.enabled" ng-if="subAction.visible" >{{subAction.name}}</a>
+			</div>
+		</div>
+		-->
+
+		<!-- back, next and finish buttons -->
+		<div class="col-xs-1" style="margin-top: 4px;" ng-if="editor.enabled">
+			<div class="row text-right white-font">
+				<button style='margin-top: 4px; margin-left:2px; margin-right:2px; margin-left:2px;' class="btn red-gradient white-font vtour-box-shadow" ng-if="editor.enabled && editor.backStepPossible" ng-hide="editor.currentStep.backStep === -1" ng-click="editor._backStep()">
+					Back
+				</button>
+
+				<button style='margin-top: 4px; margin-left:2px; margin-right:2px; margin-left:2px;' class="btn red-gradient white-font vtour-box-shadow" ng-if="editor.enabled && editor.nextStepPossible" ng-hide="editor.currentStep.nextStep === -1" ng-click="editor._nextStep()">
+					Next
+				</button>
+
+				<button style='margin-top: 4px; margin-left:2px; margin-right:2px; margin-left:2px;' class="btn red-gradient white-font vtour-box-shadow" ng-if="editor.enabled && editor.finishStepPossible" ng-hide="editor.currentStep.finishStep === -1" ng-click="editor._finish()">
+					Finish
+				</button>
+			</div>
+		</div>
+
+		<!-- Label-title of the current step -->
+		<div class="col-xs-2">
+			<h3 style="margin-top: 10px;"><font class="white-font" ng-if="editor.enabled">Step {{editor.currentStep.index+1}}: {{editor.currentStep.desc}}</font><br></h3>
+		</div>
+
+		<div class="col-xs-3" ng-if="editor.enabled" style="margin-top: 2px;">
+			<div class="row">
+				<a style="margin-right: 2px;" ng-repeat="subAction in editor.subActions" class="btn btn-xs red-gradient white-font vtour-box-shadow" ng-click="editor.changeSubAction(subAction.id)" ng-disabled="!subAction.enabled" ng-if="subAction.visible" ng-class="{'active-action': subAction.active}" data-toggle="tooltip" data-placement="bottom" title="{{subAction.description}}">{{subAction.name}}</a>
+			</div>
+
+			<div class="row" style="margin-top:2px">
+				<select class="btn btn-xs dropdown-toggle red-gradient white-font vtour-box-shadow" ng-model="editor.currentMeshTemplate" ng-change="editor.changeMeshTemplate()" ng-if="editor.tool.showMeshTemplateSelector" ng-options="action.name for action in editor.meshTemplates" style="background-color: #ce5541 !important;"></select>
+			</div>
+		</div>
+
+		<div class="col-xs-3" ng-if="editor.enabled">
+			<div style="margin-right:5px;">
+				<div class="row text-right white-font">{{editor.currentTitle}}</div>
+				<div class="row text-right white-font">{{editor.currentState}}</div>
+				<div class="row text-right white-font">{{editor.dimensionsMessage}}</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="mesh-group-creation-dialog">
+	<div class="modal-header">
+		Name New Mesh Group
+	</div>
+
+	<div class="modal-body text-center" ng-keydown="$event.stopPropagation();">
+		<input class="form-control" ng-model="createGroup.groupName"></input>
+	</div>
+
+	<div class="modal-footer">
+		<a class="btn btn-default" ng-click="createGroup.close()">Done</a>
+		<a class="btn btn-default" ng-click="createGroup.close(true)">Cancel</a>
+	</div>
+</script>
+
+<script type="text/ng-template" id="mesh-group-rename-dialog">
+	<div class="modal-header">
+		Enter new group name
+	</div>
+
+	<div class="modal-body text-center" ng-keydown="$event.stopPropagation();">
+		<input class="form-control" ng-model="renameGroup.groupName"></input>
+	</div>
+
+	<div class="modal-footer">
+		<a class="btn btn-default" ng-click="renameGroup.close()">Done</a>
+		<a class="btn btn-default" ng-click="renameGroup.close(true)">Cancel</a>
+	</div>
+</script>
+
+<style>
+
+.tourHelpModal .modal-content{
+	background: rgba(0,0,0,0.5);
+}
+
+.blk-btn-wht-out{
+	background: transparent !important;
+	border: 1px solid white !important;
+	color: white !important;
+	border-radius: 0 !important;
+}
+
+
+.blk-btn-wht-out:hover{
+	background: transparent !important;
+	border: 1px solid #8d2c33 !important;
+	color: #8d2c33 !important;
+	border-radius: 0 !important;
+	border-color: #8d2c33 !important;
+}
+
+.walkthrough-setter{
+	background-color:#008ABD;
+	border: 1px solid white !important;
+}
+
+ .walkthrough-setter:hover{
+	background-color:#FF7F50 !important;
+ }
+
+.drop-li-a:hover{
+	background-color: black !important;
+	background: black !important;
+	color: #4bcdfc !important;
+	text-decoration: underline !important;
+}
+
+.drop-li-a{
+	color: white !important;
+	padding-left: 5px !important;
+	font-size: 11px;
+}
+
+#floor-drop-container > button .open{
+	border: 2px solid #4bcdfc !important;
+}
+
+#floors-dropdown-button .dropdown-backdrop,
+.vt-dropdown-button + .dropdown-backdrop{
+	display: none !important;
+}
+</style>
+
+
+<script type="text/ng-template" id="tour-help-modal">
+	<div class="modal-header white-font" style="border-bottom: 0;">
+		Navigation Help
+	</div>
+
+	<div class="modal-body text-center white-font">
+		<div class="row text-center">
+			<div class="col-xs-6 col-xs-offset-3">
+				<img ng-src="{{tourHelp.currentPage.image}}" width="100%"/>
+			</div>
+		</div>
+		<div class="row text-center">{{tourHelp.currentPage.text}}</div>
+	</div>
+
+	<div class="modal-footer" style="margin-top: 0; border-top: 0;">
+		<font class="white-font pull-left" style="margin-top: 4px; font-size: 20px;">{{tourHelp.pageIndex+1}}/{{tourHelp.pages.length}}</font>
+		<a class="btn btn-default blk-btn-wht-out" ng-click="tourHelp.previous()" ng-disabled="tourHelp.previousDisabled">Previous</a>
+		<a class="btn btn-default blk-btn-wht-out" ng-click="tourHelp.next()" ng-disabled="tourHelp.nextDisabled">Next</a>
+		<a class="btn btn-default blk-btn-wht-out" ng-click="tourHelp.closeModal()">Done</a>
+	</div>
+</script>
+
+<script type="text/ng-template" id="facebook-post-360">
+	<div ng-if="!controller.completed" class="modal-header">
+		<h3 style="color:white">
+			{{controller.posting?(!controller.loggedIn?'Logging In To Facebook...':'Posting Spin To Facebook...'):'Post Spin To Facebook'}}
+		</h3>
+	</div>
+
+	<div ng-if="controller.completed" style="color: #fff;font-weight: bold;line-height: 26.1px;font-size: 16px;margin-top: 25.4px;margin-bottom: 6.4px;height: 45px;margin-left: 20px;">
+		<h3>
+			{{controller.status?'Spin Posted Successfully.':'Failed To Post Spin.'}}
+		</h3>
+	</div>
+
+	<div class="form-control-group" style="border:none" ng-if="controller.posting && !controller.completed">
+
+		<div class="progress progress-striped active">
+			<div class="progress-bar progress-bar-blue" role="progressbar" style="width:100%;">
+			</div>
+		</div>
+	</div>
+	<div class="form-control-group" style="border:none" ng-if="!controller.posting">
+
+		<table style="width: 100%;">
+			<tr>
+				<td style="padding-left: 15px;vertical-align: top;padding-right: 15px;">
+						<div class="form-group row">
+							<div class="col-sm-12" style="color: #fff;margin-bottom: 5px;">
+								Photo caption:
+							</div>
+							<div class="col-sm-12">
+								<textarea id="fbComment" autofocus ng-change="controller.updateView()" class="text-input form-control" type="text" ng-model="controller.caption" style="height: 82px; max-height: 74px; resize: none !important;" >
+								</textarea>
+							</div>
+						</div>
+
+						<div class="form-group row" ng-if="false">
+							<div class="col-sm-12">
+								<input id="fbIncludeAddress" ng-change="controller.updateView()" style="width: 24px;height: 24px;margin-top: 7px;margin-right: 10px;" class="col-sm-8 text-input form-control" type="checkbox" ng-model="controller.includeAddress" ng-keydown="$event.stopPropagation();" />
+								<label for="fbIncludeAddress" class="col-form-label" style="color:white">Append property address</label>
+							</div>
+						</div>
+
+						<div class="form-group row" ng-if="false">
+							<div class="col-sm-12">
+								<input id="fbIncludeListingUrl" ng-change="controller.updateView()" style="width: 24px;height: 24px;margin-top: 7px;margin-right: 10px;" class="col-sm-8 text-input form-control" type="checkbox" ng-model="controller.includeListingUrl" ng-keydown="$event.stopPropagation();" />
+								<label for="fbIncludeListingUrl" class="col-form-label" style="color:white">Append property listing URL</label>
+							</div>
+						</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="pointer-events: none;">
+					<div style="background-image: url(/images/facebook-preview.png);
+					background-repeat: no-repeat;
+					height: 300px;
+					position: relative;
+					width: 518px;
+					background-color: #fff;
+					border: 1px solid #c0c0c0;
+					margin: 10px;
+					margin-left: auto;
+					margin-right: auto;
+					margin-bottom: 0px;">
+						<div style="position: absolute;top: 58px;left: 12px;right: 12px;">
+							<div style="pointer-events: all;" ng-bind-html="controller.getPhotoCaption(true)">
+							</div>
+							<div ng-init="frontPano = 'url('+controller.getFrontPano()+')'; frontClass={'background-image':frontPano}" ng-style="frontClass" style="width: 100%;height: 800px;background-size: contain;margin-top: 10px;">
+
+							</div>
+						</div>
+
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-size: 11px;color: #fff;font-weight: bold;padding-top: 5px;padding-left: 15px;">
+					* This is only the general preview of the data your Facebook post will contain.
+				</td>
+				<td>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="modal-footer" ng-if="!controller.posting">
+		<a class="btn btn-default" ng-click="controller.closeModal()">Cancel</a>
+		<a class="btn btn-success" ng-click="controller.postPhoto()" style="font-weight: bold;font-family: Helvetica, Arial, sans-serif;">{{controller.loggedIn?'Post to Facebook':'Login and Post to Facebook'}}</a>
+	</div>
+</script>
+
+<script type="text/ng-template" id="mesh-group-rename-dialog">
+	<div class="modal-header">
+		Enter new group name
+	</div>
+
+	<div class="modal-body text-center" ng-keydown="$event.stopPropagation();">
+		<input class="form-control" ng-model="renameGroup.groupName"></input>
+	</div>
+
+	<div class="modal-footer">
+		<a class="btn btn-default" ng-click="renameGroup.close()">Done</a>
+		<a class="btn btn-default" ng-click="renameGroup.close(true)">Cancel</a>
+	</div>
+</script>
+
+
+
+
+<script type="text/ng-template" id="3d-viewer-template">
+	<div id='virtual-tour' ng-controller='VirtualTourMainController as virtualTour' ng-keydown="alert('$event')" style="overflow: hidden; position: absolute; left: 0; right: 0; top: 0; bottom: 0;">
+		<div ng-controller="VirtualTourInteractionsController as interaction" ng-click="interaction.mouseClick($event)" ng-right-click="interaction.rightMouseClick($event)" ng-mousedown="interaction.mouseDown($event)" ng-mousemove="interaction.mouseMove($event)" ng-mouseup="interaction.mouseUp($event)" im-touchstart="interaction.touchStart(
+			$event)" im-touchend="interaction.touchEnd($event)" im-touchmove="interaction.touchMove($event)" ng-keydown="interaction.hideContextMenusIfVisible()" id="inner-virtual-tour">
+			<div class="row virtual-tour-ui-element" style="margin: 0px;">
+				<!-- Upper right options -->
+				<div
+					ng-if="app.modelMode || app.walkthroughMode"
+					style="padding-top: 10px; z-index: 99; position: absolute; top: 0; right: 0; width: 300px;"
+					ng-mousedown="app.forwardEventToCanvas($event)"
+					ng-mouseup="app.forwardEventToCanvas($event)"
+					ng-cloak>
+
+
+
+							<!-- Fullscreen Toggle -->
+							<div class="im-header-pad pull-right" style="margin-right: 14px; cursor: pointer;" ng-cloak>
+								<img ng-controller="VirtualTourMenuController as vtMenu" src="/images/wide-angle.png" width="32px;" ng-click="vtMenu.fullscreen()" id="fullscreenIcon">
+							</div>
+
+							<!-- VR Toggle -->
+							<div class="im-header-pad pull-right" style="margin-right: 14px; cursor: pointer;" ng-cloak ng-if="interaction.vrModeCapable">
+								<img ng-controller="VirtualTourMenuController as vtMenu" src="/images/VR.png" width="32px;" ng-click="app.vtour.switchVRModeSafe()">
+							</div>
+
+							<!-- Snapshot Button -->
+							<li ng-controller="VirtualTourMenuController as vtMenu" class="im-header-pad pull-right" style="margin-right: 14px;" ng-hide="!app.vtour.currentFloorHasVRScene || !snapshotEnabled" ng-cloak>
+								<span class="glyphicon glyphicon-camera navbar-render-snapshot" width="32px;" ng-click="vtMenu.renderSnapshot()"></span>
+							</li>
+
+							<!-- Help Icon for 3d model-->
+							<div class="im-header-pad pull-right" style="margin-right: 14px; cursor: pointer;" ng-controller="VirtualTourMenuController as vtMenu " ng-if="app.modelMode">
+								<img src="/images/help-icon.png" width="32px;" ng-click="vtMenu.show3DModelHelpTips()"></img>
+							</div>
+
+							<!-- Help Icon for walkthrough-->
+							<div ng-if="!app.vtour.walkthroughCreatorPreview" class="im-header-pad pull-right" style="margin-right: 14px; cursor: pointer;" ng-controller="VirtualTourMenuController as vtMenu" ng-if="app.walkthroughMode">
+								<img src="/images/help-icon.png" width="32px;" ng-click="vtMenu.show3DTourHelpTips()"></img>
+							</div>
+
+							<!-- Operator options -->
+							<div
+								class="pull-right"
+								ng-controller="VirtualTourMenuController as vtMenu"
+								ng-if="app.modelMode && app.vtour && virtualTour.hasWriteAccess( app.vtour.project )"
+								style="margin-right: 14px; margin-top: 5px; cursor: pointer;">
+								<div class="btn-group">
+
+									<a href="" style="padding:0px; font-size: 32px; color: #7f8a8b; margin-left:14px;"
+										class="dropdown-toggle" data-toggle="dropdown" rel="nofollow" ng-cloak>
+										<span class="glyphicon glyphicon-collapse-down"></span>
+									</a>
+
+									<ul class="dropdown-menu pull-right">
+										<li ng-if="!virtualTour.requiresRole('Operator')"><a href="" ng-click="vtMenu.customize('screenshot')">Screenshot</a></li>
+										<li ng-if="!virtualTour.requiresRole('Operator')"><a href="" ng-click="vtMenu.customize('reset-materials')">Reset Materials</a></li>
+										<li ng-if="virtualTour.requiresRole('Operator')"><a ng-repeat='action in vtMenu.menuActions'
+												href="" ng-click="vtMenu.customize(action.command)">{{action.title}}</a></li>
+
+										<li ng-if="virtualTour.requiresRole('Operator')" class="divider" style="margin:0px;"></li>
+
+										<li ng-if="virtualTour.requiresRole('Operator')"><a ng-repeat='action in vtMenu.menuActionsDebug'
+												href="" ng-click="vtMenu.customize(action.command)">{{action.title}}</a></li>
+										<li ng-if="virtualTour.canSetSplashScreen()"><a href="" ng-click="vtMenu.customize('set-model-splash')">Set Splash</a></li>
+										<li ng-if="virtualTour.requiresRole('Operator') && app.vtour && app.vtour.currentFloor && app.vtour.currentFloor.parseObject && app.vtour.currentFloor.parseObject.getHotspots()"><a href="" ng-click="vtMenu.startHotspotTour()">Hotspot Tour</a></li>
+
+										<li ng-if="virtualTour.requiresRole('Operator')" class="divider" style="margin:0px;"></li>
+										<li><a target="_blank" ng-if="app.vtour.getPhotoAnalyzerLink() && virtualTour.requiresRole('Operator')" ng-href="{{ app.vtour.getPhotoAnalyzerLink() }}"> Operator Project Page </a></li>
+
+									</ul>
+								</div>
+							</div>
+
+							<!--Snapshot -->
+							<div class="dropdown im-header-pad pull-right" style="margin-right: 14px; cursor: pointer;" ng-if="app.modelMode && app.vtour && debug.DEBUGLEVEL > 1 && app.vtour.project" ng-controller="VirtualTourMenuController as vtMenu" ng-click="vtMenu.customize('modeler-tools')" ng-cloak>
+								<a href="" ng-cloak style="padding:0px; font-size: 30px; color: #7f8a8b;" rel="nofollow" >
+									<span class="glyphicon glyphicon-eye-open"></span>
+								</a>
+							</div>
+
+							<!-- MaprTags editor Start -->
+							<div ng-if="!app.vtour.walkthroughCreatorPreview" class="im-header-pad pull-right" ng-cloak>
+								<img
+									ng-controller="VirtualTourMenuController as vtMenu"
+									style="margin-right: 14px; cursor: pointer;"
+									src="/images/tag-graphic.png"
+									width="32px;"
+									ng-hide="!vtMenu.hasWriteAccess() || !app.vtour.is3DTourMode || app.vtour.isMobileDevice === true"
+									ng-mouseleave="vtMenu.mouseLeftMaprTagEditorIcon()"
+									ng-click="vtMenu.toggleMaprEditor()"
+									id="maprTagsToggle">
+							</div>
+
+							<!-- Bookmark spin -->
+							<div ng-if="app.walkthroughMode && !app.vtour.walkthroughCreatorPreview" class="im-header-pad pull-right" ng-cloak>
+								<img
+									ng-controller="VirtualTourMenuController as vtMenu"
+									style="margin-right: 14px; cursor: pointer;"
+									src="/images/bookmark-icon.png"
+									width="32px;"
+									ng-hide="!vtMenu.hasWriteAccess() || !app.vtour.is3DTourMode || app.vtour.isMobileDevice === true"
+									ng-click="vtMenu.showCreateBookmarkModal()"
+									id="createBookmark">
+							</div>
+
+							<!-- Post spin to facebook -->
+							<div ng-if="!app.vtour.walkthroughCreatorPreview" class="im-header-pad pull-right" ng-cloak>
+								<img
+									ng-controller="VirtualTourMenuController as vtMenu"
+									style="margin-right: 14px; cursor: pointer;"
+									src="/images/facebook-post-icon.png"
+									width="32px;"
+									ng-hide="!app.vtour.is3DTourMode"
+									ng-click="vtMenu.fbPost360PhotoModal()"
+									id="postSpinToFacebook">
+							</div>
+				</div>
+			</div> <!-- HEADER END -->
+
+				<div id="info-container" ng-class="{'info-open': interaction.addressOpen, 'info-container-pano': interaction.panoMode, 'virtual-tour-ui-element': true, 'info-container-cupboards': interaction.showCupboardEditor }" ng-if="!interaction.noMinimap && !app.vtour.plugin">
+					<div id="info-toggle" ng-class="{'text-center': true, 'toggleAddressBackOpen': interaction.addressOpen, 'toggleAddressBackClosed': !interaction.addressOpen}" ng-click="interaction.toggleAddress(); $event.stopPropagation()" style="position: absolute; top: 0; left: 0; cursor: pointer;">
+					</div>
+					<div
+						id="actual-info"
+						class="text-center"
+						style="pointer-events: none;"
+						ng-class="{'info-opened': interaction.addressOpen, 'info-closed': !interaction.addressOpen}">
+						<p
+							style="margin-top: -5px; margin-bottom: 0px; font-size: 16px;"
+							ng-if="interaction.addressOpen && app.vtour.project">
+							<strong>
+								{{app.vtour.project.getStreet() || "Private"}}
+							</strong>
+						</p>
+						<p
+							style="margin-bottom: 0px; font-size: 15px;"
+							ng-if="interaction.addressOpen && app.vtour.project">
+								{{app.vtour.project.getCity()}}
+							<font ng-if="app.vtour.project.getCity() && app.vtour.project.getState()">
+								,
+							</font>
+							{{app.vtour.project.getState()}}
+						</p>
+						<p
+							style="margin-top: -5px; margin-bottom: 0px; font-size: 16px;"
+							ng-if="interaction.addressOpen && !app.vtour.project">
+							<strong>
+								{{interaction.getAddressFromUrl()}}
+							</strong>
+						</p>
+						<div id="minimap-spacer" ng-style="spacer" style="height:0px; width:2px;">
+
+						</div>
+
+						<div
+							id="floor-drop-container"
+							style="pointer-events: all;"
+							ng-if="app.vtour.minimapPanelVisible && app.vtour.minimapLoaded && interaction.app.vtour.floors.length && app.vtour.floors.length > 1 && !interaction.floorChangeInProgress"
+							ng-cloak
+							ng-click="interaction.toggleFloorDropdown(); $event.stopPropagation();">
+
+							<button
+								class="dropdown-toggle btn btn-block vt-dropdown-button"
+								data-toggle="dropdown"
+								style="overflow: hidden; text-overflow: ellipsis;"
+								id="floors-dropdown-button">
+								{{interaction.getFloorName(interaction.app.vtour.currentFloorForced)}}
+								<span class="caret" style="position: absolute;right: 5px;margin-top: 8px;"></span>
+							</button>
+
+							<ul
+								id="im-floor-selection"
+								class="dropdown-menu"
+								style="padding-top: 0px;margin-top: 0px;min-width: 0; width: 100%; background: transparent; border: none; padding-bottom: 5px; position:static !important;">
+								<li
+									ng-repeat='floor in interaction.app.vtour.floors'
+									class="drop-li"
+									style="background: rgb(36, 36, 36); margin-top: 1px;">
+									<a
+										href=""
+										ng-click='interaction.changeFloor(floor);$event.stopPropagation();'
+										class="drop-li-a">{{interaction.getFloorName(floor)}}
+									</a>
+								</li>
+							</ul>
+						</div>
+
+
+						<div
+							id="floor-drop-container"
+							style="pointer-events: all;"
+							ng-if="app.walkthroughMode && app.vtour.minimapPanelVisible && app.vtour.minimapLoaded && interaction.app.vtour.bookmarks && app.vtour.bookmarks.length > 0 && !interaction.floorChangeInProgress"
+							ng-cloak
+							class="vt-drop-container"
+							ng-click="interaction.toggleBookmarkDropdown(); $event.stopPropagation();">
+
+							<button
+								class="dropdown-toggle btn btn-block vt-dropdown-button"
+								data-toggle="dropdown"
+								style="overflow: hidden; text-overflow: ellipsis;"
+								id="bookmarks-dropdown-button">
+								Jump To...
+								<span class="caret" style="position: absolute;right: 5px;margin-top: 8px;"></span>
+							</button>
+
+							<ul
+								class="dropdown-menu"
+								style="text-align: left;max-height: 467px;overflow: auto;padding-top: 0px;margin-top: 0px; min-width: 0; width: 100%; background: transparent; border: none; padding-bottom: 5px; position:static !important;">
+								<li
+									ng-repeat='bookmark in interaction.app.vtour.bookmarks'
+									class="drop-li"
+									style="background: rgb(36, 36, 36); margin-top: 1px;">
+									<a
+										href=""
+										ng-click='interaction.jumpToBookmark(bookmark);'
+										class="drop-li-a">{{bookmark.get("label")}}
+
+									</a>
+									<span ng-if="virtualTour.hasWriteAccess( app.vtour.project )" class="bookmark-delete" ng-click="interaction.removeBookmark(bookmark)">X</span>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+
+				<div ng-if="interaction.election">
+					<div ng-include="'choose-president-template'"></div>
+				</div>
+
+								<div ng-if="interaction.showMainContextMenu">
+					<div ng-include="'main-context-menu-template'"></div>
+				</div>
+				<div ng-if="interaction.showMainContextMenuTriangulator">
+					<div ng-include="'main-context-menu-template-triangulator'"></div>
+				</div>
+				<div ng-include="'furniture-context-menu-template'"></div>
+
+				<div ng-include="'handle-context-menu-template'"></div>
+				<div ng-include="'cupboard-door-context-menu-template'"></div>
+				<div ng-include="'cupboard-countertop-context-menu-template'"></div>
+				<div ng-include="'cupboard-bottom-base-context-menu-template'"></div>
+				<div ng-include="'cupboard-countertopable-context-menu-template'"></div>
+				<div ng-include="'cupboard-back-splash-context-menu-template'";></div>
+				<div ng-include="'cupboard-placeholder-context-menu-template'"></div>
+				<div ng-include="'amenity-context-menu-template'"></div>
+				<div ng-include="'amenity-types-context-menu-template'"></div>
+				<div ng-include="'cupboard-start-context-menu-template'"></div>
+				<div ng-include="'cupboard-planes-context-menu-template'"></div>
+				<div ng-include="'cupboard-rects-context-menu-template'"></div>
+				<div ng-include="'cupboard-meshes-empty-context-menu-template'"></div>
+
+				<div ng-include="'cupboard-editor-template'"></div>
+				<div ng-include="'waypoint-qa-step'"></div>
+
+				<div ng-include="'meta-data-hover-template'"></div>
+				<div ng-include="'meta-data-material-template'"></div>
+				<div ng-include="'helper-labels-template'"></div>
+
+				<div ng-if="interaction.panoMode" style="position: absolute; bottom: 0; left: 0; right: 0; width: 100%;" ng-include="'bottom-row-panos'">
+				</div>
+
+				<!--
+				<div ng-if="interaction.panoMode && interaction.walkthroughCreatorParam" style="position: absolute; bottom: 0; left: 0; right: 0; width: 100%;" ng-include="'bottom-row-walkthrough-positions'">
+				</div>
+				-->
+
+
+				<div ng-include="'hotspot-config-template'"></div>
+
+				<div ng-include="'measurement-mode-template'"></div>
+
+				<div id="floor-dropdown-div" style="position: absolute; right: 30px; display: block; z-index: 10;" ng-click="$event.stopPropagation();" ng-class="{'dd-up': interaction.showThumbnails, 'dd-down': !interaction.showThumbnails}">
+				</div>
+
+				<!--<a class="btn btn-sm white-font" style="position: absolute; top: 250px; left: 40px; border: 1px solid #fff;" ng-if="interaction.panoManager && interaction.panoMode" ng-href="http://{{interaction.listingURL}}">GO BACK TO LISTING PAGE</a>-->
+
+				<div id="" style="position: absolute; left: 0px; right: 0px; bottom: 10px; z-index: 0;" ng-if="interaction.panoManager && interaction.panoMode">
+
+					<div class="white-font" style="width: 100%; padding-left: 10px; padding-right: 10px; font-size: 25px; text-shadow: 0px 0px 2px #000000;">
+						{{interaction.panoManagerMessage}}
+					</div>
+
+					<div style="width: 50%; margin-left: 8px;" ng-if="interaction.panoManagerAllowed">
+						<a class="btn btn-large red-gradient white-font"
+						ng-href="http://{{interaction.listingURL}}">
+							LISTING PAGE
+						</a>
+
+						<a class="btn btn-large red-gradient white-font"
+						ng-if="!interaction.currentWaypointDisabled"
+						ng-disabled="!(interaction.isStartPointForProject || interaction.isStartPointForFloor) || interaction.waypointIsStartingPoint || interaction.movingIn3dTour || interaction.panoManagerSaving"
+						ng-click="interaction.hideWaypoint()">
+							DISABLE SPIN
+						</a>
+
+						<a class="btn btn-large red-gradient white-font"
+						ng-if="interaction.currentWaypointDisabled"
+						ng-disabled="interaction.movingIn3dTour || interaction.panoManagerSaving"
+						ng-click="interaction.enableWaypoint()">
+							ENABLE SPIN
+						</a>
+
+						<a class="btn btn-large btn-success white-font"
+						ng-if="!interaction.waypointIsStartingPoint || !interaction.isStartFloorForProject"
+						ng-disabled="interaction.currentWaypointDisabled || interaction.movingIn3dTour || !interaction.fullPanoLoaded || interaction.panoManagerSaving"
+						ng-click="interaction.setStartingWaypointGlobalAndSplashAsync()">
+							SET START FOR PROJECT
+						</a>
+
+						<a class="btn btn-large btn-success white-font"
+						ng-if="interaction.waypointIsStartingPoint && interaction.isStartFloorForProject"
+						ng-disabled="interaction.movingIn3dTour || !interaction.fullPanoLoaded || interaction.panoManagerSaving"
+						ng-click="interaction.setStartingWaypointGlobalAndSplashAsync()">
+							SET SPLASH SCREEN
+						</a>
+
+						<a class="btn btn-large btn-success white-font"
+						ng-if="!interaction.isStartFloorForProject"
+						ng-disabled="interaction.movingIn3dTour || !interaction.fullPanoLoaded || interaction.panoManagerSaving"
+						ng-click="interaction.setStartingWaypointForFloorAsync()">
+							SET START FOR FLOOR
+						</a>
+					</div>
+				</div>
+
+				<div id="" ng-class="{'walkthrough-creator-buttons-up': interaction.showThumbnails, 'walkthrough-creator-buttons': true}" ng-if="interaction.walkthroughCreatorParam && interaction.panoMode">
+					<div class="white-font" style="width: 100%; padding-left: 10px; padding-right: 10px; font-size: 35px; text-shadow: 0px 0px 2px #000000;">
+						{{interaction.walkthroughPathMessage}}
+					</div>
+
+					<div ng-if="!app.vtour.walkthroughCreatorPreview" style="width: 100%; padding-left: 10px; padding-right: 10px;">
+
+						<a class="btn btn-large red-gradient white-font" ng-disabled="" ng-click="interaction.setStartingRotation()">
+							Starting Rotation
+						</a>
+
+						<a class="btn btn-large red-gradient white-font" ng-disabled="" ng-click="interaction.setEndingRotation()">
+							Ending Rotation
+						</a>
+
+						<a class="btn btn-large red-gradient white-font" ng-disabled="" ng-click="interaction.saveWalkthroughWaypoints()">
+							Save
+						</a>
+
+						<a id="video-capture-button" class="btn btn-large red-gradient white-font" ng-click="interaction.playWalkthrough()">
+							Capture
+						</a>
+
+						<a class="btn btn-large red-gradient white-font" ng-click="interaction.resetWalkthrough()">
+							Reset
+						</a>
+
+						<a class="btn btn-large red-gradient white-font" ng-click="interaction.removeLastWalkthroughKeypoint()">
+							Remove Last
+						</a>
+					</div>
+
+					<div ng-show="app.vtour.walkthroughCreatorPreview" style="width: 100%; padding-left: 10px; padding-right: 10px;">
+
+						<a class="btn btn-large white-font walkthrough-setter" ng-click="interaction.setSelectedRotation('left')">
+							Left
+						</a>
+
+						<a class="btn btn-large white-font walkthrough-setter" style="margin-left:195px;" ng-click="interaction.setSelectedRotation('start')">
+							Start
+						</a>
+
+						<a class="btn btn-large white-font walkthrough-setter" ng-click="interaction.setSelectedRotation('end')">
+							End
+						</a>
+
+						<a class="btn btn-large white-font walkthrough-setter" style="margin-left:195px;" ng-click="interaction.setSelectedRotation('right')">
+							Right
+						</a>
+					</div>
+				</div>
+
+				<div id="" style="position: absolute; left: 0px; right: 0px; bottom: 10px; width: 40%; margin-left: auto; margin-right: auto;" ng-if="interaction.modelManager && virtualTour.canSetSplashScreen()">
+					<div style="width: 100%; margin-left: 8px;">
+
+						<a ng-controller="VirtualTourMenuController as vtMenu" class="btn btn-large btn-success white-font" ng-click="vtMenu.customize('set-model-splash')">
+							Set Splash Screen
+						</a>
+
+
+					</div>
+				</div>
+
+
+
+				<!--<div id="pano-grab-capture" style="position: absolute; left: 25px; bottom: 25px;" ng-if="interaction.panoGrabber && interaction.panoMode">
+					<span style="font-size: 50px; color: white;" class="glyphicon glyphicon-camera" ng-click="interaction.grabPano()"></span>
+				</div>-->
+
+				<!--<div id="" style="position: absolute; top: 20px; right: 20px;" ng-if="interaction.panoMode">
+					<a class="btn red-nav-btn" href="" ng-click="interaction.showShareModal()">Pay / Share</a>
+				</div>-->
+
+								<div ng-include="'new-furniture-picker-template'"></div>
+				<!--<div ng-include="'wall-element-picker-template'"></div>-->
+				<div ng-include="'new-material-picker-template'"></div>
+				<div ng-include="'furniture-configurator-template'"></div>
+
+
+								<div id="sticky-note-prompt" style="display: none">
+					<textarea class="sticky-note-text"></textarea>
+					<br/>
+					<button class="save-sticky-note">Save</button>
+				</div>
+
+								<div id="saveWarning" class="virtual-tour-ui-element" style="position: absolute; right: 1px; bottom: 0px; " ng-if="!virtualTour.saveAllowed && !app.disableResources &&!interaction.panoMode" ng-cloak>
+					<font ng-if="debug.DEBUGLEVEL <= 1" style="font-size: 10px; text-shadow: 1px 1px #2A2A2A; color: #D3D3D3">READ ONLY. Changes will not be saved.</font>
+					<font ng-if="debug.DEBUGLEVEL > 1" style="font-size: 10px; text-shadow: 1px 1px #2A2A2A; color: #D3D3D3">{{virtualTour.reasonForNoSaveAllowed}}</font>
+				</div>
+
+								<div style="display: none">
+					<div class="js-viewer-hud-controls viewer-hud-controls loader-hidden">
+						<ul style="list-style-type: none; display: inline-block; padding: 0; margin: 0; width: auto">
+							<li id="toggle-fullscreen" class="js-viewer-hud-fullscreen-button viewer-hud-fullscreen-button" style="height: 44px; display: none"></li>
+							<li id="toggle-camera" class="js-viewer-hud-first-person-button viewer-hud-first-person-button" style="height: 44px;"></li>
+							<li id="mode-xray" class="js-viewer-hud-x-ray-mode-button viewer-hud-x-ray-mode-button" style="height: 44px; display: none"></li>
+							<li id="mode-stickyNote" class="js-viewer-hud-x-ray-mode-button viewer-hud-sticky-note-button" style="height: 44px;"></li>
+							<li id="mode-measurement" class="js-viewer-hud-measurement-button viewer-hud-measurement-button" style="height: 44px;"></li>
+						</ul>
+					</div>
+				</div>
+
+								<!-- <div id="fp-rot" style="display: none;">
+					<div id="fp-rot-left-45" data-rot="45"></div><div id="fp-rot-right-45" data-rot="-45"></div>
+					<div id="fp-rot-left-90" data-rot="90"></div><div id="fp-rot-right-90" data-rot="-90"></div>
+					<div id="fp-rot-left-180" data-rot="180"></div><div id="fp-rot-right-180" data-rot="-180"></div>
+					<div id="fp-rot-left-360" data-rot="360"></div><div id="fp-rot-right-360" data-rot="-360"></div>
+				</div> -->
+
+								<div id="fp-controls" class="fp-controls im-no-user-select" style="display: none;" ng-hide="virtualTour.showShowcaseSelection || interaction.showFurniturePicker || interaction.showMaterialPicker || !window.onTouchStart">
+					<div id="fp-controls-forward" class='virtual-tour-ui-element fp-controls-forward' direction-data="forward" ng-hide="interaction.currentMode === 'hd'" ng-click="interaction.dontShowContextMenu()"></div>
+					<div id="fp-controls-backward"  class='virtual-tour-ui-element fp-controls-backward' direction-data="backward" ng-hide="interaction.currentMode === 'hd'" ng-click="interaction.dontShowContextMenu()"></div>
+					<div id="fp-controls-left"  class='virtual-tour-ui-element fp-controls-left' direction-data="left" ng-click="interaction.dontShowContextMenu()"></div>
+					<div id="fp-controls-right"  class='virtual-tour-ui-element fp-controls-right' direction-data="right" ng-click="interaction.dontShowContextMenu()"></div>
+				</div>
+
+				<div style="position: absolute; bottom: 10px; right: 10px;" ng-if="interaction.hotspotParam" class="virtual-tour-ui-element">
+					<span class="glyphicon glyphicon-play-circle white-font" style="font-size: 30px;" ng-click="interaction.startSplinePath(); $event.stopPropagation()"></span>
+				</div>
+
+				<div id="showcaseSelectionContainer" class="virtual-tour-ui-element" ng-if="(virtualTour.showcases.length || virtualTour.showcaseModel) && !interaction.election" ng-click="$event.stopPropagation()">
+					<div class="row" style="margin-right: 0px;">
+						<div class="col-xs-2 col-xs-offset-5 slidebar-background" id="showcaseSelectionToggle" ng-click="virtualTour.toggleShowcaseSelection()">
+							<div class="text-center">
+								<span ng-class="{'glyphicon': true,'white-font': true, 'glyphicon-chevron-up': !virtualTour.showShowcaseSelection, 'glyphicon-chevron-down': virtualTour.showShowcaseSelection}"></span>
+							</div>
+						</div>
+					</div>
+					<div ng-if="virtualTour.showShowcaseSelection" class="row slidebar-background" style="margin-right: 0px; overflow-x: scroll; overflow-y: hidden; white-space: nowrap;" id="showcaseSelection">
+							<div class="col-xs-2" ng-repeat="showcase in virtualTour.showcases" style="height: 100%; cursor: pointer; float: none; display: inline-block;">
+								<div class="text-center" ng-click="virtualTour.switchShowcase(showcase); virtualTour.toggleShowcaseSelection();">
+									<div class="row" style="margin-top: 7px;">
+										<img ng-src="{{showcase.thumbnailUrl}}" id="showcaseSelectionImage" ng-class="{activeShowcase: showcase.id === app.vtour.currentShowcase.id}">
+									</div>
+									<div class="row white-font">
+										{{showcase.getName()}}
+										<span class="glyphicon glyphicon-camera newScreenshotIcon" ng-show="showcase.id === app.vtour.currentShowcase.id" ng-click="virtualTour.saveNewShowcaseScreenshot()"></span>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xs-2" style="height: 100%; cursor: pointer; float: none; display: inline-block;">
+								<div class="text-center" ng-click="virtualTour.saveNewShowcase();" ng-show="virtualTour.showcaseModel && virtualTour.requiresRole('Operator')">
+									<div class="row" style="margin-top: 7px;">
+										<img ng-src="/img/NewShowcase.png" id="newShowcaseImage">
+									</div>
+									<div class="row white-font">
+										Create New Showcase
+									</div>
+								</div>
+							</div>
+
+					</div>
+
+				</div>
+
+
+				<div style="position: absolute; left: 25px; bottom: 12px; width: 150px;" id="virtual-tour-actions" ng-hide="floorPlan || app.vtour.renderPipeline.getMode() === 'oculus'">
+					<div class="row" style="margin: 0; padding: 0;">
+
+						<div ng-click='interaction.setNewMode(interaction.app.vtour.firstPersonUI)' class="virtual-tour-ui-element col-xs-6" ng-if="(interaction.currentMode === 'overview' || interaction.currentMode === 'hd' && app.modelMode) || debug.DEBUGLEVEL > 1" style="padding: 5px;" ng-cloak>
+							<img width="100%" src="../../images/3dvt/First-Person.png"/>
+						</div>
+						<div ng-click='interaction.setNewMode(interaction.app.vtour.overviewUI)' class="virtual-tour-ui-element col-xs-6" ng-if="interaction.currentMode === 'firstperson'" style="padding: 5px;">
+							<img width="100%" src="../../images/3dvt/Overview.png"/>
+						</div>
+						<div ng-if="interaction.hotspotParam" ng-click='interaction.toggleHotspotConfig(); $event.preventDefault(); $event.stopPropagation();' class="virtual-tour-ui-element col-xs-6" style="padding: 5px;">
+							<span class="glyphicon glyphicon-edit" style="font-size: 60px; color: white;"></span>
+						</div>
+
+						<!--
+						<div class="col-xs-6" id="hd-mode" ng-click="interaction.setNewMode(interaction.app.vtour.waypointUI)" style="display: none; padding: 5px;">
+							<img width="100%" src="../../images/3dvt/HD.png"/>
+						</div>
+						-->
+					</div>
+				</div>
+
+								<!--
+				<div id="hd-mode-controls" ng-if="interaction.currentMode !== 'hd'" ng-cloak>
+					<div id="hd-mode-controls-previous" ng-click="app.vtour.enterPreviousWaypoint(); $event.stopPropagation();"><img src="/images/previousWaypoint.png" ng-if="false" id="hd-mode-controls-previous-img"></img></div>
+					<div id="hd-mode-controls-next" ng-click="app.vtour.enterNextWaypoint(); $event.stopPropagation();"><img src="/images/nextWaypoint.png " ng-if="false" id="hd-mode-controls-next-img"></div>
+				</div>
+				-->
+
+								<div>
+					<div class="virtual-tour-ui-element" id="agent-details" ng-hide="moduleAgent === undefined" ng-cloak>
+						<img id="agent-photo" ng-hide="moduleAgent.agentPhoto === undefined" ng-src="{{moduleAgent.agentPhoto}}" />
+						<div id="agent-name" ng-hide="moduleAgent.name === undefined">{{moduleAgent.name}} </div>
+						<div id="agent-bre" ng-hide="moduleAgent.idNumber === undefined">BRE #{{moduleAgent.idNumber}}</div>
+						<a id="agent-email" ng-hide="moduleAgent.contactEmail === undefined" href="mailto:{{moduleAgent.contactEmail}}">{{moduleAgent.contactEmail}}</a>
+						<!--<a id="company-photo-link" ng-hide="moduleAgent.companyUrl === undefined" href="{{moduleAgent.companyUrl}}" target="_blank">
+							<img id="company-photo" ng-hide="moduleAgent.companyLogo === undefined" ng-src="{{moduleAgent.companyLogo}}"></img>
+						</a>-->
+						<div id="agent-phone" ng-hide="moduleAgent.phone === undefined">{{moduleAgent.phone}}</div>
+						<div id="company-name" ng-hide="moduleAgent.companyName === undefined">{{moduleAgent.companyName}}</div>
+					</div>
+				</div>
+
+								<div id="fp-fov-slider" style="display: none;">
+					<div id="fp-fov-indicator"></div>
+				</div>
+
+				
+				<!-- MaprTags Editor UI START -->
+				<div ng-include="'/app/virtual-tour/mapr-tags-walkthrough/templates/vt-mapr-tag-editor.html'"></div>
+				<div ng-include="'/app/virtual-tour/mapr-tags-walkthrough/templates/vt-mapr-tag-card.html'"></div>
+				<div ng-include="'/app/virtual-tour/mapr-tags-walkthrough/templates/vt-mapr-tag-image.html'"></div>
+				<div ng-include="'/app/virtual-tour/mapr-tags-walkthrough/templates/vt-mapr-tag-video.html'"></div>
+				<div ng-include="'/app/virtual-tour/mapr-tags-walkthrough/templates/vt-mapr-tag-card-mobile.html'"></div>
+				<!-- MaprTags Editor UI END-->
+
+				<div ng-if='app.vtour.plugin' class="virtual-tour-ui-element"><div ng-include="'/app/virtual-tour/plugins/triangulator-plugin.html'"></div></div>
+
+				<canvas id="canvasWebGL" style="height: 100%; width: 100%; display: block;" ng-keydown="alert('$event')"></canvas>
+				<canvas id="canvas" style="height: 100%; width: 100%; display: none; border:1px solid #000000;" ng-keydown="alert('$event')"></canvas>
+			</div>
+		</div>
+	</div>
+</script>
+
+<!-- Walkthrough - MaprEditor - CSS - START @lazarmitic -->
+<style>
+	.facebook-preview-icon{
+		margin-right: 5px;
+		margin-top: -3px;
+	}
+
+	.edit-tag-modal-container {
+
+		font-family: "Open Sans", Helvetica, Arial, sans-serif;
+		position: fixed;
+		background-color: rgba(175, 175, 175, 0.8);
+		right: 0px;
+		top: 0px;
+		width: 425px;
+		height: 100%;
+		z-index: 1001;
+		margin: 0px;
+		padding-left: 20px;
+		padding-right: 20px;
+		border-left: 2px solid rgba(255, 255, 255, 255);
+		overflow-y: auto;
+	}
+
+	.chars-remaining {
+		font-size: 16px;
+		height: 100%;
+		margin-bottom: 0px;
+		color: rgba(255, 255, 255, 1);
+	}
+
+	.text-box-title {
+		font-size: 24px;
+		height: 100%;
+		margin-bottom: 5px;
+		color: rgba(255, 255, 255, 1);
+	}
+
+	.bold-text-large {
+
+		font-size: 26px;
+		height: 100%;
+		margin-bottom: 0px;
+		color: rgba(255, 255, 255, 1);
+		font-weight: bold;
+	}
+
+	.bold-text-small {
+
+		font-size: 20px;
+		height: 100%;
+		margin-bottom: 0px;
+		color: rgba(255, 255, 255, 1);
+		font-weight: bold;
+	}
+
+
+	.title-text-box {
+		width: 100%;
+		height: 70px;
+		resize: none;
+		border: 2px solid #E2E2E2;
+		border-radius: 5px;
+	}
+
+	.title-text-box:focus {
+		outline: none !important;
+		border:2px solid rgba(27, 150, 223, 1);;
+		box-shadow: none;
+	}
+
+	.details-text-box {
+		width: 100%;
+		height: 125px;
+		resize: none;
+		border: 2px solid #E2E2E2;
+		border-radius: 5px;
+		background-color: white;
+	}
+
+	.details-text-box:focus {
+		outline: none !important;
+		border:2px solid rgba(27, 150, 223, 1);;
+		box-shadow: none;
+	}
+
+	.blue-button {
+
+		font-size: 16px;
+		border-radius: 41px;
+		width: 120px;
+		border-width: 0px;
+		color: white;
+		background-color: rgba(27, 150, 223, 1);
+		font-weight: bold;
+		padding-top: 9px;
+	}
+
+	.blue-button:focus {
+
+		outline: none;
+	}
+
+	.blue-button:disabled {
+
+		background-color: rgba(200, 200, 200, 1);
+	}
+
+	.white-button {
+
+		font-size: 16px;
+		border-radius: 41px;
+		width: 120px;
+		border-width: 0px;
+		color: red;
+		background-color: white;
+		font-weight: bold;
+		padding-top: 9px;
+	}
+
+	.white-button:focus {
+
+		outline: none;
+	}
+
+
+	.height-slider {
+		-webkit-appearance: none;
+		width: 100%;
+	}
+
+	.height-slider:focus {
+		outline: none;
+	}
+
+	.height-slider::-webkit-slider-runnable-track {
+		width: 100%;
+		height: 4px;
+		box-shadow: none;
+		background: white;
+		border-radius: 2px;
+		border: none;
+	}
+
+	.height-slider:focus::-webkit-slider-runnable-track {
+		background: white;
+	}
+
+	.height-slider::-webkit-slider-thumb {
+		box-shadow: none;
+		border: 4px solid rgba(27, 150, 223, 1);
+		height: 24px;
+		width: 24px;
+		border-radius: 50%;
+		background: white;
+		cursor: pointer;
+		-webkit-appearance: none;
+		margin-top: -9px;
+	}
+
+	.onoffswitch {
+		position: relative; width: 58px;
+		user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;
+	}
+	.onoffswitch-checkbox {
+		display: none;
+	}
+	.onoffswitch-label {
+		display: block; overflow: hidden; cursor: pointer;
+		border: 2px solid #FFFFFF; border-radius: 50px;
+	}
+	.onoffswitch-inner {
+		display: block; width: 200%; margin-left: -100%;
+		transition: margin 0.3s ease-in 0s;
+	}
+	.onoffswitch-inner:before, .onoffswitch-inner:after {
+		display: block; float: right; width: 50%; height: 26px; padding: 0; line-height: 26px;
+		font-size: 16px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+		box-sizing: border-box;
+	}
+	.onoffswitch-inner:before {
+		content: "";
+		padding-left: 10px;
+		background-color: #FFFFFF; color: #FFFFFF;
+	}
+	.onoffswitch-inner:after {
+		content: "";
+		padding-right: 10px;
+		background-color: #FFFFFF; color: #FFFFFF;
+		text-align: right;
+	}
+	.onoffswitch-switch {
+		display: block; width: 26px; margin: 0px;
+		background: rgba(27, 150, 223, 1);
+		position: absolute; top: 0; bottom: 0;
+		right: 28px;
+		border: 2px solid #FFFFFF; border-radius: 50px;
+		transition: all 0.3s ease-in 0s;
+	}
+	.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+		margin-left: 0;
+	}
+	.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+		right: 0px;
+		background-color: rgba(27, 150, 223, 1);
+	}
+
+
+
+
+
+	.card-modal-container {
+
+		border-radius: 8px;
+		position: absolute;
+		background-color: rgba(50, 50, 50, 0.8);
+		border-width: 2px;
+		border-style: solid;
+		border-color: rgba(255, 255, 255, 1);
+		width: 375px;
+		z-index: 1000;
+	}
+
+	.card-modal-container-mobile {
+		border-radius: 8px;
+		position: absolute;
+		background-color: rgba(50, 50, 50, 0.8);
+		border-width: 2px;
+		border-style: solid;
+		border-color: rgba(255, 255, 255, 1);
+		width: 90%;
+		margin-left: 5%;
+		margin-top: 5%;
+		z-index: 1000;
+	}
+
+	.video-modal-mobile {
+
+		max-width: 100%;
+		max-height: 100%;
+	}
+
+	.video-modal-container-mobile {
+
+		position: absolute !important;
+		overflow: hidden !important;
+		z-index: 1001;
+	}
+
+	.image-modal-mobile {
+
+		position: fixed;
+		width: 100%;
+		margin-top: 0px;
+		background-color: rgba(0, 0, 0, 0);
+		border-style: none;
+		text-align: center;
+		z-index: 1001;
+	}
+
+	.video-modal {
+
+		position: fixed;
+		width: 750px;
+		margin-top: 50px;
+		left: 50%;
+		margin-left: -375px;
+		background-color: rgba(0, 0, 0, 0.0);
+		border-style: none;
+		text-align: center;
+		z-index: 1001;
+	}
+
+	.image-modal {
+
+		position: fixed;
+		width: 750px;
+		margin-top: 50px;
+		left: 50%;
+		margin-left: -375px;
+		background-color: rgba(0, 0, 0, 0.0);
+		border-style: none;
+		text-align: center;
+		z-index: 1001;
+	}
+
+	.card-image {
+
+		background-size: 100%;
+		height: 200px;
+		text-align: center;
+		margin-left: -1px;
+		margin-right: -1px;
+		background-repeat: no-repeat;
+		background-image: url();
+	}
+
+	.cursor-3d-anchor {
+
+		position: absolute;
+		width:30px;
+		height: 30px;
+		pointer-events: none;
+		z-index: 1000;
+		visibility: hidden;
+	}
+
+	.inactive-mapr-tag {
+
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		z-index: 500;
+	}
+
+	.description {
+
+		resize: none;
+		border: 2px solid #E2E2E2;
+		border-radius: 0px;
+		height: 150px;
+		margin-left: 40px;
+		width: 440px;
+		font-size: 14px;
+	}
+
+	.description:focus {
+		outline: none !important;
+		border:2px solid #cf5641;
+		box-shadow: none;
+	}
+</style>
+<!-- Walkthrough - MaprEditor - CSS - END @lazarmitic -->
+
+<!-- Triangulator - Material Pick Step - CSS - START @lazarmitic -->
+<style>
+	.material-scroll {
+
+		padding-left: 0px;
+		padding-right: 20px;
+	}
+
+	.material-picker-container {
+
+		position: absolute;
+
+		width: 650px;
+		height: 100%;
+		background-color: rgba(0,0,0,0.6);
+		margin-top: 50px;
+		padding: 0px;
+		margin-bottom: 0px;
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
+	.tool-button {
+
+		text-decoration: underline;
+		color: white;
+		margin-left: 30px;
+	}
+	.tool-button:hover {
+
+		cursor: pointer;
+	}
+
+	.recent-color {
+
+		width: 90px;
+		height: 90px;
+		margin-left: 6px;
+		margin-top: 6px;
+		overflow: auto;
+	}
+
+	.material-tab {
+
+		color: white !important;
+		border-style: solid !important;
+		border-width: 1px !important;
+		border-color: white !important;
+		border-radius: 0px !important;
+	}
+
+	.material-tab:hover {
+
+		color: papayawhip !important;
+	}
+
+	.material-tab:active {
+
+		color: papayawhip !important;
+	}
+
+	.material-tab:focus {
+
+		color: papayawhip !important;
+	}
+
+	.opaque:focus {
+
+		background-color: rgba(0,0,0,0.6);
+	}
+
+</style>
+<!-- Triangulator - Material Pick Step - CSS - END @lazarmitic -->
+
+<!-- // CONTEXT MENU STYLES -->
+
+<style>
+
+	.context-menu {
+
+		position:absolute;
+		top:0;
+		left:0;
+
+		width: 192px;
+		height: 192px;
+
+		z-index: 99999;
+
+		pointer-events:none;
+
+		display:none;
+
+	}
+
+	.context-menu-td {
+		width: 64px;
+		height: 64px;
+		vertical-align: center;
+		text-align: center;
+
+		border:none;
+		border-radius: 15px;
+		border-spacing: 0px;
+
+		background-color: transparent;
+
+	}
+
+	.context-menu-td:hover {
+		background-color: transparent;
+	}
+
+	.context-menu-icon {
+		margin-top: 0px;
+		width: 100%;
+
+		pointer-events:all;
+	}
+
+	.context-menu-icon:hover {
+		opacity: 0.5;
+		color: white;
+	}
+
+</style>
+
+<script type="text/ng-template" id="measurement-mode-template">
+	<div style="position: absolute; left: 0; right: 0; bottom: 0; width: 200px; height: 100px; margin-left:auto; margin-right: auto;" ng-if="interaction.measurementDeltas && !interaction.manualEventHandling">
+		<div class="row" style="margin: 0; height: 100%">
+			<div style="background: rgba(0,0,0,0.5); border-radius: 5px; border: 1px solid white; height: 100%;">
+				<!--<div class="col-xs-12 white-font text-center">
+					X: {{interaction.measurementDeltas.x}}m
+				</div>
+				<div class="col-xs-12 white-font text-center">
+					Y: {{interaction.measurementDeltas.y}}m
+				</div>
+				<div class="col-xs-12 white-font text-center">
+					Z: {{interaction.measurementDeltas.z}}m
+				</div>
+				<div class="col-xs-12 white-font text-center">
+					T: {{interaction.measurementDeltas.totalDistance}}m
+				</div>-->
+				<style>
+					ul {
+					    list-style-type: square;
+					}
+					#greenLine {
+					    color: red;
+					}
+					#redLine {
+					    color: white;
+					}
+
+					#blueMesh {
+					    color: blue;
+					}
+
+					ul > li > span {
+					    color: white;
+					}
+				</style>
+				<div class="col-xs-12 text-center" style="padding-left: 0;">
+					<ul style="padding-left: 100px;">
+						<li id="redLine">
+							<span>{{interaction.displayMeasurement(interaction.measurementDeltas.red, 'linear')}}</span>
+						</li>
+						<li id="greenLine">
+							<span>{{interaction.displayMeasurement(interaction.measurementDeltas.green, 'linear')}}</span>
+						</li>
+						<li id="blueMesh" ng-if="interaction.measurementDeltas.wallArea">
+							<span>{{interaction.displayMeasurement(interaction.measurementDeltas.wallArea, 'squared')}}<sup>2</sup></span>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-xs-12 white-font text-center">
+					<a class="btn btn-sm outline" ng-click="interaction.turnOffMeasurementMode(); $event.stopPropagation()">Done</a>
+					<a class="btn btn-sm outline" ng-click="interaction.toggleMeasurementUnits(); $event.stopPropagation()">{{interaction.measurementUnits}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="hotspot-config-template">
+	<div style="position: absolute; bottom: 0; left: 40%; width: 300px; height: 60px" ng-if="interaction.hotspotConfigOn">
+		<div class="row">
+			<div class="col-xs-3">
+				<a href="" class="btn outline" ng-click="interaction.endHotspotConfiguration(false)">
+					Cancel
+				</a>
+			</div>
+
+			<div class="col-xs-3">
+				<a href="" class="btn outline" ng-click="interaction.endHotspotConfiguration(true)">
+					Save
+				</a>
+			</div>
+			<div class="col-xs-3">
+				<a href="" class="btn outline" ng-click="interaction.clearHotspots()">
+					Restart
+				</a>
+			</div>
+			<div class="col-xs-3">
+				<a href="" class="btn outline" ng-click="interaction.undoLastHotspot()">
+					Undo
+				</a>
+			</div>
+		</div>
+	</div>
+</script>
+
+<style>
+
+	p.speech
+	{
+		position: relative;
+		width: 200px;
+		height: 100px;
+		text-align: center;
+		background-color: #fff;
+		border: 4px solid #666;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		-webkit-box-shadow: 2px 2px 4px #888;
+		-moz-box-shadow: 2px 2px 4px #888;
+		box-shadow: 2px 2px 4px #888;
+	}
+
+	p.speech:before
+	{
+		content: ' ';
+		position: absolute;
+		width: 0;
+		height: 0;
+		left: 30px;
+		top: 92px;
+		border: 13px solid;
+		border-color: #666 transparent transparent #666;
+	}
+
+	p.speech:after
+	{
+		content: ' ';
+		position: absolute;
+		width: 0;
+		height: 0;
+		left: 34px;
+		top: 92px;
+		border: 8px solid;
+		border-color: #fff transparent transparent #fff;
+	}
+
+	p.speechtwo
+	{
+		position: relative;
+		width: 200px;
+		height: 40px;
+		text-align: center;
+		background-color: #fff;
+		border: 4px solid #666;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		padding-top: 6px;
+	}
+
+	p.speechtwo:before
+	{
+		content: ' ';
+		position: absolute;
+		width: 0;
+		height: 0;
+		left: 30px;
+		top: 92px;
+		border: 13px solid;
+		border-color: #666 transparent transparent #666;
+	}
+
+	p.speechtwo:after
+	{
+		content: ' ';
+		position: absolute;
+		width: 0;
+		height: 0;
+		left: 34px;
+		top: 92px;
+		border: 8px solid;
+		border-color: #fff transparent transparent #fff;
+	}
+
+</style>
+
+<script type="text/ng-template" id="meta-data-material-template">
+	<div ng-if="interaction.matMetaData" style="position: absolute; width: 180px; height: 100px; vertical-align: bottom; bottom: 35px; right: 10px;">
+		<div class="row text-center" style="position: absolute; bottom: 0px; left: 0; right: 0;">
+			<p class="speechtwo">
+				{{interaction.matMetaData.name}}
+			</p>
+		</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="meta-data-hover-template">
+	<div ng-if="interaction.mouseoverMetadata" style="position: absolute; width: 180px; height: 100px; vertical-align: bottom;" ng-style="{top: interaction.metadataTop, left: interaction.metadataLeft}">
+		<div class="row text-center" style="position: absolute; bottom: 0px; left: 0; right: 0;">
+			<p class="speech">{{interaction.mouseoverMetadata.name}}
+				<br>
+				${{interaction.mouseoverMetadata.price}}
+				<br>
+				{{interaction.mouseoverMetadata.dimensions.width}}x{{interaction.mouseoverMetadata.dimensions.height}}x{{interaction.mouseoverMetadata.dimensions.depth}}
+
+			</p>
+		</div>
+
+	</div>
+
+</script>
+
+<!-- Helper label above active room helper in Walkthrough.
+For some reason following updates aren't visible on test -->
+<script type="text/ng-template" id="helper-labels-template">
+	<div ng-controller="HelperController as helper" id="roomNameLabel">
+		<div style="position: absolute; width: 200px; height: 1px;" ng-show="helper.visible" ng-style="{top: helper.activeLabel.top, left: helper.activeLabel.left, opacity: helper.activeLabel.opacity}">
+			<div class="row text-center white-font" style="position: absolute; top: 0px; bottom: 0px; left: 0; right: 0; white-space: nowrap; text-shadow: 0px 0px 1px #000000; font-weight:bold; pointer-events:none; ">
+				{{helper.activeLabel.text}}
+			</div>
+		</div>
+
+	</div>
+
+</script>
+
+
+<script type="text/ng-template" id="choose-president-template">
+
+	<div class="row">
+		<div class="" style="position: absolute; bottom: 5px; right: 5px; width: 300px">
+			<img class="pull-right" width="100px" style="cursor: pointer;" src="/images/election/Trump.jpg" ng-click="$event.stopPropagation(); virtualTour.switchShowcase(virtualTour.showcases[0])"/>
+			<font class="pull-right white-font" style="margin-right: 5px; margin-left: 5px; margin-top: 30px; font-size: 34px; font-weight: bold;">OR</font>
+			<img class="pull-right" width="100px" style="cursor: pointer;" src="/images/election/Hillary.jpg" ng-click="$event.stopPropagation(); virtualTour.switchShowcase(virtualTour.showcases[1])"/>
+		</div>
+	</div>
+
+</script>
+
+<!-- // FURNITURE CONTEXT MENU -->
+
+<script type="text/ng-template" id="main-context-menu-template">
+
+	<table ng-if="interaction.showMainContextMenu && !interaction.floorPlan" class="vtour-9-grid" style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+
+		<tr>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-hide="interaction.app.vtour.isJsonVt()" ng-if="interaction.showMainContextMenu && interaction.resourcesEnabled" ng-src="{{interaction.icons[0]}}" ng-click='interaction.showMaterialPickerElement()'/>
+			</td>
+
+			<td class="context-menu-td"></td>
+
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-if="interaction.showMainContextMenu && interaction.resourcesEnabled" ng-src="{{interaction.icons[1]}}" ng-click='interaction.showFurniturePickerElement(); $event.stopPropagation();'/>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="context-menu-td"></td>
+
+			<td class="context-menu-td">
+				<img id='buttonNavigate' class="context-menu-icon" ng-if="interaction.showMainContextMenu" ng-src="{{interaction.icons[7]}}" ng-click="interaction.jumpToPosition($event)"/>
+			</td>
+
+			<td class="context-menu-td"></td>
+		</tr>
+
+
+		<tr>
+			<td class="context-menu-td">
+				<img id='buttonInspect' class="context-menu-icon" ng-src="{{interaction.icons[4]}}" ng-click="virtualTour.inspectMeshAtScreenspaceCoord(interaction.clickedCoord); $event.stopPropagation();" ng-if='debug.DEBUGLEVEL > 1' />
+			</td>
+
+			<td class="context-menu-td"></td>
+
+			<td class="context-menu-td">
+				<img id='buttonRuler' class="context-menu-icon" ng-if="interaction.showMainContextMenu && !interaction.unableToMeasure" ng-src="{{interaction.icons[8]}}" ng-click="interaction.startMeasurementMode()"/>
+			</td>
+		</tr>
+
+	</table>
+
+</script>
+
+<script type="text/ng-template" id="main-context-menu-template-triangulator">
+
+	<table ng-if="interaction.showMainContextMenuTriangulator && !interaction.floorPlan" class="vtour-9-grid" style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+
+		<tr>
+			<td class="context-menu-td"></td>
+
+			<td class="context-menu-td"></td>
+
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-if="interaction.showMainContextMenuTriangulator && interaction.resourcesEnabled" ng-src="{{interaction.icons[9]}}" ng-click='interaction.addBoxTriangulator();'/>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="context-menu-td"></td>
+
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-if="interaction.showMainContextMenuTriangulator && interaction.resourcesEnabled" ng-src="{{interaction.icons[1]}}" ng-click='interaction.showFurniturePickerElement(); $event.stopPropagation();'/>
+			</td>
+
+			<td class="context-menu-td"></td>
+		</tr>
+
+
+		<tr>
+			<td class="context-menu-td">
+				<img id='buttonInspect' class="context-menu-icon" ng-src="{{interaction.icons[4]}}" ng-click="virtualTour.inspectMeshAtScreenspaceCoord(interaction.clickedCoord); $event.stopPropagation();"
+					 ng-if='debug.DEBUGLEVEL > 1' />
+			</td>
+
+			<td class="context-menu-td"></td>
+
+			<td class="context-menu-td">
+				<img id='buttonRuler' class="context-menu-icon" ng-if="interaction.showMainContextMenuTriangulator && !interaction.unableToMeasure" ng-src="{{interaction.icons[8]}}" ng-click="interaction.startMeasurementMode()"/>
+			</td>
+		</tr>
+
+	</table>
+
+</script>
+
+<script type="text/ng-template" id="furniture-context-menu-template">
+
+	<table ng-show="interaction.showFurnitureContextMenu && !interaction.floorPlan" class='vtour-9-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+
+		<tr>
+			<td class="context-menu-td" ng-mousedown="interaction.startFurnitureRotation()" im-touchstart-prevent="interaction.startFurnitureRotation();" im-touchmove-prevent="interaction.rotateFurniture($event);">
+				<img class="context-menu-icon" ng-show="interaction.showFurnitureContextMenu" ng-src="{{interaction.icons[2]}}"/>
+			</td>
+
+			<td class="context-menu-td">
+			</td>
+
+			<td class="context-menu-td" ng-controller="FurniturePickerController as furniturePicker" ng-click="interaction.showConfigurationTool(true);">
+				<img class="context-menu-icon" ng-show="interaction.showFurnitureContextMenu && interaction.showPaintOption" ng-src="{{interaction.icons[0]}}"/>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-click="virtualTour.inspectMeshAtScreenspaceCoord(interaction.clickedCoord); $event.stopPropagation();" ng-show="interaction.showFurnitureContextMenu && debug.DEBUGLEVEL > 1" ng-src="{{interaction.icons[4]}}"/>
+			</td>
+
+			<td class="context-menu-td" ng-mousedown="interaction.startFurnitureMovement()" im-touchstart-prevent="interaction.startFurnitureMovement();" im-touchmove-prevent="interaction.moveFurniture($event);">
+				<img class="context-menu-icon" ng-show="interaction.showFurnitureContextMenu" ng-src="{{interaction.icons[3]}}"/>
+			</td>
+
+			<td class="context-menu-td">
+			</td>
+		</tr>
+
+		<tr>
+			<td class="context-menu-td">
+				<img id='buttonSettings' class="context-menu-icon" ng-show="interaction.showFurnitureContextMenu && interaction.yelpParam" src="/images/yelp.png" ng-click="interaction.showYelpSearch()"/>
+			</td>
+
+			<td class="context-menu-td">
+				<img id='buttonSettings' class="context-menu-icon" ng-show="interaction.showFurnitureContextMenu && interaction.selectedMeshHasSettings()" ng-src="{{interaction.icons[5]}}" ng-click="interaction._onSettingsClickHandler($event)"/>
+			</td>
+
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showFurnitureContextMenu" ng-src="{{interaction.icons[6]}}" ng-click="interaction.deleteFurniturePiece()" />
+			</td>
+
+		</tr>
+
+	</table>
+</script>
+
+<!-- Cupboard Editor: click on empty space when CE isn't yet initialized -->
+<script type="text/ng-template" id="cupboard-start-context-menu-template">
+    <table ng-show="interaction.showCEStartMenu" class='vtour-9-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+        <tr>
+            <td class="context-menu-td"></td>
+            <td class="context-menu-td"></td>
+            <td class="context-menu-td"></td>
+        </tr>
+
+        <tr>
+            <td class="context-menu-td"></td>
+            <td class="context-menu-td" ng-mousedown="interaction._initializeCupboardGroup()">
+                <img class="context-menu-icon" ng-show="interaction.showCEStartMenu" ng-src="{{interaction.cupboardIcons[0]}}" />
+            </td>
+            <td class="context-menu-td"></td>
+        </tr>
+
+        <tr>
+            <td class="context-menu-td"></td>
+            <td class="context-menu-td"></td>
+            <td class="context-menu-td"></td>
+        </tr>
+    </table>
+</script>
+
+<!-- Cupboard Editor: default menu in 1st step - placing planes -->
+<script type="text/ng-template" id="cupboard-planes-context-menu-template">
+    <table ng-show="interaction.showCEConfigurePlanesMenu" class='vtour-9-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+        <tr>
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsActivatePickPlane()">
+                <img class="context-menu-icon" ng-show="interaction.showCEConfigurePlanesMenu" ng-src="{{interaction.cupboardIcons[1]}}" />
+            </td>
+
+            <td class="context-menu-td"></td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsActivatePickPlane45()">
+                <img class="context-menu-icon" ng-show="interaction.showCEConfigurePlanesMenu" ng-src="{{interaction.cupboardIcons[4]}}" />
+            </td>
+        </tr>
+
+        <tr>
+            <td class="context-menu-td"></td>
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsHideMenu()">
+                <img class="context-menu-icon" ng-show="interaction.showCEConfigurePlanesMenu" ng-src="{{interaction.cupboardIcons[22]}}" />
+            </td>
+            <td class="context-menu-td"></td>
+        </tr>
+
+        <tr>
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsActivatePickPlanePosition()">
+                <img class="context-menu-icon" ng-show="interaction.showCEConfigurePlanesMenu" ng-src="{{interaction.cupboardIcons[2]}}" />
+            </td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsActivatePickPlaneNormal()">
+                <img class="context-menu-icon" ng-show="interaction.showCEConfigurePlanesMenu" ng-src="{{interaction.cupboardIcons[3]}}" />
+            </td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsActivatePickPlaneDrag()">
+                <img class="context-menu-icon" ng-show="interaction.showCEConfigurePlanesMenu" ng-src="{{interaction.cupboardIcons[5]}}" />
+            </td>
+        </tr>
+    </table>
+</script>
+
+<!-- Cupboard Editor: default menu in 2nd step - placing rectangles -->
+<script type="text/ng-template" id="cupboard-rects-context-menu-template">
+    <table ng-show="interaction.showCERectsFullMenu" class='vtour-16-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+        <tr>
+        	<td class="context-menu-td"></td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsCreateRects()">
+                <img class="context-menu-icon" ng-show="interaction.showCERectsFullMenu" ng-src="{{interaction.cupboardIcons[6]}}" />
+            </td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsModifyRects()">
+                <img class="context-menu-icon" ng-show="interaction.showCERectsFullMenu" ng-src="{{interaction.cupboardIcons[7]}}" />
+            </td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardDelete()">
+                <img class="context-menu-icon" ng-show="interaction.showCERectsFullMenu" ng-src="{{interaction.cupboardIcons[12]}}" />
+            </td>
+        </tr>
+
+        <tr>
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsSetPushPullAction()">
+                <img class="context-menu-icon" ng-show="interaction.showCERectsFullMenu" ng-src="{{interaction.cupboardIcons[44]}}" />
+            </td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsHideMenu()">
+                <img class="context-menu-icon" ng-show="interaction.showCERectsFullMenu" ng-src="{{interaction.cupboardIcons[22]}}" />
+            </td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsSetDepth()">
+                <img class="context-menu-icon" ng-show="interaction.showCERectsFullMenu" ng-src="{{interaction.cupboardIcons[23]}}" />
+            </td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsAdjustOffsets()">
+                <img class="context-menu-icon" ng-show="interaction.showCERectsFullMenu" ng-src="{{interaction.cupboardIcons[8]}}" />
+            </td>
+        </tr>
+
+        <tr>
+        	<td class="context-menu-td"></td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsSplitHorizontal()">
+                <img class="context-menu-icon" ng-show="interaction.showCERectsFullMenu" ng-src="{{interaction.cupboardIcons[9]}}" />
+            </td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsSplitVertical()">
+                <img class="context-menu-icon" ng-show="interaction.showCERectsFullMenu" ng-src="{{interaction.cupboardIcons[10]}}" />
+            </td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardCopyOffsets()">
+                <img class="context-menu-icon" ng-show="interaction.showCERectsFullMenu" ng-src="{{interaction.cupboardIcons[11]}}" />
+            </td>
+        </tr>
+    </table>
+</script>
+
+<!-- Cupboard Editor: click on amenity object -->
+<script type="text/ng-template" id="amenity-context-menu-template">
+    <table ng-show="interaction.showCEAmenityMenu" class='vtour-9-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+        <tr>
+        	<td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[39]}}" ng-mousedown="interaction._changeAmenity()" /></td>
+            <td class="context-menu-td"></td>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[38]}}" ng-mousedown="interaction._deleteAmenity()" /></td>
+        </tr>
+
+        <tr>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[51]}}" ng-mousedown="interaction._modifyAmenity()" /></td>
+            <td class="context-menu-td"></td>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[17]}}" ng-mousedown="interaction._cupboardsSwapOpacity()" /></td>
+        </tr>
+
+        <tr>
+			<td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[41]}}" ng-mousedown="interaction._amenityRotate(1.5707963);" /></td>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[53]}}" ng-mousedown="interaction._amenityFlip();" /></td>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[42]}}" ng-mousedown="interaction._amenityRotate(-1.5707963)" /></td>
+        </tr>
+    </table>
+</script>
+
+<!-- Cupboard Editor: select amenity type -->
+<script type="text/ng-template" id="amenity-types-context-menu-template">
+    <table ng-show="interaction.showCEAmenityTypes" class='vtour-16-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+        <tr>
+            <td class="context-menu-td"></td>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[36]}}" ng-mousedown="interaction._convertToAmenityType('microwave')" /></td>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[54]}}" ng-mousedown="interaction._convertToAmenityType('mirror')" /></td>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[46]}}" ng-mousedown="interaction._convertToAmenityType('oven', 'ovenfan')" ng-show="interaction.showCEHighLevelAmenity" /></td>
+        </tr>
+
+        <tr>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[33]}}" ng-mousedown="interaction._convertToAmenityType('shower')" ng-show="interaction.showCELowLevelAmenity" /></td>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[35]}}" ng-mousedown="interaction._convertToAmenityType('dishwasher')" ng-show="interaction.showCELowLevelAmenity" /></td>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[34]}}" ng-mousedown="interaction._convertToAmenityType('oven', 'oven')" ng-show="interaction.showCELowLevelAmenity" /></td>
+            <td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[52]}}" ng-mousedown="interaction._convertToAmenityType('sink')" ng-show="interaction.showCEMidLevelAmenity" /></td>
+        </tr>
+
+        <tr>
+			<td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[40]}}" ng-mousedown="interaction._convertToAmenityType('fireplace')" ng-show="interaction.showCELowLevelAmenity" /></td>
+			<td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[37]}}" ng-mousedown="interaction._convertToAmenityType('washer')" ng-show="interaction.showCELowLevelAmenity" /></td>
+			<td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[32]}}" ng-mousedown="interaction._convertToAmenityType('refrigerator')" ng-show="interaction.showCELowLevelAmenity" /></td>
+			<td class="context-menu-td"><img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[47]}}" ng-mousedown="interaction._convertToAmenityType('toilet')" ng-show="interaction.showCELowLevelAmenity" /></td>
+        </tr>
+    </table>
+</script>
+
+<!-- Cupboard Editor: click on cupboard without door in 3RD STEP -->
+<script type="text/ng-template" id="cupboard-placeholder-context-menu-template">
+
+    <table ng-show="interaction.showCEPlaceholderMeshMenu" class='vtour-9-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+
+		<tr>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[31]}}" ng-mousedown="interaction._showAmenityChoices()" />
+			</td>
+
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[13]}}" ng-mousedown="interaction._cupbordPasteDoorAndHandle(false)" />
+			</td>
+
+			<td class="context-menu-td"></td>
+		</tr>
+
+        <tr>
+            <td class="context-menu-td"></td>
+
+            <td class="context-menu-td">
+                <img class="context-menu-icon" ng-show="interaction.showCEPlaceholderMeshPrev" ng-src="{{interaction.cupboardIcons[14]}}" ng-mousedown="interaction._cupbordPasteDoorAndHandle(true)" />
+            </td>
+
+            <td class="context-menu-td">
+                <img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[17]}}" ng-mousedown="interaction._cupboardsSwapOpacity()" />
+            </td>
+        </tr>
+
+        <tr>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showCEBottomBaseAdd" ng-src="{{interaction.cupboardIcons[24]}}" ng-mousedown="interaction.setupBottomBaseModal()" />
+
+				<img class="context-menu-icon" ng-show="interaction.showCEBottomBaseRemove" ng-src="{{interaction.cupboardIcons[27]}}" ng-mousedown="interaction.deleteBottomBase()" />
+			</td>
+
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showCECountertopAdd" ng-src="{{interaction.cupboardIcons[19]}}" ng-mousedown="interaction.setupCountertops()" />
+			</td>
+
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showCECountertopRemove" ng-src="{{interaction.cupboardIcons[20]}}" ng-mousedown="interaction.deleteCountertop()" />
+			</td>
+        </tr>
+    </table>
+</script>
+
+<!-- Cupboard Editor: click on cupboard door in 3RD STEP -->
+<script type="text/ng-template" id="cupboard-door-context-menu-template">
+
+    <table ng-show="interaction.showCupboardDoorMenu" class='vtour-9-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+
+        <tr>
+            <td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[31]}}" ng-mousedown="interaction._showAmenityChoices()" />
+			</td>
+
+            <td class="context-menu-td">
+                <img class="context-menu-icon" ng-show="interaction.showCupboardDoorMenu" ng-src="{{interaction.cupboardIcons[13]}}" ng-mousedown="interaction._cupbordPasteDoorAndHandle(false)" />
+            </td>
+
+            <td class="context-menu-td">
+                <img class="context-menu-icon" ng-show="interaction.showCupboardDoorMenu" ng-src="{{interaction.cupboardIcons[21]}}" ng-mousedown="interaction._deleteCupboardDoorMesh()" />
+            </td>
+        </tr>
+
+        <tr>
+			<td class="context-menu-td">
+				<img class="context-menu-icon"
+					ng-show="interaction.showCECopyDoorMesh"
+					ng-src="{{interaction.cupboardIcons[18]}}"
+					ng-mousedown="interaction._cupboardCopySource()" />
+			</td>
+
+            <td class="context-menu-td">
+                <img class="context-menu-icon" ng-show="interaction.showCupboardDoorMenu && interaction.showCEPlaceholderMeshPrev" ng-src="{{interaction.cupboardIcons[14]}}" ng-mousedown="interaction._cupbordPasteDoorAndHandle(true)" />
+            </td>
+
+            <td class="context-menu-td">
+                <img class="context-menu-icon" ng-show="interaction.showCupboardDoorMenu" ng-src="{{interaction.cupboardIcons[17]}}" ng-mousedown="interaction._cupboardsSwapOpacity()" />
+            </td>
+        </tr>
+
+        <tr>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showCEBottomBaseAdd" ng-src="{{interaction.cupboardIcons[24]}}" ng-mousedown="interaction.setupBottomBaseModal()" />
+
+				<img class="context-menu-icon" ng-show="interaction.showCEBottomBaseRemove" ng-src="{{interaction.cupboardIcons[27]}}" ng-mousedown="interaction.deleteBottomBase()" />
+			</td>
+
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showCECountertopAdd" ng-src="{{interaction.cupboardIcons[19]}}" ng-mousedown="interaction.setupCountertops()" />
+			</td>
+
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showCECountertopRemove" ng-src="{{interaction.cupboardIcons[20]}}" ng-mousedown="interaction.deleteCountertop()" />
+			</td>
+        </tr>
+
+    </table>
+</script>
+
+<!-- Cupboard Editor: click on handle in 3RD STEP -->
+<script type="text/ng-template" id="handle-context-menu-template">
+
+    <table ng-show="interaction.showHandleMenu" class='vtour-9-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+
+        <tr>
+            <td class="context-menu-td">
+                <img class="context-menu-icon" ng-show="interaction.showHandleMenu" ng-src="{{interaction.cupboardIcons[43]}}" ng-mousedown="interaction._cupboardModifyHandle()" />
+            </td>
+
+            <td class="context-menu-td"></td>
+
+            <td class="context-menu-td"></td>
+        </tr>
+
+        <tr>
+            <td class="context-menu-td">
+                <img class="context-menu-icon" ng-show="interaction.showHandleMenu" ng-src="{{interaction.cupboardIcons[16]}}" ng-mousedown="interaction._cupboardDeleteHandle()" />
+            </td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsMoveHandle()">
+                <img class="context-menu-icon" ng-show="interaction.showHandleMenu" ng-src="{{interaction.icons[3]}}" />
+            </td>
+
+            <td class="context-menu-td">
+                <img class="context-menu-icon" ng-show="interaction.showHandleMenu" ng-src="{{interaction.cupboardIcons[17]}}" ng-mousedown="interaction._cupboardsSwapOpacity()" />
+            </td>
+        </tr>
+
+        <tr>
+            <td class="context-menu-td"></td>
+
+            <td class="context-menu-td" ng-mousedown="interaction._cupboardsRotateHandle()">
+                <img class="context-menu-icon" ng-show="interaction.showHandleMenu" ng-src="{{interaction.cupboardIcons[15]}}" />
+            </td>
+
+            <td class="context-menu-td"></td>
+
+        </tr>
+
+    </table>
+</script>
+
+<!-- Cupboard Editor: click on empty space in 3RD STEP - meshes -->
+<script type="text/ng-template" id="cupboard-meshes-empty-context-menu-template">
+
+    <table ng-show="interaction.showCEMeshesNothingClicked" class='vtour-9-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+
+        <tr>
+            <td class="context-menu-td"></td>
+
+            <td class="context-menu-td"></td>
+
+            <td class="context-menu-td"></td>
+        </tr>
+
+        <tr>
+            <td class="context-menu-td"></td>
+
+            <td class="context-menu-td"></td>
+
+            <td class="context-menu-td">
+                <img class="context-menu-icon" ng-show="interaction.showCEMeshesNothingClicked" ng-src="{{interaction.cupboardIcons[17]}}" ng-mousedown="interaction._cupboardsSwapOpacity()" />
+            </td>
+        </tr>
+
+        <tr>
+            <td class="context-menu-td"></td>
+
+			<td class="context-menu-td"></td>
+
+            <td class="context-menu-td"></td>
+        </tr>
+
+    </table>
+</script>
+
+<!-- Cupboard Editor: click on countertop in 3RD STEP -->
+<script type="text/ng-template" id="cupboard-countertop-context-menu-template">
+    <table ng-show="interaction.showCECountertopMenu" class='vtour-16-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+        <tr>
+            <td class="context-menu-td"></td>
+            <td class="context-menu-td"></td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showCEBackSplashAdd" ng-src="{{interaction.cupboardIcons[25]}}" ng-mousedown="interaction.addDefaultBackSplash()" />
+				<img class="context-menu-icon" ng-show="!interaction.showCEBackSplashAdd" ng-src="{{interaction.cupboardIcons[26]}}" ng-mousedown="interaction.deleteBackSplash()" />
+			</td>
+            <td class="context-menu-td"></td>
+
+        </tr>
+
+		<tr>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showCEStoveRemove" ng-src="{{interaction.cupboardIcons[50]}}" ng-mousedown="interaction._deleteCounterAbleObject()" />
+			</td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showCESinkRemove" ng-src="{{interaction.cupboardIcons[29]}}" ng-mousedown="interaction.deleteSink(true)" />
+			</td>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[17]}}" ng-mousedown="interaction._cupboardsSwapOpacity()" />
+			</td>
+		</tr>
+
+        <tr>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showCEStoveAdd" ng-src="{{interaction.cupboardIcons[48]}}" ng-mousedown="interaction.addDefaultStovetopForCountertop()" />
+			</td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-show="interaction.showCESinkAdd" ng-src="{{interaction.cupboardIcons[28]}}" ng-mousedown="interaction.addDefaultSink()" />
+			</td>
+
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[19]}}" ng-mousedown="interaction.setupCountertops()" />
+			</td>
+
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[20]}}" ng-mousedown="interaction.deleteCountertop()" />
+			</td>
+        </tr>
+    </table>
+</script>
+
+<!-- Cupboard Editor: click on countertopable object in 3RD STEP -->
+<script type="text/ng-template" id="cupboard-countertopable-context-menu-template">
+	<table ng-show="interaction.showCECountertopAbleMenu" class='vtour-9-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+		<tr>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon"
+					ng-show="interaction.showCESinkRemove"
+					ng-src="{{interaction.cupboardIcons[29]}}"
+					ng-mousedown="interaction.deleteSink()" />
+				<img class="context-menu-icon"
+					ng-show="interaction.showCEStoveRemove"
+					ng-src="{{interaction.cupboardIcons[50]}}"
+					ng-mousedown="interaction._deleteCounterAbleObject()" />
+			</td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon"
+					ng-show="interaction.showCESinkRemove"
+					ng-src="{{interaction.cupboardIcons[30]}}"
+					ng-mousedown="interaction._cupboardsModifySink()" />
+				<img class="context-menu-icon"
+					ng-show="interaction.showCEStoveRemove"
+					ng-src="{{interaction.cupboardIcons[49]}}"
+					ng-mousedown="interaction._modifyCounterAbleObject()" />
+			</td>
+		</tr>
+
+		<tr>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[17]}}" ng-mousedown="interaction._cupboardsSwapOpacity()" />
+			</td>
+		</tr>
+
+		<tr>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td"></td>
+		</tr>
+	</table>
+</script>
+
+<!-- Cupboard Editor: click on bottom base in 3RD STEP -->
+<script type="text/ng-template" id="cupboard-bottom-base-context-menu-template">
+	<table ng-show="interaction.showCEBottomBaseMenu" class='vtour-9-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+		<tr>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[27]}}" ng-mousedown="interaction.deleteBottomBase()" />
+			</td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[24]}}" ng-mousedown="interaction.setupBottomBaseModal()" />
+			</td>
+		</tr>
+
+		<tr>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[17]}}" ng-mousedown="interaction._cupboardsSwapOpacity()" />
+			</td>
+		</tr>
+
+		<tr>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td"></td>
+		</tr>
+	</table>
+</script>
+
+<!-- Cupboard Editor: click on back splash in 3RD STEP -->
+<script type="text/ng-template" id="cupboard-back-splash-context-menu-template">
+	<table ng-show="interaction.showCEBackSplashMenu" class='vtour-9-grid' style="position: absolute;" ng-style="{top: interaction.divtop + 'px', left: interaction.divleft + 'px'}">
+		<tr>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[26]}}" ng-mousedown="interaction.deleteBackSplash()" />
+			</td>
+			<td class="context-menu-td">
+				<img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[25]}}" ng-mousedown="interaction._cupboardsModifyBackSplash()" />
+			</td>
+		</tr>
+
+		<tr>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td">
+                <img class="context-menu-icon" ng-src="{{interaction.cupboardIcons[17]}}" ng-mousedown="interaction._cupboardsSwapOpacity()" />
+            </td>
+		</tr>
+
+		<tr>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td"></td>
+			<td class="context-menu-td"></td>
+		</tr>
+	</table>
+</script>
+
+<script type="text/ng-template" id="set-stair-location-template">
+	<div class="modal-header">
+		<h4>You are currently on {{stair.application.currentFloor.name}}</h4>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label>Target Floor</label>
+				<select ng-model="stair.targetFloorName">
+					<option ng-repeat="floor in stair.floors" value="{{floor.name}}">{{floor.name}}</option>
+				</select>
+
+			</div>
+
+			<div class="form-group">
+				<label>
+					<input type="radio" ng-model="stair.direction" value="Up">
+					Up
+				</label>
+				<label>
+					<input type="radio" ng-model="stair.direction" value="Down">
+					Down
+				</label>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<h5>Defined Stairs For This Floor:</h5>
+			<p ng-if="stair.stairLocations.length < 1">The are no current stair locations set</p>
+			<ul ng-if="stair.stairLocations.length > 0">
+				<li ng-repeat="stairLocation in stair.stairLocations track by $index">Target: {{stairLocation.targetFloor}}, Direction: {{stairLocation.direction}}</li>
+			</ul>
+		</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a class="btn btn-default" ng-click="stair.saveStairLocation()" href="">Save and Close</a>
+		<a class="btn btn-default" ng-click="stair.closeModal()" href="">Cancel</a>
+	</div>
+</script>
+
+<script type="text/ng-template" id="splash-screen">
+
+	<div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 1000; margin: auto;" class="backgroundGradient">
+
+		<div style="position: absolute; bottom: 0; top: 0; right: 0; left: 0; height: 100%; width: 100%; margin: auto">
+
+			<div style="position: absolute; width: 100%; height: 175px; top: 0; bottom: 0; left:0; right:0; margin: auto;">
+				<div id="loadingCircleContainer" style="width: 100px; height: 100px; position: absolute; top: 0; left:0; right:0; bottom: 0; margin: auto;">
+					<svg height="100" width="100">
+						<circle cx="50" cy="50" r="47" stroke="white" stroke-width="5" fill="transparent" stroke-dasharray="570" stroke-dashoffset="0"/>
+						<circle cx="50" cy="50" r="42" id="redCircle" transform="rotate(-90 50 50)"/>
+					</svg>
+					<a href="{{redirect}}" ng-attr-target="{{(isMobile) ? '_blank' : undefined}}"><img src="../../images/loadingCircles/Arrow.png" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; width: 75%;"></a>
+				</div>
+
+				<div style="width: 100%; position: absolute; bottom: 0; left: 0; right: 0; margin: auto;">
+					<div class="text-center">
+						<p  class="white-font gotham-font" style="letter-spacing: 2px;">Explore 3D {{virtualTourType}}</p>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+		<div style="width: 100%; height: 100%">
+			<div class="row text-center" style="z-index: 2000; margin: 0; width: 100%; height: 100%; background-size: cover; background-position: center;" back-img="{{screenshotUrl}}">
+				<div style="width: 100%; height: 100%; background: rgba(0,0,0,0.5); background-size: cover;">
+
+				</div>
+			</div>
+			<div id="splash-screen-logo-div"
+				style="background-image: url('{{logoUrl}}');"
+				ng-show="logoUrl" class="visible-on-extra-extra-small">
+			</div>
+
+			<div class="text-center visible-on-extra-extra-small" style="width: 100%; position: absolute; bottom: 10%;">
+				<h1 class="white-font">{{modelName}}</h1>
+			</div>
+		</div>
+	</div>
+</script>
+
+<style>
+	.green-font{
+		color: green;
+	}
+
+</style>
+
+<script type="text/ng-template" id="spin-viewer-template">
+
+	<div class="container" ng-controller="SpinViewerController as spinViewer">
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2">
+				<div id="spinViewerContainer" style="width: 100%; height: 500px;">
+
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-xs-3" id="equirepeat" ng-repeat="equi in spinViewer.equis" style="margin-top: 5px;">
+				<img ng-src="{{spinViewer.trustSrc(equi.img)}}" ng-click="spinViewer.setSpin($index)" width="100%">
+			</div>
+		</div>
+	</div>
+</script>
+
+<style>
+	#mainContainer.main-container-vtour {
+		padding: 0;
+		height: auto;
+	}
+
+	.snapScrollBarHolder, .equirectScrollBarHolder {
+		display: -webkit-box;
+  		display: -ms-flexbox;
+  		display: -webkit-flex;
+  		display: flex;
+		align-items: center;
+	}
+
+	.slider-arrow {
+		width: 5%;
+		text-align: center;
+		font-size: 24px;
+		cursor: pointer;
+	}
+
+	.snapScrollBarHolder ul, .equirectScrollBarHolder ul {
+		width: 90%;
+		height: 130px;
+		overflow-x: auto;
+		white-space: nowrap;
+		padding: 5px;
+		overflow-y: hidden;
+		display: none;
+		margin-bottom: 0;
+	}
+
+	.snapScrollBarHolder ul li, .equirectScrollBarHolder ul li {
+		display: inline-block;
+		padding-right: 5px;
+		cursor: pointer;
+		position: relative;
+	}
+
+	#panoLiteTestWebGLContainer canvas {
+		vertical-align: middle;
+	}
+
+	.upload-loader {
+		background-image: url('../../img/loader.svg');
+		width: 50px;
+    	height: 10px;
+    	display: block;
+	}
+
+	.upload-err {
+		color: darkred;
+	}
+
+	.delete-loader {
+		margin: auto;
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    	bottom: 0;
+    	right: 0;
+		color: #fff;
+		padding-top: 10px;
+		background: url('../../img/loader.svg') no-repeat;
+		width: 65px;
+		height: 30px;
+		font-weight: 100;
+		display: none;
+	}
+
+	.photo-availability-error {
+		font-size: 18px;
+    	text-align: center;
+    	padding: 40px;
+		color: #CF5641;
+	}
+
+	.snapScrollBarHolder li .glyphicon-remove {
+		position: absolute;
+		right: 5px;
+		top: 3px;
+		color: #fff;
+	}
+</style>
+
+
+<script type="text/ng-template" id="yelp-template">
+	<div class="modal-body">
+	<div class="row">
+
+		<!-- <table class="table">
+			<th>Company</th>
+			<th>Rating</th>
+			<th>Review Count</th>
+			<th>Distance</th>
+
+			<tr ng-repeat="company in yelpResults.companies">
+				<td><a ng-href="{{company.url}}" target="_blank">{{company.name}}</td>
+				<td>{{company.rating}}</td>
+				<td>{{company.review_count}}</td>
+				<td>{{yelpResults.metersToMiles(company.distance)}} miles</td>
+			</tr>
+		</table> -->
+
+		<div class="col-xs-6 col-md-4" ng-repeat="company in yelpResults.companies">
+
+			<div class="row" style="border: 1px solid black; margin-right: 0; margin-bottom: 3px; padding-top: 5px; padding-right: 5px; height: 118px;">
+				<div class="col-xs-5">
+					<img ng-src="{{company.image_url}}" width="100px" style="margin-bottom: 5px"/>
+				</div>
+				<div class="col-xs-7">
+					<div class="row" style="text-align: right;">
+						<a class="pull-right" style="margin-top: 0; margin-bottom: 7px;" ng-href="{{company.url}}" target="_blank">{{company.name}}</a>
+					</div>
+					<div class="row">
+						<font class="pull-right">Rating: {{company.rating}}</font>
+					</div>
+					<div class="row">
+						<font class="pull-right">Reviews: {{company.review_count}}</font>
+					</div>
+					<div class="row">
+						<font class="pull-right">{{yelpResults.metersToMiles(company.distance)}} miles</font>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default btn-lg" ng-click="yelpResults.closeModal()">Close</button>
+	</div>
+</script>
+
+<script type="text/ng-template" id="lastSnapPreview">
+	<div class="modal-body" style="padding: 0; border: 1px solid white;">
+		<div class="photo-availability-error" ng-if="!photoUrl">Image not available. Please wait for image to upload and try again in 10 seconds.</div>
+	    <img ng-src="{{photoUrl}}" style="margin: auto;" width="100%"/>
+	</div>
+</script>
+
+<script type="text/ng-template" id="bookmark-spin-modal">
+	<div class="modal-header">
+		<h3 style="color:white">
+			Bookmark This Spin
+		</h3>
+	</div>
+
+	<div class="form-control-group" style="border:none" ng-if="controller.saving">
+		<div class="progress progress-striped active">
+			<div class="progress-bar progress-bar-blue" role="progressbar" style="width:100%;">
+			</div>
+		</div>
+	</div>
+	<div class="form-control-group" style="border:none" ng-if="!controller.saving">
+		<div class="form-group row">
+			<label for="fbComment" class="col-sm-4 col-form-label" style="color:white">Title:</label>
+			<div class="col-sm-8">
+				<input id="fbComment" class="text-input form-control" autofocus type="text" ng-model="controller.label" />
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer" ng-if="!controller.saving">
+		<a class="btn btn-default" ng-click="controller.closeModal()">Cancel</a>
+		<a class="btn btn-success" ng-click="controller.save()">Save</a>
+	</div>
+</script>
+
+<script>
+// (function($){
+// 	$(window).load(function(){
+// 		console.debug("applying scroll bar");
+// 		$("#content-5").mCustomScrollbar({
+// 			axis:"x",
+// 			theme:"dark-thin",
+// 			autoExpandScrollbar:true,
+// 			advanced:{autoExpandHorizontalScroll:true}
+// 		});
+// 	});
+// })
+</script>
+
+
+
+
+
+
+
+
+	<div class="main-container-vtour" id="mainContainer" style="height: 100%">
+		<!-- ngView:  --><div data-ng-view="" autoscroll="" class="view-animate ng-scope" style="height: 100%">
+
+	<div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 1000; margin: auto;" class="backgroundGradient ng-scope">
+
+		<div style="position: absolute; bottom: 0; top: 0; right: 0; left: 0; height: 100%; width: 100%; margin: auto">
+
+			<div style="position: absolute; width: 100%; height: 175px; top: 0; bottom: 0; left:0; right:0; margin: auto;">
+				<div id="loadingCircleContainer" style="width: 100px; height: 100px; position: absolute; top: 0; left:0; right:0; bottom: 0; margin: auto;">
+					<svg height="100" width="100">
+						<circle cx="50" cy="50" r="47" stroke="white" stroke-width="5" fill="transparent" stroke-dasharray="570" stroke-dashoffset="0"></circle>
+						<circle cx="50" cy="50" r="42" id="redCircle" transform="rotate(-90 50 50)"></circle>
+					</svg>
+					<a href="https://www.insidemaps.com/app/walkthrough/?projectId=ETAYgE7Dyn&amp;env=prod" ng-attr-target="{{(isMobile) ? &#39;_blank&#39; : undefined}}"><img src="./Arrow.png" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; width: 75%;"></a>
+				</div>
+
+				<div style="width: 100%; position: absolute; bottom: 0; left: 0; right: 0; margin: auto;">
+					<div class="text-center">
+						<p class="white-font gotham-font ng-binding" style="letter-spacing: 2px;">Explore 3D Tour</p>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+		<div style="width: 100%; height: 100%">
+			<div class="row text-center" style="z-index: 2000; margin: 0px; width: 100%; height: 100%; background-size: cover; background-position: center center; background-image: url(&quot;https://dwf9rsemygh2b.cloudfront.net/users/s8v8Kz3SKs/projects/ETAYgE7Dyn/splashPhoto/SplashImage.jpg?loadingBackground&quot;);" back-img="https://dwf9rsemygh2b.cloudfront.net/users/s8v8Kz3SKs/projects/ETAYgE7Dyn/splashPhoto/SplashImage.jpg?loadingBackground">
+				<div style="width: 100%; height: 100%; background: rgba(0,0,0,0.5); background-size: cover;">
+
+				</div>
+			</div>
+			<div id="splash-screen-logo-div" style="background-image: url(&#39;https://im-production.s3.amazonaws.com/logos/im-header-logo-white-red.png?AWSAccessKeyId=AKIAIBTORDPZP3IJCAHQ&amp;Expires=1518134399&amp;Signature=6eUzxMFnvZyoZ4b4fHP2%2B2ERGMM%3D&#39;);" ng-show="logoUrl" class="visible-on-extra-extra-small">
+			</div>
+
+			<div class="text-center visible-on-extra-extra-small" style="width: 100%; position: absolute; bottom: 10%;">
+				<h1 class="white-font ng-binding">Spain</h1>
+			</div>
+		</div>
+	</div>
+</div>
+	</div>
+
+	<!-- Adding shared html file used by shared-module -->
+	<!-- ngInclude: 'https://cache-1.insidemaps.com/stage-b/release-18020203/app/lib/shared-modules/shared-module.html' --><div ng-include="&#39;https://cache-1.insidemaps.com/stage-b/release-18020203/app/lib/shared-modules/shared-module.html&#39;" class="ng-scope"><style class="ng-scope">
+.nopermissionmodal .modal-dialog{
+	margin: 0 !important;
+	height: 100% !important;
+	width: 100% !important;
+}
+
+.nopermissionmodal .modal-content{
+	height: 100% !important;
+	width: 100% !important;
+	background-image:
+		radial-gradient(
+		  circle at bottom center,
+		  rgb(139,139,139),
+		  rgb(53, 53, 53)
+		);
+}
+
+.almostfullmodal .modal-dialog{
+	height: 96% !important;
+	width: 96% !important;
+}
+
+.submitted input.ng-invalid {
+	border: 2px #ce5541 solid;
+}
+
+.signin {
+	width: 191px;
+    height: 46px;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 10px auto;
+	cursor: pointer;
+}
+
+.signin.googleoauth {
+	background-image: url(../../images/login/google/normal.png);
+}
+.signin.googleoauth:focus {
+	background-image: url(../../images/login/google/focus.png);
+}
+.signin.googleoauth:active {
+	background-image: url(../../images/login/google/pressed.png);
+}
+.signin.liveoauth {
+	background-image: url(../../images/login/live/normal.png);
+}
+.signin.liveoauth:active {
+	background-image: url(../../images/login/live/pressed.png);
+}
+
+</style>
+
+<script type="text/ng-template" id="login-modal-template" class="ng-scope">
+	<div id="login-modal-dialog">
+		<section>
+			<div class="content-modal" ng-init="tabLogin = newLogin.tab || 1" >
+				<article class="rounded-tabs" >
+					<div ng-class="{ active: tabLogin == 1 }" ng-click="tabLogin = 1" >Sign In</div>
+					<div ng-class="{ active: tabLogin == 2 }" ng-click="tabLogin = 2" >Sign Up</div>
+				</article>
+				<article ng-show="tabLogin == 1">
+					<h3>InsideMaps account</h3>
+					<form novalidate name="loginUserPass">
+						<div>
+							<input
+								type="text"
+								placeholder="username or email"
+								ng-model="newLogin.username"
+								lowercase
+								ng-required="true"
+								ng-trim="false"
+								ng-change="newLogin.username = newLogin.username.split(' ').join('')"
+								required>
+						</div>
+						<div>
+							<a href="" ng-click="newLogin.openResetPassword()" tabindex="99">
+								forgot password?
+							</a>
+							<input
+								type="password"
+								placeholder="password"
+								ng-model="newLogin.password"
+								required>
+						</div>
+						<p class="login-error-message">{{newLogin.errorMessage}}</p>
+						<button style="width: 191px;margin: 12px auto;margin-top: 0px;" ng-click="newLogin.attemptLogin('user-pass')">
+							Sign In
+						</button>
+					</form>
+					<div>or</div>
+
+					<span class="signin googleoauth" href="" ng-click="newLogin.attemptLogin('google')">
+					</span>
+
+					<span class="signin liveoauth" href="" ng-click="newLogin.attemptLogin('microsoft')">
+					</span>
+
+				</article>
+
+				<article ng-show="tabLogin == 2">
+					<div ng-controller="SignupController as signup">
+						<h3>Create your InsideMaps account</h3>
+						<form name="signupForm" ng-class="{submitted: submitted}" ng-submit="submitted=true; signup.signUpUser( signupForm.$valid )" novalidate autocomplete="nope">
+								<input
+									ng-if="newLogin.referralOrganization"
+									type="text"
+									name="firstName"
+									id="firstName"
+									placeholder="First name"
+									ng-model="signup.firstName"
+									autocomplete="off"
+									ng-required="false"
+									autocomplete="nope"
+									autofocus/>
+
+								<input
+									ng-if="newLogin.referralOrganization"
+									type="text"
+									name="lastName"
+									id="lastName"
+									placeholder="Last name"
+									ng-model="signup.lastName"
+									autocomplete="off"
+									ng-required="false"
+									autocomplete="nope"/>
+
+								<input
+									type="email"
+									name="email"
+									id="email"
+									placeholder="email"
+									ng-model="signup.email"
+									ng-pattern="/^.+@.+$/"
+									lowercase
+									stopccp
+									autocomplete="off"
+									ng-required="true"
+									autocomplete="nope"
+									required>
+								<p
+									ng-show="signupForm.email.$dirty && !signupForm.email.$valid"
+									class="text-danger">
+										Email address has bad format.
+								</p>
+
+									<input
+									type="password"
+									name="pw1"
+									id="pw1"
+									placeholder="password"
+									ng-model="signup.password"
+									ng-minlength="6"
+									ng-required="true"
+									autocomplete="nope"
+									required/>
+								<input
+									type="password"
+									name="pw2"
+									id="pw2"
+									placeholder="repeat password"
+									ng-model="signup.passwordRepeat"
+									ng-minlength="6"
+									repeat-check="pw1"
+									autocomplete="nope"
+									ng-required="true"
+									required/>
+							<p
+								ng-show="signup.showRepeatError( signupForm.pw2 )"
+								class="text-danger">
+								Passwords do not match.
+							</p>
+							<p
+								ng-show="signupForm.pw1.$dirty && signupForm.pw2.$dirty && (!signupForm.pw1.$valid || !signupForm.pw2.$valid) && !signupForm.pw2.$error.valmatch"
+								class="text-danger">
+								Password has to be minimum 6 characters long.
+							</p>
+							<p>
+								{{signup.errorMessage}}
+							</p>
+
+							<button type="submit">
+								CREATE ACCOUNT
+							</button>
+						</form>
+					</div>
+				</article>
+			</div>
+		</section>
+	</div>
+</script>
+
+<script type="text/ng-template" id="prompt-modal-template" class="ng-scope">
+	<div id="prompt-modal">
+		<div class="modal-header">
+			<div class="row text-center">
+				<h2 class="modal-title">{{ controller.title }}</h2>
+			</div>
+		</div>
+		<form ng-submit="controller.onOkPressed()">
+			<div class="modal-body">
+				<input
+					type="{{controller.inputType}}"
+					class="form-control input-lg"
+					placeholder="{{ controller.placeholder }}"
+					ng-model="controller.text"
+					autofocus/>
+			</div>
+			<div class="modal-footer">
+				<button type="button submit" class="btn btn-primary btn-lg">Ok</button>
+				<button type="button" class="btn btn-default btn-lg" ng-click="controller.onCancelPressed()">Cancel</button>
+			</div>
+		</form>
+	</div>
+</script>
+
+
+<script type="text/ng-template" id="multi-input-modal-template" class="ng-scope">
+	<div id="prompt-modal">
+		<div class="modal-header">
+			<div class="row text-center">
+				<h2 class="modal-title">{{ multiInputController.title }}</h2>
+				<h3><i>{{ multiInputController.subTitle }}</i></h3>
+
+			</div>
+		</div>
+		<form ng-submit="multiInputController.onOkPressed()">
+			<div>
+				<table class="table">
+					<tr class="row text-center" ng-repeat="(key, value) in multiInputController.values">
+						<td class="col-xs-8" style="vertical-align:middle;">
+							<font class="pull-left" size="4">
+								<b>
+									{{value.label}}
+								</b>
+							</font>
+						</td>
+						<td class="col-xs-4" style="vertical-align:middle;">
+							<input
+								type="{{value.inputType}}"
+								class="input-lg"
+								ng-model="value.value"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button submit" class="btn btn-primary btn-lg">Ok</button>
+				<button type="button" class="btn btn-default btn-lg" ng-click="multiInputController.onCancelPressed()">Cancel</button>
+			</div>
+		</form>
+	</div>
+</script>
+
+
+<script type="text/ng-template" id="multiple-picker-template" class="ng-scope">
+	<div id="prompt-modal">
+		<div class="modal-header">
+			<div class="row text-center">
+				<h2 class="modal-title">{{ multiplePickerCtrl.title }}</h2>
+				<h3><i>{{ multiplePickerCtrl.subTitle }}</i></h3>
+				<button
+					type="button submit"
+					class="btn btn-default"
+					ng-click="multiplePickerCtrl.onSelectAllPressed()">
+					Select All
+				</button>
+				<button
+					type="button"
+					class="btn btn-default"
+					ng-click="multiplePickerCtrl.onDeselectAllPressed()">
+					Deselect All
+				</button>
+			</div>
+		</div>
+		<form ng-submit="multiplePickerCtrl.onOkPressed()">
+			<div>
+				<table class="table">
+					<tr class="row text-center" ng-repeat="option in multiplePickerCtrl.options">
+						<td class="col-xs-8" style="vertical-align:middle;">
+							<font class="pull-left" size="4">
+								{{option.name}}
+							</font>
+						</td>
+						<td class="col-xs-4" style="vertical-align:middle;">
+							<input
+								type="checkbox"
+								class="input"
+								ng-model="option.selected"/>
+						</td>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button
+					type="button submit"
+					class="btn btn-primary">
+					Ok
+				</button>
+				<button
+					type="button"
+					class="btn btn-default"
+					ng-click="multiplePickerCtrl.onCancelPressed()">
+					Cancel
+				</button>
+			</div>
+		</form>
+	</div>
+</script>
+
+<script type="text/ng-template" id="no-permission-signin" class="ng-scope">
+	<div class="modal-body" style="padding: 0; min-height: 400px;" id="npmodal">
+		<div class="row text-center gotham-font" style="margin: 0; letter-spacing: 1px;">
+			<h1 class="text-center white-font" style="margin-top:15%">Oops, this project is not available</h1>
+			<p class="text-center white-font" ng-if="nopermission.user" >{{nopermission.text}}<br>If you think this is a mistake, please email support@insidemaps.com</p>
+			<p class="text-center white-font" ng-if="!nopermission.user">Please make sure you are signed in and have access to this project. If the problem persists, please email support@insidemaps.com</p>
+			<a class="btn btn-lg red-gradient white-font text-center" style="border: none; padding-top: 12px;" ng-if="!nopermission.user" href="" ng-click="nopermission.attemptLogin()">SIGN IN</a>
+		</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="object-acl-template" class="ng-scope">
+	<div class="modal-body row">
+		<div class="col-md-6">
+			Current ACL:
+			<pre>{{ objectACLCtrl.currentACL | json }}</pre>
+		</div>
+		<div class="col-md-6">
+			Expected ACL:</b>
+			<pre>{{ objectACLCtrl.generatedACL | json }}</pre>
+		</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="project-info-viewer-template" class="ng-scope">
+	<div class="modal-body row">
+		<div class="col-md-6">
+			Current Info:
+			<pre>
+				<p ng-class="{ 'text-danger': !projectInfoViewerController.savedInfo.name }">Name: {{ projectInfoViewerController.savedInfo.name }}</p>
+				<p ng-class="{ 'text-danger': !projectInfoViewerController.savedInfo.street }">Street: {{ projectInfoViewerController.savedInfo.street }}</p>
+				<p ng-class="{ 'text-danger': !projectInfoViewerController.savedInfo.city }">City: {{ projectInfoViewerController.savedInfo.city }}</p>
+				<p ng-class="{ 'text-danger': !projectInfoViewerController.savedInfo.country }">Country: {{ projectInfoViewerController.savedInfo.country }}</p>
+			</pre>
+		</div>
+		<div class="col-md-6">
+			Info When Submitted:</b>
+			<pre>
+				<p>Name: {{ projectInfoViewerController.submittedInfo.name }}</p>
+				<p>Street: {{ projectInfoViewerController.submittedInfo.street }}</p>
+				<p>City: {{ projectInfoViewerController.submittedInfo.city }}</p>
+				<p>Country: {{ projectInfoViewerController.submittedInfo.country }}</p>
+			</pre>
+		</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="project-property-changer-template" class="ng-scope">
+	<div class="modal-body row text-center">
+		<div class="modal-header">
+			<font size="6">
+				Change Project Property
+			</font>
+			<br>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<table class="table" border="1">
+					<tr style="background-color:#F7F7F7;">
+		 				<th>
+		 					<center>
+								<b>{{ projectPropertyChangerCtrl.property | uppercase }}S</b>
+		 					</center>
+		 				</th>
+		 			</tr>
+					<tr>
+						<td style="vertical-align:middle;">
+							<input
+								type="text"
+								style="width:100%;"
+								placeholder="Filter: {{ projectPropertyChangerCtrl.property | lowercase }}s"
+								ng-model="projectPropertyChangerCtrl.propertyFilter"
+								ng-change="projectPropertyChangerCtrl.applyPropertyFilter()">
+							</input>
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align:middle;">
+							<select
+								style="width:100%;"
+								ng-options="projectPropertyChangerCtrl.getPropertyRepresentation( option ) for option in projectPropertyChangerCtrl.optionsFiltered"
+								ng-model="projectPropertyChangerCtrl.propertyValue">
+							</select>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<table class="table" border="1">
+					<tr style="background-color:#F7F7F7;">
+		 				<th>
+		 					<center>
+								<b>NO</b>
+		 					</center>
+		 				</th>
+		 				<th>
+		 					<center>
+								<b>PROJECT NAME</b>
+		 					</center>
+		 				</th>
+		 				<th>
+		 					<center>
+								<b>PROJECT OWNER</b>
+		 					</center>
+		 				</th>
+						<th>
+		 					<center>
+								<b>{{ projectPropertyChangerCtrl.property | uppercase }}</b>
+		 					</center>
+		 				</th>
+		 			</tr>
+					<tr
+						id="row-{{$index}}"
+						ng-repeat="project in projectPropertyChangerCtrl.projects">
+						<td style="vertical-align:middle;">
+							{{ $index + 1  }}
+						</td>
+						<td style="vertical-align:middle;">
+							{{ project.getName() }}
+						</td>
+						<td style="vertical-align:middle;">
+							{{ project.getUser() && ( project.getUser().getUsername() || project.getUser().id ) }}
+						</td>
+						<td style="vertical-align:middle;">
+							{{ projectPropertyChangerCtrl.getPropertyRepresentation( project.get( projectPropertyChangerCtrl.property ) ) }}
+						</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+		<div class="modal-footer">
+			<div
+				class="btn btn-success btn-lg"
+				ng-click="projectPropertyChangerCtrl.onApplyClicked()">
+				Apply
+			</div>
+			<div
+				class="btn btn-primary btn-lg"
+				ng-click="projectPropertyChangerCtrl.onCloseClicked()">
+				Close
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="project-issues-template" class="ng-scope">
+	<div class="modal-body row">
+		<button
+			class="btn btn-danger pull-right"
+			ng-click="projectIssuesCtrl.close()">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+		<br>
+		<center><font size="7">Project Issues</font></center>
+		<center><font size="3">{{projectIssuesCtrl.project.getName()}}</font></center>
+		<br>
+		<br>
+		<table class="table" border="1">
+		  	<col width="2%">
+		  	<col width="6%">
+			<col width="15%">
+			<col width="40%">
+			<col width="10%">
+			<col width="8%">
+			<col width="5%">
+			<col width="10%">
+			<tr style="background-color:#F7F7F7;">
+ 				<th>
+ 					<center>
+ 						Blocking
+ 					</center>
+ 				</th>
+		 		<th>
+		 			<center>
+		 				Submitted At
+		 			</center>
+		 		</th>
+ 				<th>
+ 					<center>
+ 						Title
+ 					</center>
+ 				</th>
+  				<th>
+ 					<center>
+ 						Description
+ 					</center>
+ 				</th>
+ 				<th>
+ 					<center>
+ 						Submitting User
+ 					</center>
+ 				</th>
+ 				<th>
+ 					<center>
+ 						Fixed
+ 					</center>
+ 				</th>
+ 				<th>
+ 					<center>
+ 						Fixed At
+ 					</center>
+ 				</th>
+ 				<th>
+ 					<center>
+ 						Fixing User
+ 					</center>
+ 				</th>
+			</tr>
+			<tr
+				class="text-center {{projectIssuesCtrl.getIssueProjectColor( issue )}}"
+				ng-repeat="issue in projectIssuesCtrl.issues">
+				<td style="vertical-align:middle;">
+					{{ issue.blocking ? 'Yes' : 'No'}}
+				</td>
+				<td style="vertical-align:middle;">
+					{{issue.submitted.date | date:'dd.MM.yyyy, hh:mm a'}}
+				</td>
+				<td style="vertical-align:middle;">
+					<b>{{issue.title}}</b>
+				</td>
+				<td style="vertical-align:middle;">
+					<b>{{issue.comment}}</b>
+				</td>
+				<td style="vertical-align:middle;">
+					{{issue.submitted.email}}
+				</td>
+				<td style="vertical-align:middle;">
+					<div
+						ng-if="!issue.fixed"
+						class="btn btn-default btn-block"
+						ng-click="projectIssuesCtrl.fixIssue( issue )">
+						Mark Fixed
+					</div>
+					<div ng-if="issue.fixed">
+						{{issue.fixed ? 'Yes' : 'No'}}
+					</div>
+				</td>
+				<td style="vertical-align:middle;">
+					<div ng-if="issue.fixed">
+						{{issue.fixed.date | date:'dd.MM.yyyy, hh:mm a'}}
+					</div>
+				</td>
+				<td style="vertical-align:middle;">
+					<div ng-if="issue.fixed">
+						{{issue.fixed.email}}
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</script>
+
+
+<script type="text/ng-template" id="parse-object-viewer-template" class="ng-scope">
+	<div class="modal-body row">
+		<div class="col-md-12">
+			<button
+				ng-disabled="parseObjectViewerCtrl.getPreviousIndex() === parseObjectViewerCtrl.getSelectedIndex()"
+				class="btn btn-default col-md-1"
+				ng-click="parseObjectViewerCtrl.selectPrevious()">
+				<span class="glyphicon glyphicon-chevron-left">
+				</span>
+			</button>
+			<div class="col-md-10">
+				<h3>
+					<center>
+						<b>
+							{{parseObjectViewerCtrl.selected.parseObject.className}}
+						</b>
+						&nbsp|&nbsp
+						<b>
+							{{parseObjectViewerCtrl.selected.parseObject.id}}
+						</b>
+					</center>
+				</h3>
+				<center>
+					<button
+						class="btn btn-success"
+						ng-click="parseObjectViewerCtrl.saveSelectedObject()">
+						SAVE CHANGES
+					</button>
+				</center>
+				</br>
+			</div>
+			<button
+				ng-disabled="parseObjectViewerCtrl.getNextIndex() === parseObjectViewerCtrl.getSelectedIndex()"
+				class="btn btn-default col-md-1"
+				ng-click="parseObjectViewerCtrl.selectNext()">
+				<span class="glyphicon glyphicon-chevron-right">
+				</span>
+			</button>
+		</div>
+		<div class="col-md-12">
+			<table class="table" border="1">
+		    	<col width="12%">
+			  	<col width="13%">
+				<col width="55%">
+				<col width="10%">
+				<col width="10%">
+	  			<tr style="background-color:#F7F7FF">
+					<th><center>Attribute</center></th>
+					<th><center>Type</center></th>
+					<th><center>Value</center></th>
+					<th><center>Changed</center></th>
+					<th><center>Error</center></th>
+				</tr>
+
+				<tr
+					id="row-{{$index}}"
+					class="text-center"
+					style="background-color:#FAFAFA"
+					ng-repeat="(attribute, value) in parseObjectViewerCtrl.getCurrentSchema()"
+					ng-if="attribute!=='objectId'">
+
+					<td style="vertical-align:middle">
+						<b>{{attribute}}</b>
+					</td>
+					<td style="vertical-align:middle">
+						<b>{{value.type}} {{value.targetClass ? [value.targetClass] : ''}}</b>
+					</td>
+					<td style="vertical-align:middle">
+						<div ng-if="value.type === 'String'">
+							<input
+								type="text"
+								style="width:100%;"
+								ng-model="parseObjectViewerCtrl.selected.angularModel[attribute]"
+								ng-change="parseObjectViewerCtrl.modelChange( attribute )">
+							</input>
+						</div>
+
+						<div ng-if="value.type === 'Boolean'">
+							<input
+								type="checkbox"
+								ng-model="parseObjectViewerCtrl.selected.angularModel[attribute]"
+								ng-change="parseObjectViewerCtrl.modelChange( attribute )">
+							</input>
+						</div>
+
+						<div ng-if="value.type === 'Date'">
+							{{parseObjectViewerCtrl.selected.angularModel[attribute] | date:'dd.MM.yyyy, HH:mm:ss' : 'UTC'}} (UTC)
+						</div>
+
+						<div ng-if="value.type === 'Number'">
+							<input
+								type="number"
+								style="width:100%;"
+								ng-model="parseObjectViewerCtrl.selected.angularModel[attribute]"
+								ng-change="parseObjectViewerCtrl.modelChange( attribute )">
+							</input>
+						</div>
+
+						<div ng-if="value.type === 'Object' || value.type === 'Array'">
+							<textarea
+								json-text
+								rows="2"
+								style="width:100%; resize: true;"
+								ng-model="parseObjectViewerCtrl.selected.angularModel[attribute]"
+								ng-change="parseObjectViewerCtrl.modelChange( attribute )">
+
+							</textarea>
+						</div>
+
+						<div ng-if="value.type === 'ACL'">
+							<textarea
+								readonly
+								select-on-click
+								rows="2"
+								style="width:100%; resize: true;">
+								{{parseObjectViewerCtrl.selected.angularModel[attribute] | json }}
+							</textarea>
+						</div>
+
+						<div ng-if="value.type === 'GeoPoint'">
+								{{parseObjectViewerCtrl.selected.angularModel[attribute].latitude }},
+								{{parseObjectViewerCtrl.selected.angularModel[attribute].longitude }}
+						</div>
+
+						<div ng-if="value.type === 'Pointer'">
+							<div class="row">
+								<div class="col-md-10">
+									<button
+										class="btn btn-default btn-sm btn-block"
+										ng-model="parseObjectViewerCtrl.selected.angularModel[attribute]"
+										ng-click="parseObjectViewerCtrl.pointerOpen( attribute )"
+										ng-disabled="!parseObjectViewerCtrl.selected.angularModel[attribute]">
+										{{ parseObjectViewerCtrl.selected.angularModel[attribute] ?
+				parseObjectViewerCtrl.selected.angularModel[attribute].id : 'undefined' }}
+									</button>
+								</div>
+								<div class="col-md-2">
+									<button
+										class="btn btn-warning btn-sm btn-block"
+										ng-click="parseObjectViewerCtrl.pointerChange( attribute, value.targetClass )">
+										EDIT
+									</button>
+								</div>
+							</div>
+						</div>
+					</td>
+					<td style="vertical-align:middle">
+						<button
+							class="btn btn-success btn-xs"
+							ng-if="parseObjectViewerCtrl.isAttributeChanged( attribute )"
+							ng-click="parseObjectViewerCtrl.resetAttribute( attribute )">
+							RESET
+						</button>
+					</td>
+					<td style="vertical-align:middle">
+						<font color="red">
+							<b>{{parseObjectViewerCtrl.selected.validationMap[attribute]}}</b>
+						</font>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</script>
+
+</div>
+
+ 
+	<!-- BEGIN library-boostrap-scripts -->
+	<link rel="stylesheet" type="text/css" href="./bootstrap.css">
+	<link rel="stylesheet" href="./bootstrap-extensions.css">
+	<link rel="stylesheet" href="./font-awesome.min(1).css">
+	<link rel="stylesheet" href="./main(1).css">
+	<style>[ng-cloak], .ng-cloak, [data-ng-cloak], .data-ng-cloak { display: none !important; }</style>
+	<style type="text/css"> .nav, .pagination, .carousel, .panel-title a { cursor: pointer; } </style>
+	<!-- END library-bootstrap-scripts -->
+
+	<!-- BEGIN library-scripts -->
+	<script type="application/javascript" src="./threex.rendererstats.js"></script>
+	<script type="application/javascript" src="./tween.js"></script>
+	<!-- begin gulp auto generated script tags for bower libs with includes -->
+	<!-- begin gulp auto generated partials -->
+	<script type="application/javascript" src="./pnltri.js"></script>
+	<script type="application/javascript" src="./FileSaver.js"></script>
+	<script type="application/javascript" src="./load-image.all.min(1).js"></script>
+	<script type="application/javascript" src="./canvas-to-blob.min.js"></script>
+	<script type="application/javascript" src="./OculusBridge.min.js"></script>
+	<!-- END library-scripts -->
+	<link rel="stylesheet" type="text/css" href="./library-stylesheets.min.css">
+	<link rel="stylesheet" type="text/css" href="./website.min(1).css">
+	<link rel="stylesheet" type="text/css" href="./main(2).css">
+
+	<script type="application/javascript" src="./vtmain-bundle.js"></script>
+
+	<script> 
+	if ( global.insidemaps_.php.dataLoaded ) global.insidemaps_.php.dataLoaded( );
+	</script> 
+
+
+
+
+
+</body></html>

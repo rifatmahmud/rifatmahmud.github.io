@@ -1,0 +1,109 @@
+/**
+ * Insidemaps CSS file, Copyright 2014, Insidemaps, Inc
+ *
+ * Application-independent fixes and additions to Bootstrap CSS
+ *
+ * @author: Original author:   Ib Green
+ * @author: Additional author:
+ */
+
+
+/** Bootstrap CSS tweak - prevent AngularJS directives from being clobbered
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak, [data-ng-cloak], .data-ng-cloak {
+	display: none !important;
+}
+
+
+/** Bootstrap CSS tweak - Chevron indicator for collapsible panes
+ */
+.panel-heading .accordion-toggle:after {
+	/* symbol for "opening" panels */
+	font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+	content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+	float: right;        /* adjust as needed */
+	color: gray;         /* adjust as needed */
+}
+
+.panel-heading .accordion-toggle.collapsed:after {
+	/* symbol for "collapsed" panels */
+	content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}
+
+/* .cellOutside { max-width: 50%; } */
+td { overflow: hidden; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; text-overflow: ellipsis;  width: inherit; }
+
+/* disables scrolling in virtual tour */
+.im-no-scroll {
+	height: 100%;
+	overflow: hidden;
+}
+
+
+.im-no-user-select {
+    -webkit-user-select: none;
+	   -moz-user-select: -moz-none;
+		-ms-user-select: none;
+			user-select: none;
+}
+
+.im-transparent { /* Not so useful, Makes everything transparent */
+    opacity: 0.5;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; /* IE8 */
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    filter:alpha(opacity=50); /* for IE4 - IE7 */
+}
+
+.im-transparent-background {
+    /*background-color: rgba(128, 128, 128, 0.5); */
+}
+
+.im-transparent-background .modal-content {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.im-transparent-background-70 .modal-content {
+    background: -moz-linear-gradient(-45deg,  rgba(151,151,151,0.70) 0%, rgba(137,137,137,0.70) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(151,151,151,0.70)), color-stop(100%,rgba(137,137,137,0.70))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg,  rgba(151,151,151,0.70) 0%,rgba(137,137,137,0.70) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg,  rgba(151,151,151,0.70) 0%,rgba(137,137,137,0.70) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg,  rgba(151,151,151,0.70) 0%,rgba(137,137,137,0.70) 100%); /* IE10+ */
+    background: linear-gradient(135deg,  rgba(151,151,151,0.70) 0%,rgba(137,137,137,0.70) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#979797', endColorstr='#de898989',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+.im-transparent-background-30 .modal-content {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.panel-heading .accordion-toggle:after {
+	/* symbol for "opening" panels */
+	font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+	content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+	float: right;        /* adjust as needed */
+	color: grey;         /* adjust as needed */
+}
+.panel-heading .accordion-toggle.collapsed:after {
+	/* symbol for "collapsed" panels */
+	content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}
+
+td { overflow: hidden; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; text-overflow: ellipsis;  width: inherit; }
+
+
+
+.im-no-scroll {
+    height: 100%;
+    overflow: hidden;
+}
+
+.im-no-user-select {
+    -webkit-user-select: none;
+       -moz-user-select: -moz-none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.glyphicon {
+    margin-right: 3px;
+}
+
+/* end of file */
